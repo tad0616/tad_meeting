@@ -113,7 +113,7 @@ function list_tad_meeting()
 
     $myts = MyTextSanitizer::getInstance();
 
-    $sql = "select * from `" . $xoopsDB->prefix("tad_meeting") . "` ";
+    $sql = "select * from `" . $xoopsDB->prefix("tad_meeting") . "` order by tad_meeting_datetime desc";
 
     //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
     $PageBar = getPageBar($sql, 20, 10);
