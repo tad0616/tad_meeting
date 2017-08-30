@@ -1,111 +1,52 @@
 <?php
+/**
+ * Tad Meeting module
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package    Tad Meeting
+ * @since      2.5
+ * @author     tad
+ * @version    $Id $
+ **/
 
-// user menu
-define("_MD_LUNCH_SHOW", "watch menu");
-define("_MD_LUNCH_ADD", "Lunch Add (Form)");
-define("_MD_LUNCH_ADD_MENU", "Lunch Add (Menu)");
-define("_MD_LUNCH_ADD_MENU2", "Lunch Add (Menu 2)");
-define("_MD_LUNCH_VIEW_ADD_MENU", "menu table");
+define('_TAD_NEED_TADTOOLS', 'This module needs TadTools module. You can download TadTools from <a href="http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50" target="_blank">Tad Textbook </a>. ');
 
-// function
-define("_MD_LUNCH_Y", "year");
-define("_MD_LUNCH_CHANGE_SUBMIT", "switch");
+//tad_meeting-list
+define('_MD_TADMEETIN_TAD_MEETING_CATE_SN', 'meeting category');
+define('_MD_TADMEETIN_TAD_MEETING_DATETIME', 'meeting date');
+define('_MD_TADMEETIN_TAD_MEETING_PLACE', 'meeting place');
+define('_MD_TADMEETIN_TAD_MEETING_CHAIRMAN', 'meeting chair');
+define('_MD_TADMEETIN_TAD_MEETING_NOTE', 'Related Supplement');
+define('_MD_TADMEETIN_SHOW_TAD_MEETING_SN_FILES', '');
+define('_MD_TADMEETIN_TAD_MEETING_TITLE', 'meeting name');
 
-define("_MD_N2CN_NUMS", "zlid one two three four five seven seven eight");
-define("_MD_N2CN_REZO", "zero");
-define("_MD_N2CN_TEN", "ten");
-define("_MD_N2CN_HUND", "hundred");
-define("_MD_N2CN_THOU", "thousand");
-define("_MD_N2CN_TENTHOU", "million");
-define("_MD_N2CN_HUNDTHOU", "billion");
-define("_MD_N2CN_MIL", "megabytes");
-define("_MD_N2CN_DOT", "dot");
-define("_MD_N2CN_ONETEN", "ten");
-define("_MD_N2CN_MIU", "negative");
-
-
-// add_lunch
-define("_MD_LUNCH_L2W", "the first two weeks");
-define("_MD_LUNCH_L1W", "previous week");
-define("_MD_LUNCH_TITLEW", "lunch recipe");
-define("_MD_LUNCH_N1W", "next week");
-define("_MD_LUNCH_N2W", "next two weeks");
-
-define("_MD_LUNCH_SY", "school year");
-define("_MD_LUNCH_S1", "first");
-define("_MD_LUNCH_S2", "semester");
-define("_MD_LUNCH_SW", "week");
-
-define("_MD_LUNCH_DAY", "date");
-define("_MD_LUNCH_M", "month");
-define("_MD_LUNCH_D", "day");
-
-define("_MD_LUNCH_WEEKN", "week");
-
-// form input
-define("_MD_LUNCH_DISH_TITLE", "menu input");
-define("_MD_LUNCH_DISH_MAIN", "staple food");
-define("_MD_LUNCH_DISH_DISH1", "dish one");
-define("_MD_LUNCH_DISH_DISH2", "dish two");
-define("_MD_LUNCH_DISH_DISH3", "dish three");
-define("_MD_LUNCH_DISH_DISH4", "dish four");
-define("_MD_LUNCH_DISH_DISH5", "dish five");
-define("_MD_LUNCH_DISH_SOUP", "soup");
-define("_MD_LUNCH_DISH_FRUIT", "fruit");
-define("_MD_LUNCH_DISH_REM", "Remarks");
-define("_MD_LUNCH_DISH_MENBERS", "the number of schools serving nutritious lunch");
-
-define("_MD_LUNCH_REWRITE", "rewrite");
-
-define("_MD_LUNCH_DISH_DISH", "dish");
-
-// Menu Detail VIEW_ADD_MENU
-define("_MD_LUNCH_ITEM_1", "material one");
-define("_MD_LUNCH_ITEM_2", "material two");
-define("_MD_LUNCH_ITEM_3", "material three");
-define("_MD_LUNCH_ITEM_4", "material four");
-define("_MD_LUNCH_ITEM_5", "material five");
-define("_MD_LUNCH_ITEM_6", "material six");
-define("_MD_LUNCH_ITEM_7", "material seven");
-define("_MD_LUNCH_ITEM_8", "material eight");
-define("_MD_LUNCH_ITEM_9", "material nine");
-define("_MD_LUNCH_ITEM_10", "material ten");
-define("_MD_LUNCH_NUMBER", "quantity");
-
-// sql msg
-define("_MD_SQL_ERROR", "enter the database is incorrect");
-define("_MD_SQL_SAVEOK", "Save action completed!");
-
-// use permissions
-define("_MD_LUNCH_NO_POWER", "you do not have permission to use this feature.");
-
-// function error msg
-define("_MD_HB_ERROR_WEEKS", "time input error");
-
-
-define("_MD_LUNCH_WEEK0", "Sunday");
-define("_MD_LUNCH_WEEK1", "Monday");
-define("_MD_LUNCH_WEEK2", "Tuesday");
-define("_MD_LUNCH_WEEK3", "Wednesday");
-define("_MD_LUNCH_WEEK4", "Thursday");
-define("_MD_LUNCH_WEEK5", "Friday");
-define("_MD_LUNCH_WEEK6", "Saturday");
-
-
-//define("_MD_LUNCH_SHOW", "watch menu");
-//define("_MD_LUNCH_ADD", "Lunch Add (Form)");
-//define("_MD_LUNCH_ADD_MENU", "Lunch Add (Menu)");
-//define("_MD_LUNCH_ADD_MENU2", "Lunch Add (Menu 2)");
-//define("_MD_LUNCH_VIEW_ADD_MENU", "menu table");
-
-
-// pdf
-define("_MD_P_WEEK_TITLE", "lunch recipe");
-define("_MD_P_MASTER", "principal");
-define("_MD_P_SECRETARY", "Executive Secretary");
-define("_MD_P_DESIGN", "designer");
-// define ("_ MD_WEEK", "this week");
-define("_MD_PDF_PRINTER", "print pdf file");
-
-// ooo
-define("_MD_OOO_PRINTER", "print ooo file");
+// tad_meeting_data-list
+define('_MD_TADMEETIN_TAD_MEETING_DATA_SN', 'report serial number');
+define('_MD_TADMEETIN_TAD_MEETING_DATA_UNIT', 'room');
+define('_MD_TADMEETIN_TAD_MEETING_DATA_JOB', 'job');
+define('_MD_TADMEETIN_TAD_MEETING_DATA_TITLE', 'report title');
+define('_MD_TADMEETIN_TAD_MEETING_DATA_CONTENT', 'report content');
+define('_MD_TADMEETIN_TAD_MEETING_DATA_UID', 'the reporter');
+define('_MD_TADMEETIN_TAD_MEETING_DATA_SORT', 'sort');
+define('_MD_TADMEETIN_TAD_MEETING_DATA_DATE', 'last edit date');
+define('_MD_TADMEETIN_UP_TAD_MEETING_DATA_SN', 'upload');
+define('_MD_TADMEETIN_SHOW_TAD_MEETING_DATA_SN_FILES', 'upload');
+define('_MD_TADMEETIN_SMNAME1', 'conference system home page');
+define('_MD_TADMEETIN_SMNAME2', 'groups report');
+define('_MD_TADMEETIN_ADD_MEETING', 'Add a meeting');
+define('_MD_TADMEETIN_ADD_REPORT', 'Add meeting report');
+define('_MD_TADMEETIN_REPORT', 'report');
+define('_MD_TADMEETIN_BRACKETS_L', '(');
+define('_MD_TADMEETIN_BRACKETS_R', ')');
+define('_MD_TADMEETIN_DOWNLOAD_PDF', 'Download meeting record (PDF)');
+define('_MD_TADMEETIN_DOWNLOAD_WORD', 'download the meeting record (Word)');
+define('_MD_TADMEETIN_NONE', 'no');
+define('_MD_TADMEETIN_COMMA', ',');
