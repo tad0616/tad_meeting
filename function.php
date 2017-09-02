@@ -129,7 +129,7 @@ function insert_tad_meeting()
 
     $myts = MyTextSanitizer::getInstance();
 
-    $tad_meeting_sn       = intval($_POST['tad_meeting_sn']);
+    $tad_meeting_sn       = (int)$_POST['tad_meeting_sn'];
     $tad_meeting_title    = $myts->addSlashes($_POST['tad_meeting_title']);
     $tad_meeting_cate_sn  = $_POST['tad_meeting_cate_sn'];
     $tad_meeting_datetime = $myts->addSlashes($_POST['tad_meeting_datetime']);
@@ -177,7 +177,7 @@ function update_tad_meeting($tad_meeting_sn = '')
 
     $myts = MyTextSanitizer::getInstance();
 
-    $tad_meeting_sn       = intval($_POST['tad_meeting_sn']);
+    $tad_meeting_sn       = (int)$_POST['tad_meeting_sn'];
     $tad_meeting_title    = $myts->addSlashes($_POST['tad_meeting_title']);
     $tad_meeting_cate_sn  = $_POST['tad_meeting_cate_sn'];
     $tad_meeting_datetime = $myts->addSlashes($_POST['tad_meeting_datetime']);
@@ -375,7 +375,7 @@ function number2chinese($num, $type = "")
     //小數部分
     if (strpos($num, '.')) {
         list($num, $dec) = explode('.', $num);
-        $dec             = strval(round($dec, 2));
+        $dec             = (string)round($dec, 2);
         if ($mode) {
             $retval .= "{$char[$dec['0']]}角{$char[$dec['1']]}分";
         } else {
@@ -385,7 +385,7 @@ function number2chinese($num, $type = "")
         }
     }
     //整數部分
-    $str = $mode ? strrev(intval($num)) : strrev($num);
+    $str = $mode ? strrev((int)$num) : strrev($num);
     for ($i = 0, $c = strlen($str); $i < $c; $i++) {
         $out[$i] = $char[$str[$i]];
         if ($mode) {
