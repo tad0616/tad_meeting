@@ -73,6 +73,7 @@ function list_tad_meeting($tad_meeting_cate_sn = "")
 function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = "")
 {
     global $xoopsDB, $xoopsTpl;
+    $cate_count = array();
 
     $sql = "SELECT count(*),tad_meeting_cate_sn FROM " . $xoopsDB->prefix("tad_meeting") . " GROUP BY tad_meeting_cate_sn";
     $result = $xoopsDB->query($sql) or web_error($sql);
