@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright  XOOPS Project (https://xoops.org)
  * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package    Tad Meeting
  * @since      2.5
@@ -113,7 +113,7 @@ function list_tad_meeting()
 
     $myts = MyTextSanitizer::getInstance();
 
-    $sql = "select * from `" . $xoopsDB->prefix("tad_meeting") . "` order by tad_meeting_datetime desc";
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting") . "` ORDER BY tad_meeting_datetime DESC";
 
     //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
     $PageBar = getPageBar($sql, 20, 10);
@@ -175,7 +175,7 @@ function list_tad_meeting()
 function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
-    $sql      = "select * from `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
     $result   = $xoopsDB->query($sql) or web_error($sql);
     $data_arr = '';
     while ($data = $xoopsDB->fetchArray($result)) {
@@ -278,7 +278,7 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 function tad_meeting_data_max_sort()
 {
     global $xoopsDB;
-    $sql        = "select max(`tad_meeting_data_sort`) from `" . $xoopsDB->prefix("tad_meeting_data") . "`";
+    $sql = "SELECT max(`tad_meeting_data_sort`) FROM `" . $xoopsDB->prefix("tad_meeting_data") . "`";
     $result     = $xoopsDB->query($sql) or web_error($sql);
     list($sort) = $xoopsDB->fetchRow($result);
     return ++$sort;

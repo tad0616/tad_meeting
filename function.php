@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright  XOOPS Project (https://xoops.org)
  * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package    Tad Meeting
  * @since      2.5
@@ -81,7 +81,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $formValidator_code = $formValidator->render();
 
     //會議類別
-    $sql                               = "select `tad_meeting_cate_sn`, `tad_meeting_cate_title` from `" . $xoopsDB->prefix("tad_meeting_cate") . "` order by tad_meeting_cate_sort";
+    $sql = "SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "` ORDER BY tad_meeting_cate_sort";
     $result                            = $xoopsDB->query($sql) or web_error($sql);
     $i                                 = 0;
     $tad_meeting_cate_sn_options_array = '';
