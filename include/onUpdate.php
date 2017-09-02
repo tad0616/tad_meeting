@@ -9,14 +9,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright  XOOPS Project (https://xoops.org)
  * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package    Tad Meeting
  * @since      2.5
  * @author     tad
  * @version    $Id $
  **/
-
 
 function xoops_module_update_tad_meeting($module, $old_version)
 {
@@ -31,7 +30,7 @@ function xoops_module_update_tad_meeting($module, $old_version)
 function chk_chk1()
 {
     global $xoopsDB;
-    $sql    = "select count(`欄位`) from " . $xoopsDB->prefix("資料表");
+    $sql    = "SELECT count(`欄位`) FROM " . $xoopsDB->prefix("資料表");
     $result = $xoopsDB->query($sql);
     if (empty($result)) {
         return true;
@@ -44,7 +43,7 @@ function chk_chk1()
 function go_update1()
 {
     global $xoopsDB;
-    $sql = "ALTER TABLE " . $xoopsDB->prefix("資料表") . " ADD `欄位` smallint(5) NOT NULL";
+    $sql = "ALTER TABLE " . $xoopsDB->prefix("資料表") . " ADD `欄位` SMALLINT(5) NOT NULL";
     $xoopsDB->queryF($sql) or redirect_header(XOOPS_URL, 3, $xoopsDB->error());
 
     return true;
@@ -119,7 +118,6 @@ function delete_directory($dirname)
             } else {
                 delete_directory($dirname . '/' . $file);
             }
-
         }
     }
     closedir($dir_handle);
