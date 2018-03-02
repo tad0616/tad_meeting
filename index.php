@@ -59,7 +59,7 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     if (empty($tad_meeting_sn)) {
         return;
     } else {
-        $tad_meeting_sn = intval($tad_meeting_sn);
+        $tad_meeting_sn = (int)$tad_meeting_sn;
     }
 
     $xoopsTpl->assign('now_uid', $xoopsUser->uid());
@@ -317,16 +317,16 @@ function insert_tad_meeting_data()
 
     $myts = MyTextSanitizer::getInstance();
 
-    $tad_meeting_sn           = intval($_POST['tad_meeting_sn']);
-    $tad_meeting_data_sn      = intval($_POST['tad_meeting_data_sn']);
+    $tad_meeting_sn           = (int)$_POST['tad_meeting_sn'];
+    $tad_meeting_data_sn      = (int)$_POST['tad_meeting_data_sn'];
     $tad_meeting_data_unit    = $_POST['tad_meeting_data_unit'];
     $tad_meeting_data_job     = $_POST['tad_meeting_data_job'];
     $tad_meeting_data_title   = $myts->addSlashes($_POST['tad_meeting_data_title']);
     $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
     //取得使用者編號
     $tad_meeting_data_uid  = ($xoopsUser) ? $xoopsUser->uid() : "";
-    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? intval($_POST['tad_meeting_data_uid']) : $tad_meeting_data_uid;
-    $tad_meeting_data_sort = intval($_POST['tad_meeting_data_sort']);
+    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? (int)$_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
+    $tad_meeting_data_sort = (int)$_POST['tad_meeting_data_sort'];
     $tad_meeting_data_date = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
 
     $sql = "insert into `" . $xoopsDB->prefix("tad_meeting_data") . "` (
@@ -383,8 +383,8 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
     $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
     //取得使用者編號
     $tad_meeting_data_uid  = ($xoopsUser) ? $xoopsUser->uid() : "";
-    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? intval($_POST['tad_meeting_data_uid']) : $tad_meeting_data_uid;
-    $tad_meeting_data_sort = intval($_POST['tad_meeting_data_sort']);
+    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? (int)$_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
+    $tad_meeting_data_sort = (int)$_POST['tad_meeting_data_sort'];
     $tad_meeting_data_date = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
 
     $sql = "update `" . $xoopsDB->prefix("tad_meeting_data") . "` set
