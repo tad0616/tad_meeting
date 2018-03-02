@@ -49,3 +49,8 @@ define('_MI_TADMEETIN_MEETING_JOB_DEFAULT', '校長;教導主任;分校主任;教務組;網管;
 define('_MI_TADMEETIN_FILE_TITLE', '預設會議記錄檔案標題');
 define('_MI_TADMEETIN_FILE_TITLE_DESC', '用於產生文件標題及檔名');
 define('_MI_TADMEETIN_FILE_TITLE_DEFAULT', 'OO市立OO國民小學OO學年度第O學期');
+
+define('_MI_TADMEETIN_ORDERBY', '會議內容排序方式');
+define('_MI_TADMEETIN_ORDERBY_DESC', '會用在所有報表及頁面上');
+define('_MI_TADMEETIN_ORDERBY_OPT1', '自動排序（依據「處室設定」順序）');
+define('_MI_TADMEETIN_ORDERBY_OPT2', '自訂排序');

@@ -49,3 +49,8 @@ define('_MI_TADMEETIN_MEETING_JOB_DEFAULT', 'Principals; teaching director; bran
 define('_MI_TADMEETIN_FILE_TITLE', 'default meeting record file title');
 define('_MI_TADMEETIN_FILE_TITLE_DESC', 'for generating file title and file name');
 define('_MI_TADMEETIN_FILE_TITLE_DEFAULT', 'OO City OO National Primary School OO Academic Year O');
+
+define('_MI_TADMEETIN_ORDERBY', 'Meeting Content Sorter');
+define('_MI_TADMEETIN_ORDERBY_DESC', 'will be used on all reports and pages');
+define('_MI_TADMEETIN_ORDERBY_OPT1', 'Auto-sort (based on the order of office settings)');
+define('_MI_TADMEETIN_ORDERBY_OPT2', 'Custom Ordering');

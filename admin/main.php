@@ -44,7 +44,7 @@ function list_tad_meeting($tad_meeting_cate_sn = "")
 
     $i = 0;
 
-    $all_content = "";
+    $all_content = array();
     while ($all = $xoopsDB->fetchArray($result)) {
 
         $all_content[$i] = $all;
@@ -75,7 +75,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = "")
     global $xoopsDB, $xoopsTpl;
     $cate_count = array();
 
-    $sql = "SELECT count(*),tad_meeting_cate_sn FROM " . $xoopsDB->prefix("tad_meeting") . " GROUP BY tad_meeting_cate_sn";
+    $sql    = "SELECT count(*),tad_meeting_cate_sn FROM " . $xoopsDB->prefix("tad_meeting") . " GROUP BY tad_meeting_cate_sn";
     $result = $xoopsDB->query($sql) or web_error($sql);
     while (list($count, $tad_meeting_cate_sn) = $xoopsDB->fetchRow($result)) {
         $cate_count[$tad_meeting_cate_sn] = $count;
@@ -85,7 +85,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = "")
     $path_arr = array_keys($path);
     $data[]   = "{ id:0, pId:0, name:'All', url:'main.php', target:'_self', open:true}";
 
-    $sql = "SELECT tad_meeting_cate_sn, tad_meeting_cate_parent_sn, tad_meeting_cate_title FROM " . $xoopsDB->prefix("tad_meeting_cate") . " ORDER BY tad_meeting_cate_sort";
+    $sql    = "SELECT tad_meeting_cate_sn, tad_meeting_cate_parent_sn, tad_meeting_cate_title FROM " . $xoopsDB->prefix("tad_meeting_cate") . " ORDER BY tad_meeting_cate_sort";
     $result = $xoopsDB->query($sql) or web_error($sql);
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_parent_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $font_style      = $def_tad_meeting_cate_sn == $tad_meeting_cate_sn ? ", font:{'background-color':'yellow', 'color':'black'}" : '';
@@ -157,7 +157,7 @@ function get_tad_meeting_cate_sub($tad_meeting_cate_sn = "0")
     global $xoopsDB;
     $sql                     = "select tad_meeting_cate_sn,tad_meeting_cate_title from " . $xoopsDB->prefix("tad_meeting_cate") . " where tad_meeting_cate_parent_sn='{$tad_meeting_cate_sn}'";
     $result                  = $xoopsDB->query($sql) or web_error($sql);
-    $tad_meeting_cate_sn_arr = "";
+    $tad_meeting_cate_sn_arr = array();
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $tad_meeting_cate_sn_arr[$tad_meeting_cate_sn] = $tad_meeting_cate_title;
     }
@@ -221,9 +221,9 @@ function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_m
 function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
+    $sql      = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
     $result   = $xoopsDB->query($sql) or web_error($sql);
-    $data_arr = '';
+    $data_arr = array();
     while ($data = $xoopsDB->fetchArray($result)) {
         $tad_meeting_cate_sn            = $data['tad_meeting_cate_sn'];
         $data_arr[$tad_meeting_cate_sn] = $data;
@@ -293,7 +293,7 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
 function tad_meeting_cate_max_sort()
 {
     global $xoopsDB;
-    $sql = "SELECT max(`tad_meeting_cate_sort`) FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
+    $sql        = "SELECT max(`tad_meeting_cate_sort`) FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
     $result     = $xoopsDB->query($sql) or web_error($sql);
     list($sort) = $xoopsDB->fetchRow($result);
     return ++$sort;

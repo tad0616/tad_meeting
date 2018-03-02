@@ -62,7 +62,8 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
         $tad_meeting_sn = (int)$tad_meeting_sn;
     }
 
-    $xoopsTpl->assign('now_uid', $xoopsUser->uid());
+    $now_uid = isset($xoopsUser) ? $xoopsUser->uid() : 0;
+    $xoopsTpl->assign('now_uid', $now_uid);
 
     $myts = MyTextSanitizer::getInstance();
 
@@ -125,7 +126,7 @@ function list_tad_meeting()
 
     //取得分類所有資料陣列
     $tad_meeting_cate_arr = get_tad_meeting_cate_all();
-    $all_content          = '';
+    $all_content          = array();
     $i                    = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
@@ -175,9 +176,9 @@ function list_tad_meeting()
 function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
+    $sql      = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
     $result   = $xoopsDB->query($sql) or web_error($sql);
-    $data_arr = '';
+    $data_arr = array();
     while ($data = $xoopsDB->fetchArray($result)) {
         $tad_meeting_cate_sn            = $data['tad_meeting_cate_sn'];
         $data_arr[$tad_meeting_cate_sn] = $data;
@@ -259,14 +260,14 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $xoopsTpl->assign('now_op', 'tad_meeting_data_form');
     $xoopsTpl->assign('next_op', $op);
 
-    $meeting_unit_arr = '';
+    $meeting_unit_arr = array();
     $meeting_unit     = explode(';', $xoopsModuleConfig['meeting_unit']);
     foreach ($meeting_unit as $value) {
         $meeting_unit_arr[] = trim($value);
     }
     $xoopsTpl->assign('meeting_unit', $meeting_unit_arr);
 
-    $meeting_job_arr = '';
+    $meeting_job_arr = array();
     $meeting_job     = explode(';', $xoopsModuleConfig['meeting_job']);
     foreach ($meeting_job as $value) {
         $meeting_job_arr[] = trim($value);
@@ -278,7 +279,7 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 function tad_meeting_data_max_sort()
 {
     global $xoopsDB;
-    $sql = "SELECT max(`tad_meeting_data_sort`) FROM `" . $xoopsDB->prefix("tad_meeting_data") . "`";
+    $sql        = "SELECT max(`tad_meeting_data_sort`) FROM `" . $xoopsDB->prefix("tad_meeting_data") . "`";
     $result     = $xoopsDB->query($sql) or web_error($sql);
     list($sort) = $xoopsDB->fetchRow($result);
     return ++$sort;

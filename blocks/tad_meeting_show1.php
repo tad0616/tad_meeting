@@ -27,9 +27,9 @@ function tad_meeting_show1($options)
     $block['options0'] = $options[0];
     $limit             = empty($options[0]) ? 5 : $options[0];
     $sql               = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting") . "` ORDER BY `tad_meeting_datetime` DESC";
-    $result = $xoopsDB->query($sql) or web_error($sql);
-    $content = '';
-    $i       = 0;
+    $result            = $xoopsDB->query($sql) or web_error($sql);
+    $content           = array();
+    $i                 = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         $content[$i] = $all;
         $i++;
