@@ -315,12 +315,12 @@ function insert_tad_meeting_cate()
 
     $myts = MyTextSanitizer::getInstance();
 
-    $tad_meeting_cate_sn        = (int)$_POST['tad_meeting_cate_sn'];
-    $tad_meeting_cate_parent_sn = $_POST['tad_meeting_cate_parent_sn'];
+    $tad_meeting_cate_sn        = (int) $_POST['tad_meeting_cate_sn'];
+    $tad_meeting_cate_parent_sn = (int) $_POST['tad_meeting_cate_parent_sn'];
     $tad_meeting_cate_title     = $myts->addSlashes($_POST['tad_meeting_cate_title']);
     $tad_meeting_cate_desc      = $myts->addSlashes($_POST['tad_meeting_cate_desc']);
-    $tad_meeting_cate_sort      = (int)$_POST['tad_meeting_cate_sort'];
-    $tad_meeting_cate_enable    = (int)$_POST['tad_meeting_cate_enable'];
+    $tad_meeting_cate_sort      = (int) $_POST['tad_meeting_cate_sort'];
+    $tad_meeting_cate_enable    = (int) $_POST['tad_meeting_cate_enable'];
 
     $sql = "insert into `" . $xoopsDB->prefix("tad_meeting_cate") . "` (
         `tad_meeting_cate_parent_sn`,
@@ -359,12 +359,12 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
 
     $myts = MyTextSanitizer::getInstance();
 
-    $tad_meeting_cate_sn        = (int)$_POST['tad_meeting_cate_sn'];
-    $tad_meeting_cate_parent_sn = $_POST['tad_meeting_cate_parent_sn'];
+    $tad_meeting_cate_sn        = (int) $_POST['tad_meeting_cate_sn'];
+    $tad_meeting_cate_parent_sn = (int)$_POST['tad_meeting_cate_parent_sn'];
     $tad_meeting_cate_title     = $myts->addSlashes($_POST['tad_meeting_cate_title']);
     $tad_meeting_cate_desc      = $myts->addSlashes($_POST['tad_meeting_cate_desc']);
-    $tad_meeting_cate_sort      = (int)$_POST['tad_meeting_cate_sort'];
-    $tad_meeting_cate_enable    = (int)$_POST['tad_meeting_cate_enable'];
+    $tad_meeting_cate_sort      = (int) $_POST['tad_meeting_cate_sort'];
+    $tad_meeting_cate_enable    = (int) $_POST['tad_meeting_cate_enable'];
 
     $sql = "update `" . $xoopsDB->prefix("tad_meeting_cate") . "` set
        `tad_meeting_cate_parent_sn` = '{$tad_meeting_cate_parent_sn}',

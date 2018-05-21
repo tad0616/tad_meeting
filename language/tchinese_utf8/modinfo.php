@@ -24,14 +24,14 @@ define('_MI_TADMEETIN_AUTHOR', '會議系統');
 define('_MI_TADMEETIN_CREDITS', '');
 define('_MI_TADMEETIN_DESC', '線上彙整會議記錄並產生報表');
 define('_MI_TADMEETIN_AUTHOR_WEB', 'Tad 教材網');
-define('_MI_TADMEETIN_ADMENU1', '主管理介面');
+define('_MI_TADMEETIN_ADMENU1', '會議管理');
 define('_MI_TADMEETIN_ADMENU1_DESC', '主管理介面');
 define('_MI_TADMEETIN_SMNAME2', '各組報告');
 
 define('_MI_TAD_MEETING_SHOW1_BLOCK_NAME', '近期會議');
 define('_MI_TAD_MEETING_SHOW1_BLOCK_DESC', '近期會議區塊 (tad_meeting_show1)');
 
-define('_MI_TADMEETIN_GROUPPERM', '細部權限設定');
+define('_MI_TADMEETIN_GROUPPERM', '權限設定');
 define('_MI_TADMEETIN_GROUPPERM_DESC', '細部權限設定');
 
 define('_MI_TADMEETIN_MEETING_PLACE', '會議地點');

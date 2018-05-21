@@ -19,7 +19,6 @@
 
 $adminmenu = array();
 $i         = 1;
-$icon_dir  = substr(XOOPS_VERSION, 6, 3) == '2.6' ? "" : "images/admin/";
 
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_HOME;
 $adminmenu[$i]['link']  = 'admin/index.php';
@@ -30,13 +29,13 @@ $i++;
 $adminmenu[$i]['title'] = _MI_TADMEETIN_ADMENU1;
 $adminmenu[$i]['link']  = 'admin/main.php';
 $adminmenu[$i]['desc']  = _MI_TADMEETIN_ADMENU1_DESC;
-$adminmenu[$i]['icon']  = "{$icon_dir}button.png";
+$adminmenu[$i]['icon']  = "images/admin/reunion.png";
 
 $i++;
 $adminmenu[$i]['title'] = _MI_TADMEETIN_GROUPPERM;
 $adminmenu[$i]['link']  = 'admin/groupperm.php';
 $adminmenu[$i]['desc']  = _MI_TADMEETIN_GROUPPERM_DESC;
-$adminmenu[$i]['icon']  = "{$icon_dir}button.png";
+$adminmenu[$i]['icon']  = "images/admin/keys.png";
 
 $i++;
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_ABOUT;
