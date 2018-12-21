@@ -1,4 +1,9 @@
-Tad_meeting 1.8 (released from 2018-09-18)
+tad_meeting 1.9 (released on 2019-01-01)
+ =================================================
+1.Support BootStrap4
+
+
+Tad_meeting 1.8 (released on 2018-09-18)
   ==========================================================
 1. Fixed the problem that the block could not display the quantity correctly.
 2. Block join more link

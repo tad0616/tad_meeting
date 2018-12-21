@@ -21,7 +21,7 @@ $modversion = array();
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_TADMEETIN_NAME;
-$modversion['version']     = '1.8';
+$modversion['version']     = '1.9';
 $modversion['description'] = _MI_TADMEETIN_DESC;
 $modversion['author']      = _MI_TADMEETIN_AUTHOR;
 $modversion['credits']     = _MI_TADMEETIN_CREDITS;
@@ -31,8 +31,8 @@ $modversion['image']       = "images/logo.png";
 $modversion['dirname']     = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['status_version']      = '1.7';
-$modversion['release_date']        = '2018-09-18';
+$modversion['status_version']      = '1.9';
+$modversion['release_date']        = '2019-01-01';
 $modversion['module_website_url']  = 'http://tad0616.net';
 $modversion['module_website_name'] = _MI_TADMEETIN_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
