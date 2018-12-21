@@ -1,3 +1,9 @@
+Tad_meeting 1.8 (released from 2018-09-18)
+  ==========================================================
+1. Fixed the problem that the block could not display the quantity correctly.
+2. Block join more link
+
+
 Tad_meeting 1.7 (released on 2018-05-21)
 ================================================== ================
 1. Support PHP 7.2
