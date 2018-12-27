@@ -32,7 +32,7 @@ CREATE TABLE `tad_meeting_data` (
 PRIMARY KEY  (`tad_meeting_data_sn`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tad_meeting_files_center` (  
+CREATE TABLE `tad_meeting_files_center` (
   `files_sn` smallint(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '檔案流水號',
   `col_name` varchar(255) NOT NULL default '' COMMENT '欄位名稱',
   `col_sn` smallint(5) unsigned NOT NULL default 0 COMMENT '欄位編號',
@@ -46,6 +46,8 @@ CREATE TABLE `tad_meeting_files_center` (
   `original_filename` varchar(255) NOT NULL default '' COMMENT '檔案名稱',
   `hash_filename` varchar(255) NOT NULL default '' COMMENT '加密檔案名稱',
   `sub_dir` varchar(255) NOT NULL default '' COMMENT '檔案子路徑',
+  `upload_date` datetime NOT NULL COMMENT '上傳時間',
+  `uid` mediumint(8) unsigned NOT NULL default 0 COMMENT '上傳者',
+  `tag` varchar(255) NOT NULL default '' COMMENT '註記',
   PRIMARY KEY (`files_sn`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
