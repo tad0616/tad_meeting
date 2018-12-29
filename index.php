@@ -69,7 +69,7 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 
     $sql = "select * from `" . $xoopsDB->prefix("tad_meeting") . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}' ";
-    $result = $xoopsDB->query($sql) or web_error($sql);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
     $all    = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
@@ -122,7 +122,7 @@ function list_tad_meeting()
     $sql     = $PageBar['sql'];
     $total   = $PageBar['total'];
 
-    $result = $xoopsDB->query($sql) or web_error($sql);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
 
     //取得分類所有資料陣列
     $tad_meeting_cate_arr = get_tad_meeting_cate_all();
@@ -177,7 +177,7 @@ function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
     $sql      = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
-    $result   = $xoopsDB->query($sql) or web_error($sql);
+    $result   = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
     $data_arr = array();
     while ($data = $xoopsDB->fetchArray($result)) {
         $tad_meeting_cate_sn            = $data['tad_meeting_cate_sn'];
@@ -280,7 +280,7 @@ function tad_meeting_data_max_sort()
 {
     global $xoopsDB;
     $sql        = "SELECT max(`tad_meeting_data_sort`) FROM `" . $xoopsDB->prefix("tad_meeting_data") . "`";
-    $result     = $xoopsDB->query($sql) or web_error($sql);
+    $result     = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
     list($sort) = $xoopsDB->fetchRow($result);
     return ++$sort;
 }
@@ -296,7 +296,7 @@ function get_tad_meeting_data($tad_meeting_data_sn = '')
 
     $sql = "select * from `" . $xoopsDB->prefix("tad_meeting_data") . "`
     where `tad_meeting_data_sn` = '{$tad_meeting_data_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
     $data   = $xoopsDB->fetchArray($result);
     return $data;
 }
@@ -349,7 +349,7 @@ function insert_tad_meeting_data()
         '{$tad_meeting_data_sort}',
         '{$tad_meeting_data_date}'
     )";
-    $xoopsDB->query($sql) or web_error($sql);
+    $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
 
     //取得最後新增資料的流水編號
     $tad_meeting_data_sn = $xoopsDB->getInsertId();
@@ -397,7 +397,7 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
        `tad_meeting_data_sort` = '{$tad_meeting_data_sort}',
        `tad_meeting_data_date` = '{$tad_meeting_data_date}'
     where `tad_meeting_data_sn` = '$tad_meeting_data_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, _LINE__);
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_meeting");
