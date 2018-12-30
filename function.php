@@ -82,7 +82,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 
     //會議類別
     $sql                               = "SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "` ORDER BY tad_meeting_cate_sort";
-    $result                            = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result                            = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $i                                 = 0;
     $tad_meeting_cate_sn_options_array = array();
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
@@ -152,7 +152,7 @@ function insert_tad_meeting()
         '{$tad_meeting_chairman}',
         '{$tad_meeting_note}'
     )";
-    $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $tad_meeting_sn = $xoopsDB->getInsertId();
@@ -193,7 +193,7 @@ function update_tad_meeting($tad_meeting_sn = '')
        `tad_meeting_chairman` = '{$tad_meeting_chairman}',
        `tad_meeting_note` = '{$tad_meeting_note}'
     where `tad_meeting_sn` = '$tad_meeting_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
     return $tad_meeting_sn;
 }
@@ -213,14 +213,14 @@ function delete_tad_meeting($tad_meeting_sn = '')
 
     $sql = "select tad_meeting_data_sn from `" . $xoopsDB->prefix("tad_meeting_data") . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     while (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result)) {
         delete_tad_meeting_data($tad_meeting_data_sn);
     }
 
     $sql = "delete from `" . $xoopsDB->prefix("tad_meeting") . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
 }
 
@@ -239,7 +239,7 @@ function delete_tad_meeting_data($tad_meeting_data_sn = '')
 
     $sql = "delete from `" . $xoopsDB->prefix("tad_meeting_data") . "`
     where `tad_meeting_data_sn` = '{$tad_meeting_data_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, _LINE__);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_meeting");
@@ -258,7 +258,7 @@ function get_tad_meeting($tad_meeting_sn = '')
 
     $sql = "select * from `" . $xoopsDB->prefix("tad_meeting") . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $data   = $xoopsDB->fetchArray($result);
     return $data;
 }
@@ -274,7 +274,7 @@ function get_tad_meeting_cate($tad_meeting_cate_sn = '')
 
     $sql = "select * from `" . $xoopsDB->prefix("tad_meeting_cate") . "`
     where `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $data   = $xoopsDB->fetchArray($result);
     return $data;
 }
@@ -299,7 +299,7 @@ function list_tad_meeting_data($tad_meeting_sn = "", $mode = "", $file_mode = ""
 
     $orderby = ($xoopsModuleConfig['orderby'] == 'tad_meeting_data_sort') ? "`tad_meeting_data_sort`" : "field(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
     $sql     = "select * from `" . $xoopsDB->prefix("tad_meeting_data") . "` where tad_meeting_sn='{$tad_meeting_sn}' order by $orderby";
-    $result  = $xoopsDB->query($sql) or web_error($sql, __FILE__, _LINE__);
+    $result  = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     $all_content = array();
     $i           = 1;
