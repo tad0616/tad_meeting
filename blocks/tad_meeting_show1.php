@@ -42,17 +42,13 @@ function tad_meeting_show1($options)
 function tad_meeting_show1_edit($options)
 {
     $form = "
-  <table>
-    <tr>
-      <th>
-        <!--顯示資料數-->
-        " . _MB_TAD_MEETING_SHOW1_OPT0 . "
-      </th>
-      <td>
-        <input type='text' name='options[0]' value='{$options[0]}'>
-      </td>
-    </tr>
-  </table>
-  ";
+    <ol class='my-form'>
+        <li class='my-row'>
+            <lable class='my-label'>" . _MB_TAD_MEETING_SHOW1_OPT0 . "</lable>
+            <div class='my-content'>
+                <input type='text' class='my-input' name='options[0]' value='{$options[0]}' size=6>
+            </div>
+        </li>
+    </ol>";
     return $form;
 }

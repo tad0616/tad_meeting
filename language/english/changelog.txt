@@ -2,6 +2,9 @@ tad_meeting 1.9 (released on 2019-01-01)
  =================================================
 1.Support BootStrap4
 2.Attached support panoramic picture
+3. Support PHP 7.3
+4. Support MySQL database strict mode
+
 
 Tad_meeting 1.8 (released on 2018-09-18)
   ==========================================================
