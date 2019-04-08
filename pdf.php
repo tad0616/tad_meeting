@@ -11,7 +11,7 @@ if (!$read_report) {
 set_time_limit(0);
 ini_set("memory_limit", "150M");
 
-$tad_meeting_sn = intval($_REQUEST['tad_meeting_sn']);
+$tad_meeting_sn = (int)$_REQUEST['tad_meeting_sn'];
 
 $tad_meeting = get_tad_meeting($tad_meeting_sn);
 
@@ -58,12 +58,12 @@ foreach ($meeting_data as $data) {
     $pdf->SetFont('droidsansfallback', '', 10, '', true); //設定字型
     $pdf->setCellHeightRatio(1.8);
     $tad_meeting_data_content = $data['tad_meeting_data_content'] ? $data['tad_meeting_data_content'] : _MD_TADMEETIN_NONE;
-    $pdf->MultiCell(172, 13, $tad_meeting_data_content, 0, 'J', false, 1, $pdf->getX() + 8, null, true, 0, false, true);
+    $pdf->MultiCell(172, 13, $tad_meeting_data_content, 0, 'J', false, 1, $pdf->GetX() + 8, null, true, 0, false, true);
 
     if ($data['list_file']) {
         $pdf->SetFont('droidsansfallback', '', 10, '', true); //設定字型
         $pdf->setCellHeightRatio(1.5);
-        $pdf->writeHTMLCell(172, 13, $pdf->getX(), $pdf->getY(), $data['list_file'], 0, 1, false);
+        $pdf->writeHTMLCell(172, 13, $pdf->GetX(), $pdf->GetY(), $data['list_file'], 0, 1, false);
     } else {
         $pdf->Ln(2);
     }

@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright  XOOPS Project (https://xoops.org)
  * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package    Tad Meeting
  * @since      2.5
@@ -59,16 +59,17 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     if (empty($tad_meeting_sn)) {
         return;
     } else {
-        $tad_meeting_sn = intval($tad_meeting_sn);
+        $tad_meeting_sn = (int) $tad_meeting_sn;
     }
 
-    $xoopsTpl->assign('now_uid', $xoopsUser->uid());
+    $now_uid = is_object($xoopsUser) ? $xoopsUser->uid() : 0;
+    $xoopsTpl->assign('now_uid', $now_uid);
 
     $myts = MyTextSanitizer::getInstance();
 
     $sql = "select * from `" . $xoopsDB->prefix("tad_meeting") . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}' ";
-    $result = $xoopsDB->query($sql) or web_error($sql);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $all    = $xoopsDB->fetchArray($result);
 
     //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
@@ -113,7 +114,7 @@ function list_tad_meeting()
 
     $myts = MyTextSanitizer::getInstance();
 
-    $sql = "select * from `" . $xoopsDB->prefix("tad_meeting") . "` ";
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting") . "` ORDER BY tad_meeting_datetime DESC";
 
     //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
     $PageBar = getPageBar($sql, 20, 10);
@@ -121,11 +122,11 @@ function list_tad_meeting()
     $sql     = $PageBar['sql'];
     $total   = $PageBar['total'];
 
-    $result = $xoopsDB->query($sql) or web_error($sql);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     //取得分類所有資料陣列
     $tad_meeting_cate_arr = get_tad_meeting_cate_all();
-    $all_content          = '';
+    $all_content          = array();
     $i                    = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
@@ -175,9 +176,9 @@ function list_tad_meeting()
 function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
-    $sql      = "select * from `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
-    $result   = $xoopsDB->query($sql) or web_error($sql);
-    $data_arr = '';
+    $sql      = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
+    $result   = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $data_arr = array();
     while ($data = $xoopsDB->fetchArray($result)) {
         $tad_meeting_cate_sn            = $data['tad_meeting_cate_sn'];
         $data_arr[$tad_meeting_cate_sn] = $data;
@@ -259,14 +260,14 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $xoopsTpl->assign('now_op', 'tad_meeting_data_form');
     $xoopsTpl->assign('next_op', $op);
 
-    $meeting_unit_arr = '';
+    $meeting_unit_arr = array();
     $meeting_unit     = explode(';', $xoopsModuleConfig['meeting_unit']);
     foreach ($meeting_unit as $value) {
         $meeting_unit_arr[] = trim($value);
     }
     $xoopsTpl->assign('meeting_unit', $meeting_unit_arr);
 
-    $meeting_job_arr = '';
+    $meeting_job_arr = array();
     $meeting_job     = explode(';', $xoopsModuleConfig['meeting_job']);
     foreach ($meeting_job as $value) {
         $meeting_job_arr[] = trim($value);
@@ -278,8 +279,8 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 function tad_meeting_data_max_sort()
 {
     global $xoopsDB;
-    $sql        = "select max(`tad_meeting_data_sort`) from `" . $xoopsDB->prefix("tad_meeting_data") . "`";
-    $result     = $xoopsDB->query($sql) or web_error($sql);
+    $sql        = "SELECT max(`tad_meeting_data_sort`) FROM `" . $xoopsDB->prefix("tad_meeting_data") . "`";
+    $result     = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     list($sort) = $xoopsDB->fetchRow($result);
     return ++$sort;
 }
@@ -295,7 +296,7 @@ function get_tad_meeting_data($tad_meeting_data_sn = '')
 
     $sql = "select * from `" . $xoopsDB->prefix("tad_meeting_data") . "`
     where `tad_meeting_data_sn` = '{$tad_meeting_data_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql);
+    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $data   = $xoopsDB->fetchArray($result);
     return $data;
 }
@@ -317,16 +318,16 @@ function insert_tad_meeting_data()
 
     $myts = MyTextSanitizer::getInstance();
 
-    $tad_meeting_sn           = intval($_POST['tad_meeting_sn']);
-    $tad_meeting_data_sn      = intval($_POST['tad_meeting_data_sn']);
+    $tad_meeting_sn           = (int) $_POST['tad_meeting_sn'];
+    $tad_meeting_data_sn      = (int) $_POST['tad_meeting_data_sn'];
     $tad_meeting_data_unit    = $_POST['tad_meeting_data_unit'];
     $tad_meeting_data_job     = $_POST['tad_meeting_data_job'];
     $tad_meeting_data_title   = $myts->addSlashes($_POST['tad_meeting_data_title']);
     $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
     //取得使用者編號
     $tad_meeting_data_uid  = ($xoopsUser) ? $xoopsUser->uid() : "";
-    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? intval($_POST['tad_meeting_data_uid']) : $tad_meeting_data_uid;
-    $tad_meeting_data_sort = intval($_POST['tad_meeting_data_sort']);
+    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? (int) $_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
+    $tad_meeting_data_sort = (int) $_POST['tad_meeting_data_sort'];
     $tad_meeting_data_date = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
 
     $sql = "insert into `" . $xoopsDB->prefix("tad_meeting_data") . "` (
@@ -348,7 +349,7 @@ function insert_tad_meeting_data()
         '{$tad_meeting_data_sort}',
         '{$tad_meeting_data_date}'
     )";
-    $xoopsDB->query($sql) or web_error($sql);
+    $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $tad_meeting_data_sn = $xoopsDB->getInsertId();
@@ -383,8 +384,8 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
     $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
     //取得使用者編號
     $tad_meeting_data_uid  = ($xoopsUser) ? $xoopsUser->uid() : "";
-    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? intval($_POST['tad_meeting_data_uid']) : $tad_meeting_data_uid;
-    $tad_meeting_data_sort = intval($_POST['tad_meeting_data_sort']);
+    $tad_meeting_data_uid  = !empty($_POST['tad_meeting_data_uid']) ? (int) $_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
+    $tad_meeting_data_sort = (int) $_POST['tad_meeting_data_sort'];
     $tad_meeting_data_date = date("Y-m-d H:i:s", xoops_getUserTimestamp(time()));
 
     $sql = "update `" . $xoopsDB->prefix("tad_meeting_data") . "` set
@@ -396,7 +397,7 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
        `tad_meeting_data_sort` = '{$tad_meeting_data_sort}',
        `tad_meeting_data_date` = '{$tad_meeting_data_date}'
     where `tad_meeting_data_sn` = '$tad_meeting_data_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql);
+    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_meeting");

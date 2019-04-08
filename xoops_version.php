@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright  XOOPS Project (https://xoops.org)
  * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package    Tad Meeting
  * @since      2.5
@@ -21,7 +21,7 @@ $modversion = array();
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_TADMEETIN_NAME;
-$modversion['version']     = '1.2';
+$modversion['version']     = '1.9';
 $modversion['description'] = _MI_TADMEETIN_DESC;
 $modversion['author']      = _MI_TADMEETIN_AUTHOR;
 $modversion['credits']     = _MI_TADMEETIN_CREDITS;
@@ -31,14 +31,14 @@ $modversion['image']       = "images/logo.png";
 $modversion['dirname']     = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['status_version']      = '1.2';
-$modversion['release_date']        = '2017-02-21';
-$modversion['module_website_url']  = 'http://tad0616.net';
+$modversion['status_version']      = '1.9';
+$modversion['release_date']        = '2019-01-01';
+$modversion['module_website_url']  = 'https://tad0616.net';
 $modversion['module_website_name'] = _MI_TADMEETIN_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
-$modversion['author_website_url']  = 'http://tad0616.net';
+$modversion['author_website_url']  = 'https://tad0616.net';
 $modversion['author_website_name'] = _MI_TADMEETIN_AUTHOR_WEB;
-$modversion['min_php']             = '5.3';
+$modversion['min_php']             = '5.4';
 $modversion['min_xoops']           = '2.5';
 
 //---paypal資訊---//
@@ -126,6 +126,7 @@ $modversion['config'][$i]['description'] = '_MI_TADMEETIN_MEETING_JOB_DESC';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = _MI_TADMEETIN_MEETING_JOB_DEFAULT;
+
 $i++;
 $modversion['config'][$i]['name']        = 'file_title';
 $modversion['config'][$i]['title']       = '_MI_TADMEETIN_FILE_TITLE';
@@ -133,3 +134,12 @@ $modversion['config'][$i]['description'] = '_MI_TADMEETIN_FILE_TITLE_DESC';
 $modversion['config'][$i]['formtype']    = 'textbox';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = _MI_TADMEETIN_FILE_TITLE_DEFAULT;
+
+$i++;
+$modversion['config'][$i]['name']        = 'orderby';
+$modversion['config'][$i]['title']       = '_MI_TADMEETIN_ORDERBY';
+$modversion['config'][$i]['description'] = '_MI_TADMEETIN_ORDERBY_DESC';
+$modversion['config'][$i]['formtype']    = 'select';
+$modversion['config'][$i]['valuetype']   = 'text';
+$modversion['config'][$i]['default']     = "auto";
+$modversion['config'][$i]['options']     = array('_MI_TADMEETIN_ORDERBY_OPT1' => 'auto', '_MI_TADMEETIN_ORDERBY_OPT2' => 'tad_meeting_data_sort');

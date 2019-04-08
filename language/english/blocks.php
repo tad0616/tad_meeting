@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright  XOOPS Project (https://xoops.org)
  * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package    Tad Meeting
  * @since      2.5
@@ -18,4 +18,4 @@
  **/
 
 
-define('_MB_TAD_MEETING_SHOW1_OPT0', '顯示資料數');
+define('_MB_TAD_MEETING_SHOW1_OPT0', 'Show data');

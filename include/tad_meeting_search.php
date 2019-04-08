@@ -9,7 +9,7 @@ function tad_meeting_search($queryarray, $andor, $limit, $offset, $userid)
         }
         $queryarray = $arr;
     }
-    $sql = "SELECT `tad_meeting_sn`,`tad_meeting_data_sn`,`tad_meeting_data_title`,`tad_meeting_data_date`, `tad_meeting_data_uid` FROM " . $xoopsDB->prefix("tad_meeting_data") . " where 1";
+    $sql = "SELECT `tad_meeting_sn`,`tad_meeting_data_sn`,`tad_meeting_data_title`,`tad_meeting_data_date`, `tad_meeting_data_uid` FROM " . $xoopsDB->prefix("tad_meeting_data") . " WHERE 1";
     if ($userid != 0) {
         $sql .= " AND uid=" . $userid . " ";
     }
@@ -21,7 +21,7 @@ function tad_meeting_search($queryarray, $andor, $limit, $offset, $userid)
         }
         $sql .= ") ";
     }
-    $sql .= "ORDER BY  `tad_meeting_data_date` DESC";
+    $sql    .= "ORDER BY  `tad_meeting_data_date` DESC";
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret    = array();
     $i      = 0;
