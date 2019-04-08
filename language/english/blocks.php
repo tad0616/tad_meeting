@@ -18,7 +18,4 @@
  **/
 
 
-echo "<div align=\"center\"><a href=\"https://xoops.org\" target=\"_blank\"><img src=\"../images/admin/xoopsmicrobutton.gif\" alt=\"XOOPS\" title=\"XOOPS\"></a></div>";
-echo "<div class='center smallsmall italic pad5'><strong>" . $xoopsModule->getVar("name") . "</strong> is maintained by the <a class='tooltip' rel='external' href='https://xoops.org/' title='Visit XOOPS Community'>XOOPS Community</a></div>";
-
-xoops_cp_footer();
+define('_MB_TAD_MEETING_SHOW1_OPT0', '顯示資料數');
