@@ -21,16 +21,16 @@
 function xoops_module_install_tad_meeting(&$module)
 {
 
-    mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting");
-    mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/file");
-    mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/image");
-    mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/image/.thumbs");
+    tad_meeting_mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting");
+    tad_meeting_mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/file");
+    tad_meeting_mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/image");
+    tad_meeting_mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/image/.thumbs");
 
     return true;
 }
 
 //建立目錄
-function mk_dir($dir = "")
+function tad_meeting_mk_dir($dir = "")
 {
     //若無目錄名稱秀出警告訊息
     if (empty($dir)) {

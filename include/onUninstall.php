@@ -29,7 +29,7 @@ function xoops_module_uninstall_tad_meeting($module)
 }
 
 //刪除目錄
-function delete_directory($dirname)
+function tad_meeting_delete_directory($dirname)
 {
     if (is_dir($dirname)) {
         $dir_handle = opendir($dirname);
@@ -44,7 +44,7 @@ function delete_directory($dirname)
             if (!is_dir($dirname . "/" . $file)) {
                 unlink($dirname . "/" . $file);
             } else {
-                delete_directory($dirname . '/' . $file);
+                tad_meeting_delete_directory($dirname . '/' . $file);
             }
 
         }
@@ -55,7 +55,7 @@ function delete_directory($dirname)
 }
 
 //拷貝目錄
-function full_copy($source = "", $target = "")
+function tad_meeting_full_copy($source = "", $target = "")
 {
     if (is_dir($source)) {
         @mkdir($target);
@@ -67,7 +67,7 @@ function full_copy($source = "", $target = "")
 
             $Entry = $source . '/' . $entry;
             if (is_dir($Entry)) {
-                full_copy($Entry, $target . '/' . $entry);
+                tad_meeting_full_copy($Entry, $target . '/' . $entry);
                 continue;
             }
             copy($Entry, $target . '/' . $entry);
