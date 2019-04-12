@@ -44,7 +44,7 @@ function list_tad_meeting($tad_meeting_cate_sn = "")
 
     $i = 0;
 
-    $all_content = array();
+    $all_content = [];
     while ($all = $xoopsDB->fetchArray($result)) {
 
         $all_content[$i] = $all;
@@ -73,7 +73,7 @@ function list_tad_meeting($tad_meeting_cate_sn = "")
 function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = "")
 {
     global $xoopsDB, $xoopsTpl;
-    $cate_count = array();
+    $cate_count = [];
 
     $sql    = "SELECT count(*),tad_meeting_cate_sn FROM " . $xoopsDB->prefix("tad_meeting") . " GROUP BY tad_meeting_cate_sn";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
@@ -157,7 +157,7 @@ function get_tad_meeting_cate_sub($tad_meeting_cate_sn = "0")
     global $xoopsDB;
     $sql                     = "select tad_meeting_cate_sn,tad_meeting_cate_title from " . $xoopsDB->prefix("tad_meeting_cate") . " where tad_meeting_cate_parent_sn='{$tad_meeting_cate_sn}'";
     $result                  = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    $tad_meeting_cate_sn_arr = array();
+    $tad_meeting_cate_sn_arr = [];
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $tad_meeting_cate_sn_arr[$tad_meeting_cate_sn] = $tad_meeting_cate_title;
     }
@@ -223,7 +223,7 @@ function get_tad_meeting_cate_all()
     global $xoopsDB;
     $sql      = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
     $result   = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    $data_arr = array();
+    $data_arr = [];
     while ($data = $xoopsDB->fetchArray($result)) {
         $tad_meeting_cate_sn            = $data['tad_meeting_cate_sn'];
         $data_arr[$tad_meeting_cate_sn] = $data;
@@ -243,7 +243,7 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
     if (!empty($tad_meeting_cate_sn)) {
         $DBV = get_tad_meeting_cate($tad_meeting_cate_sn);
     } else {
-        $DBV = array();
+        $DBV = [];
     }
 
     //預設值設定

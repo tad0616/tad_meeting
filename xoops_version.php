@@ -17,7 +17,7 @@
  * @version    $Id $
  **/
 
-$modversion = array();
+$modversion = [];
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_TADMEETIN_NAME;
@@ -42,7 +42,7 @@ $modversion['min_php']             = '5.4';
 $modversion['min_xoops']           = '2.5';
 
 //---paypal資訊---//
-$modversion['paypal']                  = array();
+$modversion['paypal']                  = [];
 $modversion['paypal']['business']      = 'tad0616@gmail.com';
 $modversion['paypal']['item_name']     = 'Donation :' . _MI_TADMEETIN_AUTHOR;
 $modversion['paypal']['amount']        = 0;
@@ -142,4 +142,4 @@ $modversion['config'][$i]['description'] = '_MI_TADMEETIN_ORDERBY_DESC';
 $modversion['config'][$i]['formtype']    = 'select';
 $modversion['config'][$i]['valuetype']   = 'text';
 $modversion['config'][$i]['default']     = "auto";
-$modversion['config'][$i]['options']     = array('_MI_TADMEETIN_ORDERBY_OPT1' => 'auto', '_MI_TADMEETIN_ORDERBY_OPT2' => 'tad_meeting_data_sort');
+$modversion['config'][$i]['options']     = ['_MI_TADMEETIN_ORDERBY_OPT1' => 'auto', '_MI_TADMEETIN_ORDERBY_OPT2' => 'tad_meeting_data_sort'];

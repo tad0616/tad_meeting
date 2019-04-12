@@ -126,7 +126,7 @@ function list_tad_meeting()
 
     //取得分類所有資料陣列
     $tad_meeting_cate_arr = get_tad_meeting_cate_all();
-    $all_content          = array();
+    $all_content          = [];
     $i                    = 0;
     while ($all = $xoopsDB->fetchArray($result)) {
         //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
@@ -178,7 +178,7 @@ function get_tad_meeting_cate_all()
     global $xoopsDB;
     $sql      = "SELECT * FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "`";
     $result   = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    $data_arr = array();
+    $data_arr = [];
     while ($data = $xoopsDB->fetchArray($result)) {
         $tad_meeting_cate_sn            = $data['tad_meeting_cate_sn'];
         $data_arr[$tad_meeting_cate_sn] = $data;
@@ -200,7 +200,7 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     if (!empty($tad_meeting_data_sn)) {
         $DBV = get_tad_meeting_data($tad_meeting_data_sn);
     } else {
-        $DBV = array();
+        $DBV = [];
     }
 
     //預設值設定
@@ -260,14 +260,14 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $xoopsTpl->assign('now_op', 'tad_meeting_data_form');
     $xoopsTpl->assign('next_op', $op);
 
-    $meeting_unit_arr = array();
+    $meeting_unit_arr = [];
     $meeting_unit     = explode(';', $xoopsModuleConfig['meeting_unit']);
     foreach ($meeting_unit as $value) {
         $meeting_unit_arr[] = trim($value);
     }
     $xoopsTpl->assign('meeting_unit', $meeting_unit_arr);
 
-    $meeting_job_arr = array();
+    $meeting_job_arr = [];
     $meeting_job     = explode(';', $xoopsModuleConfig['meeting_job']);
     foreach ($meeting_job as $value) {
         $meeting_job_arr[] = trim($value);

@@ -15,12 +15,12 @@ $perm_page_title = _MA_TADMEETIN_PERM_TITLE;
 
 //取得分類編號及標題
 //權限項目陣列（編號超級重要！設定後，以後切勿隨便亂改。）
-$item_list = array(
+$item_list = [
     '1' => _MA_TADMEETIN_CREATE_MEETING,
     '2' => _MA_TADMEETIN_ADD_REPORT,
     '3' => _MA_TADMEETIN_READ_REPORT,
     '4' => _MA_TADMEETIN_SORT_REPORT,
-);
+];
 
 //頁面標題
 $perm_page_title = _MA_TADMEETIN_PERM_TITLE;

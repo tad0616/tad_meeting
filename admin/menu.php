@@ -17,7 +17,7 @@
  * @version    $Id $
  **/
 
-$adminmenu = array();
+$adminmenu = [];
 $i         = 1;
 
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_HOME;

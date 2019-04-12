@@ -42,7 +42,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     if (!empty($tad_meeting_sn)) {
         $DBV = get_tad_meeting($tad_meeting_sn);
     } else {
-        $DBV = array();
+        $DBV = [];
     }
 
     //預設值設定
@@ -84,7 +84,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $sql                               = "SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `" . $xoopsDB->prefix("tad_meeting_cate") . "` ORDER BY tad_meeting_cate_sort";
     $result                            = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $i                                 = 0;
-    $tad_meeting_cate_sn_options_array = array();
+    $tad_meeting_cate_sn_options_array = [];
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_sn']    = $tad_meeting_cate_sn;
         $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_title'] = $tad_meeting_cate_title;
@@ -102,7 +102,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $xoopsTpl->assign('now_op', 'tad_meeting_form');
     $xoopsTpl->assign('next_op', $op);
 
-    $meeting_place_arr = array();
+    $meeting_place_arr = [];
     $meeting_place     = explode(';', $xoopsModuleConfig['meeting_place']);
     foreach ($meeting_place as $value) {
         $meeting_place_arr[] = trim($value);
@@ -289,7 +289,7 @@ function list_tad_meeting_data($tad_meeting_sn = "", $mode = "", $file_mode = ""
     include_once XOOPS_ROOT_PATH . "/modules/tadtools/TadUpFiles.php";
     $TadUpFiles = new TadUpFiles("tad_meeting");
 
-    $meeting_unit_arr = array();
+    $meeting_unit_arr = [];
     $meeting_unit     = explode(';', $xoopsModuleConfig['meeting_unit']);
     foreach ($meeting_unit as $value) {
         $meeting_unit_arr[] = "'" . trim($value) . "'";
@@ -301,7 +301,7 @@ function list_tad_meeting_data($tad_meeting_sn = "", $mode = "", $file_mode = ""
     $sql     = "select * from `" . $xoopsDB->prefix("tad_meeting_data") . "` where tad_meeting_sn='{$tad_meeting_sn}' order by $orderby";
     $result  = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
-    $all_content = array();
+    $all_content = [];
     $i           = 1;
     while ($all = $xoopsDB->fetchArray($result)) {
         //以下會產生這些變數： $tad_meeting_data_sn, $tad_meeting_data_unit, $tad_meeting_data_job, $tad_meeting_data_title, $tad_meeting_data_content, $tad_meeting_data_uid, $tad_meeting_data_sort, $tad_meeting_data_date
@@ -377,10 +377,10 @@ function number2chinese($num, $type = "")
         $sim  = false;
     }
 
-    $char = $sim ? array('０', '一', '二', '三', '四', '五', '六', '七', '八', '九')
-    : array('零', '壹', '貳', '叁', '肆', '伍', '陸', '柒', '捌', '玖');
-    $unit = $sim ? array('', '十', '百', '千', '', '萬', '億', '兆')
-    : array('', '拾', '佰', '仟', '', '萬', '億', '兆');
+    $char = $sim ? ['０', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+    : ['零', '壹', '貳', '叁', '肆', '伍', '陸', '柒', '捌', '玖'];
+    $unit = $sim ? ['', '十', '百', '千', '', '萬', '億', '兆']
+    : ['', '拾', '佰', '仟', '', '萬', '億', '兆'];
     $retval = $mode ? '' : '';
 
     //小數部分
