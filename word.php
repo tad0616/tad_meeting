@@ -66,7 +66,7 @@ $listStyle = ['listType' => PHPWord_Style_ListItem::TYPE_BULLET_FILLED, 'spaceAf
 foreach ($meeting_data as $i => $data) {
     $section->addTitle($data['number2chinese'] . _MD_TADMEETIN_COMMA . $data['tad_meeting_data_title'], 2);
 
-    $tad_meeting_data_content = $data['tad_meeting_data_content'] ? $data['tad_meeting_data_content'] : _MD_TADMEETIN_NONE;
+    $tad_meeting_data_content = $data['tad_meeting_data_content'] ?: _MD_TADMEETIN_NONE;
 
     $section->addText($tad_meeting_data_content, $contentfontStyle, $paragraphStyle); //新增文字段落
 

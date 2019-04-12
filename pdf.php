@@ -57,7 +57,7 @@ foreach ($meeting_data as $data) {
 
     $pdf->SetFont('droidsansfallback', '', 10, '', true); //設定字型
     $pdf->setCellHeightRatio(1.8);
-    $tad_meeting_data_content = $data['tad_meeting_data_content'] ? $data['tad_meeting_data_content'] : _MD_TADMEETIN_NONE;
+    $tad_meeting_data_content = $data['tad_meeting_data_content'] ?: _MD_TADMEETIN_NONE;
     $pdf->MultiCell(172, 13, $tad_meeting_data_content, 0, 'J', false, 1, $pdf->GetX() + 8, null, true, 0, false, true);
 
     if ($data['list_file']) {
