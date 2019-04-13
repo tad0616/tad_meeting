@@ -16,7 +16,6 @@
  * @author     tad
  * @version    $Id $
  **/
-
 include_once XOOPS_ROOT_PATH . '/modules/tadtools/language/' . $xoopsConfig['language'] . '/modinfo_common.php';
 
 define('_MI_TADMEETIN_NAME', '會議系統');

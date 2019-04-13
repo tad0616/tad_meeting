@@ -15,17 +15,14 @@
  * @since      2.5
  * @author     tad
  * @version    $Id $
+ * @param mixed $module
  **/
-
-use XoopsModules\Tad_meeting\Utility;
-
 function xoops_module_uninstall_tad_meeting($module)
 {
     global $xoopsDB;
-    $date = date("Ymd");
+    $date = date('Ymd');
 
-    rename(XOOPS_ROOT_PATH . "/uploads/tad_meeting", XOOPS_ROOT_PATH . "/uploads/tad_meeting_bak_{$date}");
+    rename(XOOPS_ROOT_PATH . '/uploads/tad_meeting', XOOPS_ROOT_PATH . "/uploads/tad_meeting_bak_{$date}");
 
     return true;
 }
-

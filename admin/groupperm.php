@@ -1,10 +1,10 @@
 <?php
 /*-----------引入檔案區--------------*/
-$xoopsOption['template_main'] = "tad_meeting_adm_groupperm.tpl";
-include_once "header.php";
-include_once "../function.php";
-include_once XOOPS_ROOT_PATH . "/Frameworks/art/functions.php";
-include_once XOOPS_ROOT_PATH . "/Frameworks/art/functions.admin.php";
+$xoopsOption['template_main'] = 'tad_meeting_adm_groupperm.tpl';
+include_once 'header.php';
+include_once '../function.php';
+include_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.php';
+include_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 //取得本模組編號

@@ -1,15 +1,15 @@
 <?php
-include_once "../../mainfile.php";
-include_once "function.php";
+include_once '../../mainfile.php';
+include_once 'function.php';
 
 //判斷目前使用者是否有：觀看會議內容
-$read_report = power_chk("tad_meeting", 3);
+$read_report = power_chk('tad_meeting', 3);
 if (!$read_report) {
     redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
 }
 
 set_time_limit(0);
-ini_set("memory_limit", "150M");
+ini_set('memory_limit', '150M');
 
 $tad_meeting_sn = (int)$_REQUEST['tad_meeting_sn'];
 
@@ -19,7 +19,7 @@ $tad_meeting = get_tad_meeting($tad_meeting_sn);
 $tad_meeting_cate_arr = get_tad_meeting_cate($tad_meeting['tad_meeting_cate_sn']);
 
 $page_title = "{$xoopsModuleConfig['file_title']}{$tad_meeting['tad_meeting_title']}";
-$filename   = str_replace(" ", "", $page_title);
+$filename = str_replace(' ', '', $page_title);
 
 require_once XOOPS_ROOT_PATH . '/modules/tadtools/tcpdf/tcpdf.php';
 $pdf = new TCPDF('PDF_PAGE_ORIENTATION', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -49,7 +49,7 @@ $pdf->MultiCell(60, 10, $tad_meeting['tad_meeting_chairman'], 1, 'C', false, 1, 
 
 $pdf->Ln(2);
 
-$meeting_data = list_tad_meeting_data($tad_meeting_sn, "return", 'file_url');
+$meeting_data = list_tad_meeting_data($tad_meeting_sn, 'return', 'file_url');
 foreach ($meeting_data as $data) {
     $pdf->SetFont('droidsansfallback', '', 12, '', true); //設定字型
     $pdf->setCellHeightRatio(1);

@@ -16,29 +16,28 @@
  * @author     tad
  * @version    $Id $
  **/
-
 $adminmenu = [];
-$i         = 1;
+$i = 1;
 
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_HOME;
-$adminmenu[$i]['link']  = 'admin/index.php';
-$adminmenu[$i]['desc']  = _MI_TAD_ADMIN_HOME_DESC;
-$adminmenu[$i]['icon']  = 'images/admin/home.png';
+$adminmenu[$i]['link'] = 'admin/index.php';
+$adminmenu[$i]['desc'] = _MI_TAD_ADMIN_HOME_DESC;
+$adminmenu[$i]['icon'] = 'images/admin/home.png';
 
 $i++;
 $adminmenu[$i]['title'] = _MI_TADMEETIN_ADMENU1;
-$adminmenu[$i]['link']  = 'admin/main.php';
-$adminmenu[$i]['desc']  = _MI_TADMEETIN_ADMENU1_DESC;
-$adminmenu[$i]['icon']  = "images/admin/reunion.png";
+$adminmenu[$i]['link'] = 'admin/main.php';
+$adminmenu[$i]['desc'] = _MI_TADMEETIN_ADMENU1_DESC;
+$adminmenu[$i]['icon'] = 'images/admin/reunion.png';
 
 $i++;
 $adminmenu[$i]['title'] = _MI_TADMEETIN_GROUPPERM;
-$adminmenu[$i]['link']  = 'admin/groupperm.php';
-$adminmenu[$i]['desc']  = _MI_TADMEETIN_GROUPPERM_DESC;
-$adminmenu[$i]['icon']  = "images/admin/keys.png";
+$adminmenu[$i]['link'] = 'admin/groupperm.php';
+$adminmenu[$i]['desc'] = _MI_TADMEETIN_GROUPPERM_DESC;
+$adminmenu[$i]['icon'] = 'images/admin/keys.png';
 
 $i++;
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_ABOUT;
-$adminmenu[$i]['link']  = 'admin/about.php';
-$adminmenu[$i]['desc']  = _MI_TAD_ADMIN_ABOUT_DESC;
-$adminmenu[$i]['icon']  = 'images/admin/about.png';
+$adminmenu[$i]['link'] = 'admin/about.php';
+$adminmenu[$i]['desc'] = _MI_TAD_ADMIN_ABOUT_DESC;
+$adminmenu[$i]['icon'] = 'images/admin/about.png';

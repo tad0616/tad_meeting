@@ -16,6 +16,4 @@
  * @author     tad
  * @version    $Id $
  **/
-
-
 define('_MB_TAD_MEETING_SHOW1_OPT0', 'Show data');
