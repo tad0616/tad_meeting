@@ -403,7 +403,7 @@ function number2chinese($num, $type = '')
         $out[$i] = $char[$str[$i]];
         if ($mode) {
             $out[$i] .= '0' != $str[$i] ? $unit[$i % 4] : '';
-            if ($i > 1 and $str[$i] + $str[$i - 1] == 0) {
+            if ($i > 1 and 0 == $str[$i] + $str[$i - 1]) {
                 $out[$i] = '';
             }
             if (0 == $i % 4) {
