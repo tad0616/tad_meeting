@@ -190,7 +190,7 @@ function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_m
             continue;
         }
 
-        if ('edit' == $mode) {
+        if ('edit' === $mode) {
             $selected = ($tad_meeting_cate_sn == $default_tad_meeting_cate_parent_sn) ? 'selected=selected' : '';
             $selected .= ($tad_meeting_cate_sn == $default_tad_meeting_cate_sn) ? 'disabled=disabled' : '';
             $selected .= (in_array($level, $unselect, true)) ? 'disabled=disabled' : '';
@@ -202,10 +202,10 @@ function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_m
             }
             $selected .= (in_array($level, $unselect, true)) ? 'disabled=disabled' : '';
         }
-        if ('none' == $page or empty($count[$tad_meeting_cate_sn])) {
+        if ('none' === $page or empty($count[$tad_meeting_cate_sn])) {
             $counter = '';
         } else {
-            $w = ('admin' == $page) ? _MA_TADLINK_CATE_COUNT : _MD_TADLINK_CATE_COUNT;
+            $w = ('admin' === $page) ? _MA_TADLINK_CATE_COUNT : _MD_TADLINK_CATE_COUNT;
             $counter = ' (' . sprintf($w, $count[$tad_meeting_cate_sn]) . ') ';
         }
         $main .= "<option value=$tad_meeting_cate_sn $selected>{$prefix}{$tad_meeting_cate_title}{$counter}</option>";

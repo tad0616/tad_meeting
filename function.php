@@ -297,7 +297,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
     $meeting_unit_str = implode(',', $meeting_unit_arr);
 
-    $orderby = ('tad_meeting_data_sort' == $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "field(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
+    $orderby = ('tad_meeting_data_sort' === $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "field(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
     $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting_data') . "` where tad_meeting_sn='{$tad_meeting_sn}' order by $orderby";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
 
@@ -333,7 +333,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
         $TadUpFiles->set_col('tad_meeting_data_sn', $tad_meeting_data_sn);
         $TadUpFiles->download_url = XOOPS_URL . '/modules/tad_meeting/index.php?op=tufdl';
-        if ('return' == $mode) {
+        if ('return' === $mode) {
             $all_content[$i]['list_file'] = $TadUpFiles->show_files('up_tad_meeting_data_sn', true, $file_mode, true, false, null, null, false);
         } else {
             $all_content[$i]['list_file'] = $TadUpFiles->show_files('up_tad_meeting_data_sn', true, 'filename', true, false, null, null, false);
@@ -342,7 +342,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
         $i++;
     }
 
-    if ('return' == $mode) {
+    if ('return' === $mode) {
         return $all_content;
     }
 
@@ -371,7 +371,7 @@ function number2chinese($num, $type = '')
         return '含有非數字非小數點字符！';
     }
 
-    if ('simple' == $type) {
+    if ('simple' === $type) {
         $mode = false;
         $sim = true;
     } else {
