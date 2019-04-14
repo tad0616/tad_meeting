@@ -1,5 +1,5 @@
 <?php
-include '../../../include/cp_header.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $of_sn = (int) (str_replace('node-_', '', $_POST['']));
 $sn = (int) (str_replace('node-_', '', $_POST['tad_meeting_cate_sn']));
@@ -22,7 +22,7 @@ function chk_cate_path($sn, $to_sn)
     //抓出子目錄的編號
     $sql = 'select `tad_meeting_cate_sn` from ' . $xoopsDB->prefix('tad_meeting_cate') . " where ``='{$sn}'";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    while (list($sub_sn) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($sub_sn) = $xoopsDB->fetchRow($result))) {
         if (chk_cate_path($sub_sn, $to_sn)) {
             return true;
         }

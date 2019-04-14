@@ -1,5 +1,5 @@
 <?php
-include '../../../include/cp_header.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $sn = (int)$_POST['tad_meeting_cate_sn'];
 $sort = (int)$_POST['sort'];

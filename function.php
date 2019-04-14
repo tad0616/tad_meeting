@@ -21,7 +21,7 @@
 if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php')) {
     redirect_header('http://campus-xoops.tn.edu.tw/modules/tad_modules/index.php?module_sn=1', 3, _TAD_NEED_TADTOOLS);
 }
-include_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
+require_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
 
 /********************* 自訂函數 *********************/
 
@@ -76,7 +76,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     if (!file_exists(TADTOOLS_PATH . '/formValidator.php')) {
         redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
-    include_once TADTOOLS_PATH . '/formValidator.php';
+    require_once TADTOOLS_PATH . '/formValidator.php';
     $formValidator = new formValidator('#myForm', true);
     $formValidator_code = $formValidator->render();
 
@@ -85,7 +85,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $i = 0;
     $tad_meeting_cate_sn_options_array = [];
-    while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result))) {
         $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_sn'] = $tad_meeting_cate_sn;
         $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_title'] = $tad_meeting_cate_title;
         $i++;
@@ -93,7 +93,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $xoopsTpl->assign('tad_meeting_cate_sn_options', $tad_meeting_cate_sn_options_array);
 
     //加入Token安全機制
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     $token = new XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
@@ -122,7 +122,7 @@ function insert_tad_meeting()
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -170,7 +170,7 @@ function update_tad_meeting($tad_meeting_sn = '')
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -213,7 +213,7 @@ function delete_tad_meeting($tad_meeting_sn = '')
     $sql = 'select tad_meeting_data_sn from `' . $xoopsDB->prefix('tad_meeting_data') . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    while (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result)) {
+    while (false !== (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result))) {
         delete_tad_meeting_data($tad_meeting_data_sn);
     }
 
@@ -239,7 +239,7 @@ function delete_tad_meeting_data($tad_meeting_data_sn = '')
     where `tad_meeting_data_sn` = '{$tad_meeting_data_sn}'";
     $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_meeting');
     $TadUpFiles->set_col('tad_meeting_data_sn', $tad_meeting_data_sn);
     $TadUpFiles->del_files();
@@ -286,7 +286,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
     $myts = MyTextSanitizer::getInstance();
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_meeting');
 
     $meeting_unit_arr = [];
@@ -303,7 +303,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
     $all_content = [];
     $i = 1;
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         //以下會產生這些變數： $tad_meeting_data_sn, $tad_meeting_data_unit, $tad_meeting_data_job, $tad_meeting_data_title, $tad_meeting_data_content, $tad_meeting_data_uid, $tad_meeting_data_sort, $tad_meeting_data_date
         foreach ($all as $k => $v) {
             $$k = $v;
@@ -350,7 +350,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
         redirect_header('index.php', 3, _MD_NEED_TADTOOLS);
     }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
     $sweet_alert_obj = new sweet_alert();
     $delete_tad_meeting_data_func = $sweet_alert_obj->render(
         'delete_tad_meeting_data_func',

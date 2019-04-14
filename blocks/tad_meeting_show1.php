@@ -31,7 +31,7 @@ function tad_meeting_show1($options)
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $content = [];
     $i = 0;
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         $content[$i] = $all;
         $i++;
     }

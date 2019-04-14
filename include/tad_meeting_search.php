@@ -25,7 +25,7 @@ function tad_meeting_search($queryarray, $andor, $limit, $offset, $userid)
     $result = $xoopsDB->query($sql, $limit, $offset);
     $ret = [];
     $i = 0;
-    while ($myrow = $xoopsDB->fetchArray($result)) {
+    while (false !== ($myrow = $xoopsDB->fetchArray($result))) {
         $ret[$i]['image'] = 'images/layout_sidebar.png';
         $ret[$i]['link'] = 'index.php?tad_meeting_sn=' . $myrow['tad_meeting_sn'];
         $ret[$i]['title'] = $myrow['tad_meeting_data_title'];

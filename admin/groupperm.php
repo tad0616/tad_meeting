@@ -1,11 +1,11 @@
 <?php
 /*-----------引入檔案區--------------*/
-$xoopsOption['template_main'] = 'tad_meeting_adm_groupperm.tpl';
-include_once 'header.php';
-include_once '../function.php';
-include_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.php';
-include_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+$GLOBALS['xoopsOption']['template_main'] = 'tad_meeting_adm_groupperm.tpl';
+require_once __DIR__ . '/header.php';
+require_once dirname(__DIR__) . '/function.php';
+require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.php';
+require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
 //取得本模組編號
 $module_id = $xoopsModule->getVar('mid');
@@ -40,4 +40,4 @@ foreach ($item_list as $item_id => $item_name) {
 }
 
 echo $formi->render();
-include_once 'footer.php';
+require_once __DIR__ . '/footer.php';
