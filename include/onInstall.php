@@ -16,18 +16,16 @@
  * @author     tad
  * @version    $Id $
  **/
-
 use XoopsModules\Tad_meeting\Utility;
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
 
 function xoops_module_install_tad_meeting(&$module)
 {
-
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting");
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/file");
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/image");
-    Utility::mk_dir(XOOPS_ROOT_PATH . "/uploads/tad_meeting/image/.thumbs");
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting');
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting/file');
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting/image');
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting/image/.thumbs');
 
     return true;
 }

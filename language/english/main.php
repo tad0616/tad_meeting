@@ -16,7 +16,6 @@
  * @author     tad
  * @version    $Id $
  **/
-
 define('_TAD_NEED_TADTOOLS', 'This module needs TadTools module. You can download TadTools from <a href="http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50" target="_blank">Tad Textbook </a>. ');
 
 //tad_meeting-list
