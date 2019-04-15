@@ -16,24 +16,24 @@
  * @author     tad
  * @version    $Id $
  **/
-require_once XOOPS_ROOT_PATH . '/modules/tadtools/language/' . $xoopsConfig['language'] . '/modinfo_common.php';
+xoops_loadLanguage('modinfo_common', 'tadtools');
 
-define('_MI_TADMEETIN_NAME', 'conferencing system');
-define('_MI_TADMEETIN_AUTHOR', 'conference system');
+define('_MI_TADMEETIN_NAME', 'Conferencing system');
+define('_MI_TADMEETIN_AUTHOR', 'Conference system');
 define('_MI_TADMEETIN_CREDITS', '');
-define('_MI_TADMEETIN_DESC', 'online assembly of meeting records and generate reports');
+define('_MI_TADMEETIN_DESC', 'Online assembly of meeting records and generate reports');
 define('_MI_TADMEETIN_AUTHOR_WEB', 'Tad textbook');
-define('_MI_TADMEETIN_ADMENU1', 'main manager interface');
-define('_MI_TADMEETIN_ADMENU1_DESC', 'main manager interface');
-define('_MI_TADMEETIN_SMNAME2', 'group reports');
+define('_MI_TADMEETIN_ADMENU1', 'Manager');
+define('_MI_TADMEETIN_ADMENU1_DESC', 'Main Manager GUI');
+define('_MI_TADMEETIN_SMNAME2', 'Group reports');
 
-define('_MI_TAD_MEETING_SHOW1_BLOCK_NAME', 'recent meeting');
+define('_MI_TAD_MEETING_SHOW1_BLOCK_NAME', 'Recent meeting');
 define('_MI_TAD_MEETING_SHOW1_BLOCK_DESC', 'Recent Meeting Block (tad_meeting_show1)');
 
-define('_MI_TADMEETIN_GROUPPERM', 'Detail permission');
+define('_MI_TADMEETIN_GROUPPERM', 'Permissions');
 define('_MI_TADMEETIN_GROUPPERM_DESC', 'Detail permission');
 
-define('_MI_TADMEETIN_MEETING_PLACE', 'meeting place');
+define('_MI_TADMEETIN_MEETING_PLACE', 'Meeting place');
 define('_MI_TADMEETIN_MEETING_PLACE_DESC', 'Please use the lowercase semicolon ";" to separate the option');
 define('_MI_TADMEETIN_MEETING_PLACE_DEFAULT', 'office; audiovisual classroom; multifunctional classroom; restaurant');
 
