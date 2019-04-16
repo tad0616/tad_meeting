@@ -76,7 +76,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
 
     $sql = 'SELECT count(*),tad_meeting_cate_sn FROM ' . $xoopsDB->prefix('tad_meeting') . ' GROUP BY tad_meeting_cate_sn';
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    while (false !== (list($count, $tad_meeting_cate_sn) = $xoopsDB->fetchRow($result))) {
+    while (list($count, $tad_meeting_cate_sn) = $xoopsDB->fetchRow($result)) {
         $cate_count[$tad_meeting_cate_sn] = $count;
     }
 
@@ -86,9 +86,9 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
 
     $sql = 'SELECT tad_meeting_cate_sn, tad_meeting_cate_parent_sn, tad_meeting_cate_title FROM ' . $xoopsDB->prefix('tad_meeting_cate') . ' ORDER BY tad_meeting_cate_sort';
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    while (false !== (list($tad_meeting_cate_sn, $tad_meeting_cate_parent_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result))) {
+    while (list($tad_meeting_cate_sn, $tad_meeting_cate_parent_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $font_style = $def_tad_meeting_cate_sn == $tad_meeting_cate_sn ? ", font:{'background-color':'yellow', 'color':'black'}" : '';
-        $open = in_array($tad_meeting_cate_sn, $path_arr, true) ? 'true' : 'false';
+        $open = in_array($tad_meeting_cate_sn, $path_arr) ? 'true' : 'false';
         $display_counter = empty($cate_count[$tad_meeting_cate_sn]) ? '' : " ({$cate_count[$tad_meeting_cate_sn]})";
         $data[] = "{ id:{$tad_meeting_cate_sn}, pId:{$tad_meeting_cate_parent_sn}, name:'{$tad_meeting_cate_title}{$display_counter}', url:'main.php?tad_meeting_cate_sn={$tad_meeting_cate_sn}', open: {$open} ,target:'_self' {$font_style}}";
     }
@@ -128,7 +128,7 @@ function get_tad_meeting_cate_path($the_tad_meeting_cate_sn = '', $include_self 
             WHERE t1.tad_meeting_cate_parent_sn = '0'";
         $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
         while (false !== ($all = $xoopsDB->fetchArray($result))) {
-            if (in_array($the_tad_meeting_cate_sn, $all, true)) {
+            if (in_array($the_tad_meeting_cate_sn, $all)) {
                 //$main.="-";
                 foreach ($all as $tad_meeting_cate_sn) {
                     if (!empty($tad_meeting_cate_sn)) {
@@ -157,7 +157,7 @@ function get_tad_meeting_cate_sub($tad_meeting_cate_sn = '0')
     $sql = 'select tad_meeting_cate_sn,tad_meeting_cate_title from ' . $xoopsDB->prefix('tad_meeting_cate') . " where tad_meeting_cate_parent_sn='{$tad_meeting_cate_sn}'";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $tad_meeting_cate_sn_arr = [];
-    while (false !== (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result))) {
+    while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $tad_meeting_cate_sn_arr[$tad_meeting_cate_sn] = $tad_meeting_cate_title;
     }
 
@@ -184,23 +184,23 @@ function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_m
     $unselect = explode(',', $unselect_level);
 
     $main = '';
-    while (false !== (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result))) {
+    while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         // $tad_meeting_post = $modulepermHandler->getGroupIds("tad_meeting_post", $tad_meeting_cate_sn, $mod_id);
-        if (!$isAdmin and !in_array($tad_meeting_cate_sn, $post_cate_arr, true)) {
+        if (!$isAdmin and !in_array($tad_meeting_cate_sn, $post_cate_arr)) {
             continue;
         }
 
         if ('edit' === $mode) {
             $selected = ($tad_meeting_cate_sn == $default_tad_meeting_cate_parent_sn) ? 'selected=selected' : '';
             $selected .= ($tad_meeting_cate_sn == $default_tad_meeting_cate_sn) ? 'disabled=disabled' : '';
-            $selected .= (in_array($level, $unselect, true)) ? 'disabled=disabled' : '';
+            $selected .= (in_array($level, $unselect)) ? 'disabled=disabled' : '';
         } else {
             if (is_array($default_tad_meeting_cate_sn)) {
-                $selected = in_array($tad_meeting_cate_sn, $default_tad_meeting_cate_sn, true) ? 'selected=selected' : '';
+                $selected = in_array($tad_meeting_cate_sn, $default_tad_meeting_cate_sn) ? 'selected=selected' : '';
             } else {
                 $selected = ($tad_meeting_cate_sn == $default_tad_meeting_cate_sn) ? 'selected=selected' : '';
             }
-            $selected .= (in_array($level, $unselect, true)) ? 'disabled=disabled' : '';
+            $selected .= (in_array($level, $unselect)) ? 'disabled=disabled' : '';
         }
         if ('none' === $page or empty($count[$tad_meeting_cate_sn])) {
             $counter = '';
