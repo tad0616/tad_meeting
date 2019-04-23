@@ -16,7 +16,9 @@
  * @author     tad
  * @version    $Id $
  * @param mixed $module
- **/
+ *
+ * @return bool
+ */
 function xoops_module_uninstall_tad_meeting($module)
 {
     global $xoopsDB;

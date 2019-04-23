@@ -17,7 +17,9 @@
  * @author     t
  * @version    $Id $
  * @param mixed $options
- **/
+ *
+ * @return mixed
+ */
 
 //區塊主函式 (tad_meeting_show1)
 function tad_meeting_show1($options)

@@ -23,7 +23,10 @@ if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php')) {
 }
 require_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
 
-/********************* 自訂函數 *********************/
+/********************* 自訂函數 ********************
+ * @param string $tad_meeting_sn
+ * @param string $tad_meeting_cate_sn
+ */
 
 //tad_meeting編輯表單
 function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
