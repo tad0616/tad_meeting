@@ -28,7 +28,7 @@ require_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
 //tad_meeting編輯表單
 function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsUser, $isAdmin, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsModuleConfig;
 
     //判斷目前使用者是否有：建立會議
     $create_meeting = power_chk('tad_meeting', 1);
@@ -94,7 +94,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 
     //加入Token安全機制
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $token = new XoopsFormHiddenToken();
+    $token = new \XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
@@ -310,9 +310,9 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
         }
 
         //將 uid 編號轉換成使用者姓名（或帳號）
-        $uid_name = XoopsUser::getUnameFromId($tad_meeting_data_uid, 1);
+        $uid_name = \XoopsUser::getUnameFromId($tad_meeting_data_uid, 1);
         if (empty($uid_name)) {
-            $uid_name = XoopsUser::getUnameFromId($tad_meeting_data_uid, 0);
+            $uid_name = \XoopsUser::getUnameFromId($tad_meeting_data_uid, 0);
         }
 
         //過濾讀出的變數值

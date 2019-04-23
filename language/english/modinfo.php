@@ -37,19 +37,19 @@ define('_MI_TADMEETIN_MEETING_PLACE', 'Meeting place');
 define('_MI_TADMEETIN_MEETING_PLACE_DESC', 'Please use the lowercase semicolon ";" to separate the option');
 define('_MI_TADMEETIN_MEETING_PLACE_DEFAULT', 'office; audiovisual classroom; multifunctional classroom; restaurant');
 
-define('_MI_TADMEETIN_MEETING_UNIT', 'room settings');
+define('_MI_TADMEETIN_MEETING_UNIT', 'Room settings');
 define('_MI_TADMEETIN_MEETING_UNIT_DESC', 'Please use the lowercase semicolon ";" to separate the option');
-define('_MI_TADMEETIN_MEETING_UNIT_DEFAULT', 'principals room; teaching office; general affairs office; kindergarten; personnel room; accounting room');
+define('_MI_TADMEETIN_MEETING_UNIT_DEFAULT', 'Principals room; Teaching office; General affairs office; Kindergarten; Personnel room; Accounting room');
 
-define('_MI_TADMEETIN_MEETING_JOB', 'job setting');
+define('_MI_TADMEETIN_MEETING_JOB', 'Job setting');
 define('_MI_TADMEETIN_MEETING_JOB_DESC', 'Please use the lowercase semicolon ";" to separate the option');
-define('_MI_TADMEETIN_MEETING_JOB_DEFAULT', 'Principals; teaching director; branch director; education group; network management; Nursing division; General affairs officer; Officer; Personnel Director; Accounting Officer');
+define('_MI_TADMEETIN_MEETING_JOB_DEFAULT', 'Principals; Teaching director; Branch director; Education group; Network management; Nursing division; General affairs officer; Officer; Personnel Director; Accounting Officer');
 
-define('_MI_TADMEETIN_FILE_TITLE', 'default meeting record file title');
-define('_MI_TADMEETIN_FILE_TITLE_DESC', 'for generating file title and file name');
+define('_MI_TADMEETIN_FILE_TITLE', 'Default meeting record file title');
+define('_MI_TADMEETIN_FILE_TITLE_DESC', 'For generating file title and file name');
 define('_MI_TADMEETIN_FILE_TITLE_DEFAULT', 'OO City OO National Primary School OO Academic Year O');
 
 define('_MI_TADMEETIN_ORDERBY', 'Meeting Content Sorter');
-define('_MI_TADMEETIN_ORDERBY_DESC', 'will be used on all reports and pages');
+define('_MI_TADMEETIN_ORDERBY_DESC', 'It will be used on all reports and pages');
 define('_MI_TADMEETIN_ORDERBY_OPT1', 'Auto-sort (based on the order of office settings)');
 define('_MI_TADMEETIN_ORDERBY_OPT2', 'Custom Ordering');

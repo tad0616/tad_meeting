@@ -94,7 +94,7 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $xoopsTpl->assign('tad_meeting_note', nl2br($tad_meeting_note));
 
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
-        redirect_header('index.php', 3, _MA_NEED_TADTOOLS);
+        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
 
     require_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
@@ -254,7 +254,7 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 
     //加入Token安全機制
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $token = new XoopsFormHiddenToken();
+    $token = new \XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
@@ -329,7 +329,7 @@ function insert_tad_meeting_data()
     $tad_meeting_data_title = $myts->addSlashes($_POST['tad_meeting_data_title']);
     $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
     //取得使用者編號
-    $tad_meeting_data_uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $tad_meeting_data_uid = $xoopsUser ? $xoopsUser->uid() : '';
     $tad_meeting_data_uid = !empty($_POST['tad_meeting_data_uid']) ? (int) $_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
     $tad_meeting_data_sort = (int) $_POST['tad_meeting_data_sort'];
     $tad_meeting_data_date = date('Y-m-d H:i:s', xoops_getUserTimestamp(time()));
@@ -388,7 +388,7 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
     $tad_meeting_data_title = $myts->addSlashes($_POST['tad_meeting_data_title']);
     $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
     //取得使用者編號
-    $tad_meeting_data_uid = ($xoopsUser) ? $xoopsUser->uid() : '';
+    $tad_meeting_data_uid = $xoopsUser ? $xoopsUser->uid() : '';
     $tad_meeting_data_uid = !empty($_POST['tad_meeting_data_uid']) ? (int) $_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
     $tad_meeting_data_sort = (int) $_POST['tad_meeting_data_sort'];
     $tad_meeting_data_date = date('Y-m-d H:i:s', xoops_getUserTimestamp(time()));

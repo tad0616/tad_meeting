@@ -53,7 +53,7 @@ function list_tad_meeting($tad_meeting_cate_sn = '')
     get_jquery(true);
 
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
-        redirect_header('index.php', 3, _MA_NEED_TADTOOLS);
+        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
     require_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
     $sweet_alert = new sweet_alert();
@@ -96,7 +96,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
     $json = implode(",\n", $data);
 
     if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/ztree.php')) {
-        redirect_header('index.php', 3, _MA_NEED_TADTOOLS);
+        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
     }
     require_once XOOPS_ROOT_PATH . '/modules/tadtools/ztree.php';
     $ztree = new ztree('cate_tree', $json, 'tad_meeting_cate_save_drag.php', 'tad_meeting_cate_save_sort.php', 'tad_meeting_cate_parent_sn', 'tad_meeting_cate_sn');
@@ -193,14 +193,14 @@ function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_m
         if ('edit' === $mode) {
             $selected = ($tad_meeting_cate_sn == $default_tad_meeting_cate_parent_sn) ? 'selected=selected' : '';
             $selected .= ($tad_meeting_cate_sn == $default_tad_meeting_cate_sn) ? 'disabled=disabled' : '';
-            $selected .= (in_array($level, $unselect)) ? 'disabled=disabled' : '';
+            $selected .= in_array($level, $unselect) ? 'disabled=disabled' : '';
         } else {
             if (is_array($default_tad_meeting_cate_sn)) {
                 $selected = in_array($tad_meeting_cate_sn, $default_tad_meeting_cate_sn) ? 'selected=selected' : '';
             } else {
                 $selected = ($tad_meeting_cate_sn == $default_tad_meeting_cate_sn) ? 'selected=selected' : '';
             }
-            $selected .= (in_array($level, $unselect)) ? 'disabled=disabled' : '';
+            $selected .= in_array($level, $unselect) ? 'disabled=disabled' : '';
         }
         if ('none' === $page or empty($count[$tad_meeting_cate_sn])) {
             $counter = '';
@@ -279,7 +279,7 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
 
     //加入Token安全機制
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $token = new XoopsFormHiddenToken();
+    $token = new \XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
