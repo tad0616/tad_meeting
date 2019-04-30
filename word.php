@@ -1,14 +1,16 @@
 <?php
+use XoopsModules\Tadtools\Utility;
+
 include_once '../../mainfile.php';
 include_once 'function.php';
 
 //判斷目前使用者是否有：觀看會議內容
-$read_report = power_chk('tad_meeting', 3);
+$read_report = Utility::power_chk('tad_meeting', 3);
 if (!$read_report) {
     redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
 }
 
-$tad_meeting_sn = (int)$_REQUEST['tad_meeting_sn'];
+$tad_meeting_sn = (int) $_REQUEST['tad_meeting_sn'];
 
 $tad_meeting = get_tad_meeting($tad_meeting_sn);
 
@@ -18,7 +20,7 @@ $tad_meeting_cate_arr = get_tad_meeting_cate($tad_meeting['tad_meeting_cate_sn']
 $page_title = "{$xoopsModuleConfig['file_title']}{$tad_meeting['tad_meeting_title']}";
 $filename = str_replace(' ', '', $page_title);
 
-require_once TADTOOLS_PATH . '/PHPWord.php';
+require_once XOOPS_ROOT_PATH . '/modules/tadtools/PHPWord.php';
 $PHPWord = new PHPWord();
 $PHPWord->setDefaultFontName('標楷體'); //設定預設字型
 $PHPWord->setDefaultFontSize(11); //設定預設字型大小

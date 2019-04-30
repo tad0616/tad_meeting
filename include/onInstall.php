@@ -16,7 +16,7 @@
  * @author     tad
  * @version    $Id $
  **/
-use XoopsModules\Tad_meeting\Utility;
+use XoopsModules\Tadtools\Utility;
 
 include dirname(__DIR__) . '/preloads/autoloader.php';
 

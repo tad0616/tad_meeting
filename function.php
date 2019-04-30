@@ -1,28 +1,8 @@
 <?php
-/**
- * Tad Meeting module
- *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright  XOOPS Project (https://xoops.org)
- * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package    Tad Meeting
- * @since      2.5
- * @author     tad
- * @version    $Id $
- **/
-
-//引入TadTools的函式庫
-if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php')) {
-    redirect_header('http://campus-xoops.tn.edu.tw/modules/tad_modules/index.php?module_sn=1', 3, _TAD_NEED_TADTOOLS);
-}
-include_once XOOPS_ROOT_PATH . '/modules/tadtools/tad_function.php';
-
+use XoopsModules\Tadtools\FormValidator;
+use XoopsModules\Tadtools\SweetAlert;
+use XoopsModules\Tadtools\TadUpFiles;
+use XoopsModules\Tadtools\Utility;
 /********************* 自訂函數 *********************/
 
 //tad_meeting編輯表單
@@ -31,7 +11,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     global $xoopsDB, $xoopsTpl, $xoopsUser, $isAdmin, $xoopsModuleConfig;
 
     //判斷目前使用者是否有：建立會議
-    $create_meeting = power_chk('tad_meeting', 1);
+    $create_meeting = Utility::power_chk('tad_meeting', 1);
     $xoopsTpl->assign('create_meeting', $create_meeting);
 
     if (!$isAdmin and !$create_meeting) {
@@ -72,17 +52,12 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $op = empty($tad_meeting_sn) ? 'insert_tad_meeting' : 'update_tad_meeting';
     //$op = "replace_tad_meeting";
 
-    //套用formValidator驗證機制
-    if (!file_exists(TADTOOLS_PATH . '/formValidator.php')) {
-        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
-    }
-    include_once TADTOOLS_PATH . '/formValidator.php';
-    $formValidator = new formValidator('#myForm', true);
-    $formValidator_code = $formValidator->render();
+    $FormValidator = new FormValidator('#myForm', true);
+    $FormValidator->render();
 
     //會議類別
     $sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY tad_meeting_cate_sort';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $i = 0;
     $tad_meeting_cate_sn_options_array = [];
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
@@ -98,7 +73,6 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('formValidator_code', $formValidator_code);
     $xoopsTpl->assign('now_op', 'tad_meeting_form');
     $xoopsTpl->assign('next_op', $op);
 
@@ -115,7 +89,7 @@ function insert_tad_meeting()
 {
     global $xoopsDB, $xoopsUser, $isAdmin;
     //判斷目前使用者是否有：建立會議
-    $create_meeting = power_chk('tad_meeting', 1);
+    $create_meeting = Utility::power_chk('tad_meeting', 1);
     if (!$isAdmin and !$create_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
@@ -126,7 +100,7 @@ function insert_tad_meeting()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     $tad_meeting_sn = (int) $_POST['tad_meeting_sn'];
     $tad_meeting_title = $myts->addSlashes($_POST['tad_meeting_title']);
@@ -151,7 +125,7 @@ function insert_tad_meeting()
         '{$tad_meeting_chairman}',
         '{$tad_meeting_note}'
     )";
-    $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $tad_meeting_sn = $xoopsDB->getInsertId();
@@ -163,7 +137,7 @@ function insert_tad_meeting()
 function update_tad_meeting($tad_meeting_sn = '')
 {
     global $xoopsDB, $isAdmin, $xoopsUser;
-    $create_meeting = power_chk('tad_meeting', 1);
+    $create_meeting = Utility::power_chk('tad_meeting', 1);
     if (!$isAdmin and !$create_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
@@ -174,11 +148,11 @@ function update_tad_meeting($tad_meeting_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     $tad_meeting_sn = (int) $_POST['tad_meeting_sn'];
     $tad_meeting_title = $myts->addSlashes($_POST['tad_meeting_title']);
-    $tad_meeting_cate_sn = (int)$_POST['tad_meeting_cate_sn'];
+    $tad_meeting_cate_sn = (int) $_POST['tad_meeting_cate_sn'];
     $tad_meeting_datetime = $myts->addSlashes($_POST['tad_meeting_datetime']);
     $tad_meeting_place = $_POST['tad_meeting_place'];
     $tad_meeting_chairman = $myts->addSlashes($_POST['tad_meeting_chairman']);
@@ -192,7 +166,7 @@ function update_tad_meeting($tad_meeting_sn = '')
        `tad_meeting_chairman` = '{$tad_meeting_chairman}',
        `tad_meeting_note` = '{$tad_meeting_note}'
     where `tad_meeting_sn` = '$tad_meeting_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     return $tad_meeting_sn;
 }
@@ -201,7 +175,7 @@ function update_tad_meeting($tad_meeting_sn = '')
 function delete_tad_meeting($tad_meeting_sn = '')
 {
     global $xoopsDB, $isAdmin;
-    $create_meeting = power_chk('tad_meeting', 1);
+    $create_meeting = Utility::power_chk('tad_meeting', 1);
     if (!$isAdmin and !$create_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
@@ -212,21 +186,21 @@ function delete_tad_meeting($tad_meeting_sn = '')
 
     $sql = 'select tad_meeting_data_sn from `' . $xoopsDB->prefix('tad_meeting_data') . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     while (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result)) {
         delete_tad_meeting_data($tad_meeting_data_sn);
     }
 
     $sql = 'delete from `' . $xoopsDB->prefix('tad_meeting') . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 }
 
 //刪除tad_meeting_data某筆資料資料
 function delete_tad_meeting_data($tad_meeting_data_sn = '')
 {
     global $xoopsDB, $isAdmin;
-    $add_report = power_chk('tad_meeting', 2);
+    $add_report = Utility::power_chk('tad_meeting', 2);
     if (!$isAdmin and !$add_report) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
@@ -237,9 +211,8 @@ function delete_tad_meeting_data($tad_meeting_data_sn = '')
 
     $sql = 'delete from `' . $xoopsDB->prefix('tad_meeting_data') . "`
     where `tad_meeting_data_sn` = '{$tad_meeting_data_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_meeting');
     $TadUpFiles->set_col('tad_meeting_data_sn', $tad_meeting_data_sn);
     $TadUpFiles->del_files();
@@ -256,7 +229,7 @@ function get_tad_meeting($tad_meeting_sn = '')
 
     $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting') . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $data = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -273,7 +246,7 @@ function get_tad_meeting_cate($tad_meeting_cate_sn = '')
 
     $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting_cate') . "`
     where `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $data = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -284,9 +257,8 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 {
     global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsModuleConfig;
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/TadUpFiles.php';
     $TadUpFiles = new TadUpFiles('tad_meeting');
 
     $meeting_unit_arr = [];
@@ -299,7 +271,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
     $orderby = ('tad_meeting_data_sort' === $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "field(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
     $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting_data') . "` where tad_meeting_sn='{$tad_meeting_sn}' order by $orderby";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     $i = 1;
@@ -346,20 +318,14 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
         return $all_content;
     }
 
-    //刪除確認的JS
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
-        redirect_header('index.php', 3, _MD_NEED_TADTOOLS);
-    }
-    include_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
-    $sweet_alert_obj = new sweet_alert();
-    $delete_tad_meeting_data_func = $sweet_alert_obj->render(
+    $SweetAlert = new SweetAlert();
+    $SweetAlert->render(
         'delete_tad_meeting_data_func',
         "{$_SERVER['PHP_SELF']}?op=delete_tad_meeting_data&tad_meeting_sn={$tad_meeting_sn}&tad_meeting_data_sn=",
         'tad_meeting_data_sn'
     );
-    $xoopsTpl->assign('delete_tad_meeting_data_func', $delete_tad_meeting_data_func);
 
-    $xoopsTpl->assign('tad_meeting_data_jquery_ui', get_jquery(true));
+    $xoopsTpl->assign('tad_meeting_data_jquery_ui', Utility::get_jquery(true));
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('isAdmin', $isAdmin);
     $xoopsTpl->assign('all_data_content', $all_content);

@@ -1,4 +1,6 @@
 <?php
+use XoopsModules\Tadtools\Utility;
+
 include '../../../include/cp_header.php';
 
 $of_sn = (int) (str_replace('node-_', '', $_POST['']));
@@ -21,7 +23,7 @@ function chk_cate_path($sn, $to_sn)
     global $xoopsDB;
     //抓出子目錄的編號
     $sql = 'select `tad_meeting_cate_sn` from ' . $xoopsDB->prefix('tad_meeting_cate') . " where ``='{$sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     while (list($sub_sn) = $xoopsDB->fetchRow($result)) {
         if (chk_cate_path($sub_sn, $to_sn)) {
             return true;

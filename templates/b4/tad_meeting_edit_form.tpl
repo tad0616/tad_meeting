@@ -19,7 +19,6 @@
   });
 </script>
 
-<!--套用formValidator驗證機制-->
 <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data"  role="form">
 
     <div class="form-group row">
