@@ -1,26 +1,9 @@
 <?php
-/**
- * Tad Meeting module
- *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright  XOOPS Project (https://xoops.org)
- * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package    Tad Meeting
- * @since      2.5
- * @author     tad
- * @version    $Id $
- **/
 $modversion = [];
 
 //---模組基本資訊---//
 $modversion['name'] = _MI_TADMEETIN_NAME;
-$modversion['version'] = '1.9';
+$modversion['version'] = '2.0';
 $modversion['description'] = _MI_TADMEETIN_DESC;
 $modversion['author'] = _MI_TADMEETIN_AUTHOR;
 $modversion['credits'] = _MI_TADMEETIN_CREDITS;
@@ -30,8 +13,8 @@ $modversion['image'] = 'images/logo.png';
 $modversion['dirname'] = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['status_version'] = '1.9';
-$modversion['release_date'] = '2019-01-01';
+$modversion['status_version'] = '2.0';
+$modversion['release_date'] = '2019-05-10';
 $modversion['module_website_url'] = 'https://tad0616.net';
 $modversion['module_website_name'] = _MI_TADMEETIN_AUTHOR_WEB;
 $modversion['module_status'] = 'release';
