@@ -33,7 +33,6 @@
     <button type="button" id="data_edit_form" class="btn btn-primary"><{$smarty.const._MD_TADMEETIN_ADD_REPORT}></button>
   </div>
 
-  <!--套用formValidator驗證機制-->
   <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form" <{if !$tad_meeting_data_sn}>style="display: none;"<{/if}>>
     <div class="alert alert-info">
       <!--處室-->

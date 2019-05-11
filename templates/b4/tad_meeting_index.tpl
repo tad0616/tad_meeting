@@ -9,9 +9,6 @@
 
 <!--顯示某一筆資料-->
 <{if $now_op=="show_one_tad_meeting"}>
-  <{if $isAdmin or $create_meeting}>
-    <{$delete_tad_meeting_func}>
-  <{/if}>
 
   <h2 class="text-center">
     <div class="btn-group pull-right" role="group" >

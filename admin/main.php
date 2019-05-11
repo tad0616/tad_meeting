@@ -1,25 +1,11 @@
 <?php
-/**
- * Tad Meeting module
- *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright  XOOPS Project (https://xoops.org)
- * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package    Tad Meeting
- * @since      2.5
- * @author     tad
- * @version    $Id $
- **/
-
+use XoopsModules\Tadtools\FormValidator;
+use XoopsModules\Tadtools\SweetAlert;
+use XoopsModules\Tadtools\Utility;
+use XoopsModules\Tadtools\Ztree;
 /*-----------引入檔案區--------------*/
 $isAdmin = true;
-$GLOBALS['xoopsOption']['template_main'] = 'tad_meeting_adm_main.tpl';
+$xoopsOption['template_main'] = 'tad_meeting_adm_main.tpl';
 require_once __DIR__ . '/header.php';
 require_once dirname(__DIR__) . '/function.php';
 
@@ -37,12 +23,12 @@ function list_tad_meeting($tad_meeting_cate_sn = '')
     $where_tad_meeting_cate_sn = !empty($tad_meeting_cate_sn) ? "where a.tad_meeting_cate_sn='{$tad_meeting_cate_sn}'" : '';
 
     $sql = 'select a.*, b.tad_meeting_cate_title from ' . $xoopsDB->prefix('tad_meeting') . ' as a left join ' . $xoopsDB->prefix('tad_meeting_cate') . " as b on a.tad_meeting_cate_sn=b.tad_meeting_cate_sn {$where_tad_meeting_cate_sn} order by a.tad_meeting_sn desc";
-    //getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
-    $PageBar = getPageBar($sql, 10, 10);
+    //Utility::getPageBar($原sql語法, 每頁顯示幾筆資料, 最多顯示幾個頁數選項);
+    $PageBar = Utility::getPageBar($sql, 10, 10);
     $bar = $PageBar['bar'];
     $sql = $PageBar['sql'];
     $total = $PageBar['total'];
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $i = 0;
 
@@ -52,16 +38,12 @@ function list_tad_meeting($tad_meeting_cate_sn = '')
 
         $i++;
     }
-    get_jquery(true);
+    Utility::get_jquery(true);
 
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php')) {
-        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
-    }
-    require_once XOOPS_ROOT_PATH . '/modules/tadtools/sweet_alert.php';
-    $sweet_alert = new sweet_alert();
-    $sweet_alert->render('delete_tad_meeting_cate_func', 'main.php?op=delete_tad_meeting_cate&tad_meeting_cate_sn=', 'tad_meeting_cate_sn');
-    $sweet_alert2 = new sweet_alert();
-    $sweet_alert2->render('delete_tad_meeting_func', "main.php?op=delete_tad_meeting&tad_meeting_cate_sn=$tad_meeting_cate_sn&g2p=$g2p&tad_meeting_sn=", 'tad_meeting_sn');
+    $SweetAlert = new SweetAlert();
+    $SweetAlert->render('delete_tad_meeting_cate_func', 'main.php?op=delete_tad_meeting_cate&tad_meeting_cate_sn=', 'tad_meeting_cate_sn');
+    $SweetAlert2 = new SweetAlert();
+    $SweetAlert2->render('delete_tad_meeting_func', "main.php?op=delete_tad_meeting&tad_meeting_cate_sn=$tad_meeting_cate_sn&g2p=$g2p&tad_meeting_sn=", 'tad_meeting_sn');
 
     $xoopsTpl->assign('now_op', 'list_tad_meeting');
     $xoopsTpl->assign('tad_meeting_cate_sn', $tad_meeting_cate_sn);
@@ -77,7 +59,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
     $cate_count = [];
 
     $sql = 'SELECT count(*),tad_meeting_cate_sn FROM ' . $xoopsDB->prefix('tad_meeting') . ' GROUP BY tad_meeting_cate_sn';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     while (list($count, $tad_meeting_cate_sn) = $xoopsDB->fetchRow($result)) {
         $cate_count[$tad_meeting_cate_sn] = $count;
     }
@@ -87,23 +69,19 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
     $data[] = "{ id:0, pId:0, name:'All', url:'main.php', target:'_self', open:true}";
 
     $sql = 'SELECT tad_meeting_cate_sn, tad_meeting_cate_parent_sn, tad_meeting_cate_title FROM ' . $xoopsDB->prefix('tad_meeting_cate') . ' ORDER BY tad_meeting_cate_sort';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 if ($result->num_rows >0 ) {
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_parent_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
-        $font_style      = $def_tad_meeting_cate_sn == $tad_meeting_cate_sn ? ", font:{'background-color':'yellow', 'color':'black'}" : '';
-        $open            = in_array($tad_meeting_cate_sn, $path_arr) ? 'true' : 'false';
+        $font_style = $def_tad_meeting_cate_sn == $tad_meeting_cate_sn ? ", font:{'background-color':'yellow', 'color':'black'}" : '';
+        $open = in_array($tad_meeting_cate_sn, $path_arr) ? 'true' : 'false';
         $display_counter = empty($cate_count[$tad_meeting_cate_sn]) ? '' : " ({$cate_count[$tad_meeting_cate_sn]})";
-        $data[]          = "{ id:{$tad_meeting_cate_sn}, pId:{$tad_meeting_cate_parent_sn}, name:'{$tad_meeting_cate_title}{$display_counter}', url:'main.php?tad_meeting_cate_sn={$tad_meeting_cate_sn}', open: {$open} ,target:'_self' {$font_style}}";
+        $data[] = "{ id:{$tad_meeting_cate_sn}, pId:{$tad_meeting_cate_parent_sn}, name:'{$tad_meeting_cate_title}{$display_counter}', url:'main.php?tad_meeting_cate_sn={$tad_meeting_cate_sn}', open: {$open} ,target:'_self' {$font_style}}";
     }
 }
     $json = implode(",\n", $data);
 
-    if (!file_exists(XOOPS_ROOT_PATH . '/modules/tadtools/ztree.php')) {
-        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
-    }
-    require_once XOOPS_ROOT_PATH . '/modules/tadtools/ztree.php';
-    $ztree = new ztree('cate_tree', $json, 'tad_meeting_cate_save_drag.php', 'tad_meeting_cate_save_sort.php', 'tad_meeting_cate_parent_sn', 'tad_meeting_cate_sn');
-    $ztree_code = $ztree->render();
+    $Ztree = new Ztree('cate_tree', $json, 'tad_meeting_cate_save_drag.php', 'tad_meeting_cate_save_sort.php', 'tad_meeting_cate_parent_sn', 'tad_meeting_cate_sn');
+    $ztree_code = $Ztree->render();
     $xoopsTpl->assign('ztree_code', $ztree_code);
     $xoopsTpl->assign('cate_count', $cate_count);
 
@@ -129,7 +107,7 @@ function get_tad_meeting_cate_path($the_tad_meeting_cate_sn = '', $include_self 
             LEFT JOIN `{$tbl}` t6 ON t6.tad_meeting_cate_parent_sn = t5.tad_meeting_cate_sn
             LEFT JOIN `{$tbl}` t7 ON t7.tad_meeting_cate_parent_sn = t6.tad_meeting_cate_sn
             WHERE t1.tad_meeting_cate_parent_sn = '0'";
-        $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+        $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
         while (false !== ($all = $xoopsDB->fetchArray($result))) {
             if (in_array($the_tad_meeting_cate_sn, $all)) {
                 //$main.="-";
@@ -158,7 +136,7 @@ function get_tad_meeting_cate_sub($tad_meeting_cate_sn = '0')
 {
     global $xoopsDB;
     $sql = 'select tad_meeting_cate_sn,tad_meeting_cate_title from ' . $xoopsDB->prefix('tad_meeting_cate') . " where tad_meeting_cate_parent_sn='{$tad_meeting_cate_sn}'";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $tad_meeting_cate_sn_arr = [];
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $tad_meeting_cate_sn_arr[$tad_meeting_cate_sn] = $tad_meeting_cate_title;
@@ -179,7 +157,7 @@ function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_m
     $count = tad_meeting_cate_count();
 
     $sql = 'select tad_meeting_cate_sn,tad_meeting_cate_title from ' . $xoopsDB->prefix('tad_meeting_cate') . " where tad_meeting_cate_parent_sn='{$start_search_sn}' order by tad_meeting_cate_sort";
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $prefix = str_repeat('&nbsp;&nbsp;', $level);
     $level++;
@@ -223,7 +201,7 @@ function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $data_arr = [];
     while (false !== ($data = $xoopsDB->fetchArray($result))) {
         $tad_meeting_cate_sn = $data['tad_meeting_cate_sn'];
@@ -272,13 +250,8 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
     $op = empty($tad_meeting_cate_sn) ? 'insert_tad_meeting_cate' : 'update_tad_meeting_cate';
     //$op = "replace_tad_meeting_cate";
 
-    //套用formValidator驗證機制
-    if (!file_exists(TADTOOLS_PATH . '/formValidator.php')) {
-        redirect_header('index.php', 3, _TAD_NEED_TADTOOLS);
-    }
-    require_once TADTOOLS_PATH . '/formValidator.php';
-    $formValidator = new formValidator('#myForm', true);
-    $formValidator_code = $formValidator->render();
+    $FormValidator = new FormValidator('#myForm', true);
+    $FormValidator->render();
 
     //加入Token安全機制
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -286,7 +259,6 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('formValidator_code', $formValidator_code);
     $xoopsTpl->assign('now_op', 'tad_meeting_cate_form');
     $xoopsTpl->assign('next_op', $op);
 }
@@ -296,7 +268,7 @@ function tad_meeting_cate_max_sort()
 {
     global $xoopsDB;
     $sql = 'SELECT max(`tad_meeting_cate_sort`) FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
-    $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     list($sort) = $xoopsDB->fetchRow($result);
 
     return ++$sort;
@@ -316,7 +288,7 @@ function insert_tad_meeting_cate()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     $tad_meeting_cate_sn = (int) $_POST['tad_meeting_cate_sn'];
     $tad_meeting_cate_parent_sn = (int) $_POST['tad_meeting_cate_parent_sn'];
@@ -338,7 +310,7 @@ function insert_tad_meeting_cate()
         '{$tad_meeting_cate_sort}',
         '{$tad_meeting_cate_enable}'
     )";
-    $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $tad_meeting_cate_sn = $xoopsDB->getInsertId();
@@ -360,10 +332,10 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = MyTextSanitizer::getInstance();
+    $myts = \MyTextSanitizer::getInstance();
 
     $tad_meeting_cate_sn = (int) $_POST['tad_meeting_cate_sn'];
-    $tad_meeting_cate_parent_sn = (int)$_POST['tad_meeting_cate_parent_sn'];
+    $tad_meeting_cate_parent_sn = (int) $_POST['tad_meeting_cate_parent_sn'];
     $tad_meeting_cate_title = $myts->addSlashes($_POST['tad_meeting_cate_title']);
     $tad_meeting_cate_desc = $myts->addSlashes($_POST['tad_meeting_cate_desc']);
     $tad_meeting_cate_sort = (int) $_POST['tad_meeting_cate_sort'];
@@ -376,7 +348,7 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
        `tad_meeting_cate_sort` = '{$tad_meeting_cate_sort}',
        `tad_meeting_cate_enable` = '{$tad_meeting_cate_enable}'
     where `tad_meeting_cate_sn` = '$tad_meeting_cate_sn'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     return $tad_meeting_cate_sn;
 }
@@ -395,7 +367,7 @@ function delete_tad_meeting_cate($tad_meeting_cate_sn = '')
 
     $sql = 'delete from `' . $xoopsDB->prefix('tad_meeting_cate') . "`
     where `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}'";
-    $xoopsDB->queryF($sql) or web_error($sql, __FILE__, __LINE__);
+    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 }
 
 /*-----------執行動作判斷區----------*/
@@ -460,5 +432,5 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('isAdmin', true);
-//$xoTheme->addStylesheet(XOOPS_URL . '/modules/tadtools/css/xoops_adm3.css');
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/tadtools/css/xoops_adm3.css');
 require_once __DIR__ . '/footer.php';

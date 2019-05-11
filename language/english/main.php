@@ -1,21 +1,6 @@
 <?php
-/**
- * Tad Meeting module
- *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright  XOOPS Project (https://xoops.org)
- * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package    Tad Meeting
- * @since      2.5
- * @author     tad
- * @version    $Id $
- **/
+
+xoops_loadLanguage('main', 'tadtools');
 if (!defined('_TAD_NEED_TADTOOLS')) {
     define('_TAD_NEED_TADTOOLS', "This module needs TadTools module. You can download TadTools from <a href='http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50' target='_blank'>Tad's web</a>.");
 }
@@ -51,5 +36,3 @@ define('_MD_TADMEETIN_DOWNLOAD_PDF', 'Download meeting record (PDF)');
 define('_MD_TADMEETIN_DOWNLOAD_WORD', 'Download the meeting record (Word)');
 define('_MD_TADMEETIN_NONE', 'No');
 define('_MD_TADMEETIN_COMMA', ',');
-
-

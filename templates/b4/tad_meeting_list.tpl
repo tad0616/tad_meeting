@@ -1,7 +1,4 @@
 <{if $all_content}>
-  <{if $isAdmin}>
-    <{$delete_tad_meeting_func}>
-  <{/if}>
 
   <div id="tad_meeting_save_msg"></div>
   <table class="table table-striped table-hover">
