@@ -25,7 +25,10 @@ require  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 // load_functions('admin');
 
+global $xoopsModule;
+
 xoops_loadLanguage('main', $xoopsModule->getVar('dirname'));
+
 if (!isset($xoopsTpl) || !is_object($xoopsTpl)) {
     require_once XOOPS_ROOT_PATH . '/class/template.php';
     $xoopsTpl = new \XoopsTpl();

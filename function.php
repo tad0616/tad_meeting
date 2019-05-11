@@ -88,7 +88,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
     $i = 0;
     $tad_meeting_cate_sn_options_array = [];
-    while (false !== (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result))) {
+    while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_sn'] = $tad_meeting_cate_sn;
         $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_title'] = $tad_meeting_cate_title;
         $i++;
@@ -216,7 +216,7 @@ function delete_tad_meeting($tad_meeting_sn = '')
     $sql = 'select tad_meeting_data_sn from `' . $xoopsDB->prefix('tad_meeting_data') . "`
     where `tad_meeting_sn` = '{$tad_meeting_sn}'";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    while (false !== (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result))) {
+    while (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result)) {
         delete_tad_meeting_data($tad_meeting_data_sn);
     }
 

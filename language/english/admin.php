@@ -22,13 +22,13 @@ if (!defined('_TAD_NEED_TADTOOLS')) {
 }
 
 //tad_meeting-edit
-define('_MD_TADMEETIN_TAD_MEETING_TITLE', 'Meeting name');
-define('_MD_TADMEETIN_TAD_MEETING_CATE_SN', 'Classification number');
-define('_MD_TADMEETIN_TAD_MEETING_DATETIME', 'Meeting date');
-define('_MD_TADMEETIN_TAD_MEETING_PLACE', 'Meeting place');
-define('_MD_TADMEETIN_TAD_MEETING_CHAIRMAN', 'Meeting chair');
-define('_MD_TADMEETIN_TAD_MEETING_SN', 'Meeting number');
-define('_MD_TADMEETIN_TAD_MEETING_NOTE', 'Related Supplement');
+define('_MA_TADMEETIN_TAD_MEETING_TITLE', 'Meeting name');
+define('_MA_TADMEETIN_TAD_MEETING_CATE_SN', 'Classification number');
+define('_MA_TADMEETIN_TAD_MEETING_DATETIME', 'Meeting date');
+define('_MA_TADMEETIN_TAD_MEETING_PLACE', 'Meeting place');
+define('_MA_TADMEETIN_TAD_MEETING_CHAIRMAN', 'Meeting chair');
+define('_MA_TADMEETIN_TAD_MEETING_SN', 'Meeting number');
+define('_MA_TADMEETIN_TAD_MEETING_NOTE', 'Related Supplement');
 define('_MD_TADMEETIN_TAD_MEETING_CATE_TITLE', 'Category title');
 define('_MD_TADMEETIN_TAD_MEETING_CATE_DESC', 'Classification instructions');
 define('_MD_TADMEETIN_TAD_MEETING_CATE_SORT', 'Sort order');

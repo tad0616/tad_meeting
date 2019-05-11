@@ -22,7 +22,7 @@ function chk_cate_path($sn, $to_sn)
     //抓出子目錄的編號
     $sql = 'select `tad_meeting_cate_sn` from ' . $xoopsDB->prefix('tad_meeting_cate') . " where ``='{$sn}'";
     $result = $xoopsDB->query($sql) or web_error($sql, __FILE__, __LINE__);
-    while (false !== (list($sub_sn) = $xoopsDB->fetchRow($result))) {
+    while (list($sub_sn) = $xoopsDB->fetchRow($result)) {
         if (chk_cate_path($sub_sn, $to_sn)) {
             return true;
         }
