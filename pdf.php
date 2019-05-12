@@ -1,8 +1,8 @@
 <?php
 use XoopsModules\Tadtools\Utility;
 
-include_once '../../mainfile.php';
-include_once 'function.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once __DIR__ . '/function.php';
 
 //判斷目前使用者是否有：觀看會議內容
 $read_report = Utility::power_chk('tad_meeting', 3);
@@ -13,7 +13,7 @@ if (!$read_report) {
 set_time_limit(0);
 ini_set('memory_limit', '150M');
 
-$tad_meeting_sn = (int) $_REQUEST['tad_meeting_sn'];
+$tad_meeting_sn = (int)$_REQUEST['tad_meeting_sn'];
 
 $tad_meeting = get_tad_meeting($tad_meeting_sn);
 

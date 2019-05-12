@@ -40,10 +40,10 @@
       <div class="col-sm-10">
 
         <label class="radio-inline">
-          <input type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_1" value="1" <{if $tad_meeting_cate_enable == "1"}>checked="checked"<{/if}>><{$smarty.const._YES}>
+          <input type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_1" value="1" <{if $tad_meeting_cate_enable == "1"}>checked<{/if}>><{$smarty.const._YES}>
         </label>
         <label class="radio-inline">
-          <input type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_0" value="0" <{if $tad_meeting_cate_enable == "0"}>checked="checked"<{/if}>><{$smarty.const._NO}>
+          <input type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_0" value="0" <{if $tad_meeting_cate_enable == "0"}>checked<{/if}>><{$smarty.const._NO}>
         </label>
       </div>
     </div>

@@ -7,14 +7,17 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright    XOOPS Project (https://xoops.org)
- * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @copyright  XOOPS Project (https://xoops.org)
+ * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package
  * @since        2.5.0
  * @author
- * @version      $Id $
+ * @version    $Id $
  **/
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+global $xoopsModule;
 
 xoops_loadLanguage('main', $xoopsModule->getVar('dirname'));
 

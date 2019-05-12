@@ -1,23 +1,24 @@
 <?php
 xoops_loadLanguage('admin_common', 'tadtools');
-define('_TAD_NEED_TADTOOLS', 'This module needs TadTools module. You can download TadTools from <a href="http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50" target="_blank">Tad Textbook </a>. ');
-
+if (!defined('_TAD_NEED_TADTOOLS')) {
+    define('_TAD_NEED_TADTOOLS', "This module needs TadTools module. You can download TadTools from <a href='http://www.tad0616.net/modules/tad_uploader/index.php?of_cat_sn=50' target='_blank'>Tad's web</a>.");
+}
 //tad_meeting-edit
-define('_MD_TADMEETIN_TAD_MEETING_TITLE', 'meeting name');
-define('_MD_TADMEETIN_TAD_MEETING_CATE_SN', 'classification number');
-define('_MD_TADMEETIN_TAD_MEETING_DATETIME', 'meeting date');
-define('_MD_TADMEETIN_TAD_MEETING_PLACE', 'meeting place');
-define('_MD_TADMEETIN_TAD_MEETING_CHAIRMAN', 'meeting chair');
-define('_MD_TADMEETIN_TAD_MEETING_SN', 'meeting number');
-define('_MD_TADMEETIN_TAD_MEETING_NOTE', 'Related Supplement');
-define('_MD_TADMEETIN_TAD_MEETING_CATE_TITLE', 'category title');
-define('_MD_TADMEETIN_TAD_MEETING_CATE_DESC', 'classification instructions');
-define('_MD_TADMEETIN_TAD_MEETING_CATE_SORT', 'sort order');
-define('_MD_TADMEETIN_TAD_MEETING_CATE_ENABLE', 'state');
+define('_MA_TADMEETIN_TAD_MEETING_TITLE', 'Meeting name');
+define('_MA_TADMEETIN_TAD_MEETING_CATE_SN', 'Classification number');
+define('_MA_TADMEETIN_TAD_MEETING_DATETIME', 'Meeting date');
+define('_MA_TADMEETIN_TAD_MEETING_PLACE', 'Meeting place');
+define('_MA_TADMEETIN_TAD_MEETING_CHAIRMAN', 'Meeting chair');
+define('_MA_TADMEETIN_TAD_MEETING_SN', 'Meeting number');
+define('_MA_TADMEETIN_TAD_MEETING_NOTE', 'Related Supplement');
+define('_MD_TADMEETIN_TAD_MEETING_CATE_TITLE', 'Category title');
+define('_MD_TADMEETIN_TAD_MEETING_CATE_DESC', 'Classification instructions');
+define('_MD_TADMEETIN_TAD_MEETING_CATE_SORT', 'Sort order');
+define('_MD_TADMEETIN_TAD_MEETING_CATE_ENABLE', 'State');
 
-define('_MA_TADMEETIN_PERM_TITLE', 'meeting system detail permission');
-define('_MA_TADMEETIN_PERM_DESC', 'check the permissions you want to open to the group:');
-define('_MA_TADMEETIN_CREATE_MEETING', 'build a meeting');
-define('_MA_TADMEETIN_ADD_REPORT', 'fill in meeting content');
-define('_MA_TADMEETIN_READ_REPORT', 'watch meeting content');
-define('_MA_TADMEETIN_SORT_REPORT', 'sort meeting content');
+define('_MA_TADMEETIN_PERM_TITLE', 'Detail permission');
+define('_MA_TADMEETIN_PERM_DESC', 'Check the permissions you want to open to the group:');
+define('_MA_TADMEETIN_CREATE_MEETING', 'Create a meeting');
+define('_MA_TADMEETIN_ADD_REPORT', 'Fill in meeting content');
+define('_MA_TADMEETIN_READ_REPORT', 'Watch meeting content');
+define('_MA_TADMEETIN_SORT_REPORT', 'Sort meeting content');

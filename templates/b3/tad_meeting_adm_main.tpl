@@ -7,11 +7,11 @@
 
       <{$ztree_code}>
 
-      <a href="main.php?op=tad_meeting_cate_form" class="btn btn-info btn-block"><{$smarty.const._TAD_ADD_CATE}></a>
+      <a href="main.php?op=tad_meeting_cate_form" class="btn btn-info"><{$smarty.const._TAD_ADD_CATE}></a>
     </div>
     <div class="col-sm-9">
 
-      <{if $tad_meeting_cate_sn > 0}>
+      <{if $tad_meeting_cate_sn !=''}>
         <div class="row">
           <div class="col-sm-4">
             <h3>

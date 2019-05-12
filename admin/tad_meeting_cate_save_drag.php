@@ -1,10 +1,10 @@
 <?php
 use XoopsModules\Tadtools\Utility;
 
-include '../../../include/cp_header.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
-$of_sn = (int) (str_replace('node-_', '', $_POST['']));
-$sn = (int) (str_replace('node-_', '', $_POST['tad_meeting_cate_sn']));
+$of_sn = (int)str_replace('node-_', '', $_POST['']);
+$sn = (int)str_replace('node-_', '', $_POST['tad_meeting_cate_sn']);
 
 if ($of_sn == $sn) {
     die(_MA_TREETABLE_MOVE_ERROR1 . '(' . date('Y-m-d H:i:s') . ')');

@@ -1,5 +1,5 @@
 <?php
-include '../../../include/cp_header.php';
+require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $sort = 1;
 foreach ($_POST['tr'] as $tad_meeting_sn) {

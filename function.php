@@ -1,14 +1,18 @@
 <?php
+<?php
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
 /********************* 自訂函數 *********************/
+ * @param string $tad_meeting_sn
+ * @param string $tad_meeting_cate_sn
+ */
 
 //tad_meeting編輯表單
 function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsUser, $isAdmin, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsModuleConfig;
 
     //判斷目前使用者是否有：建立會議
     $create_meeting = Utility::power_chk('tad_meeting', 1);
@@ -68,7 +72,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $xoopsTpl->assign('tad_meeting_cate_sn_options', $tad_meeting_cate_sn_options_array);
 
     //加入Token安全機制
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
     $token = new \XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
@@ -96,7 +100,7 @@ function insert_tad_meeting()
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -144,7 +148,7 @@ function update_tad_meeting($tad_meeting_sn = '')
 
     //XOOPS表單安全檢查
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br />', $GLOBALS['xoopsSecurity']->getErrors());
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
@@ -152,7 +156,7 @@ function update_tad_meeting($tad_meeting_sn = '')
 
     $tad_meeting_sn = (int) $_POST['tad_meeting_sn'];
     $tad_meeting_title = $myts->addSlashes($_POST['tad_meeting_title']);
-    $tad_meeting_cate_sn = (int) $_POST['tad_meeting_cate_sn'];
+    $tad_meeting_cate_sn = (int)$_POST['tad_meeting_cate_sn'];
     $tad_meeting_datetime = $myts->addSlashes($_POST['tad_meeting_datetime']);
     $tad_meeting_place = $_POST['tad_meeting_place'];
     $tad_meeting_chairman = $myts->addSlashes($_POST['tad_meeting_chairman']);
@@ -275,16 +279,16 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
     $all_content = [];
     $i = 1;
-    while ($all = $xoopsDB->fetchArray($result)) {
+    while (false !== ($all = $xoopsDB->fetchArray($result))) {
         //以下會產生這些變數： $tad_meeting_data_sn, $tad_meeting_data_unit, $tad_meeting_data_job, $tad_meeting_data_title, $tad_meeting_data_content, $tad_meeting_data_uid, $tad_meeting_data_sort, $tad_meeting_data_date
         foreach ($all as $k => $v) {
             $$k = $v;
         }
 
         //將 uid 編號轉換成使用者姓名（或帳號）
-        $uid_name = XoopsUser::getUnameFromId($tad_meeting_data_uid, 1);
+        $uid_name = \XoopsUser::getUnameFromId($tad_meeting_data_uid, 1);
         if (empty($uid_name)) {
-            $uid_name = XoopsUser::getUnameFromId($tad_meeting_data_uid, 0);
+            $uid_name = \XoopsUser::getUnameFromId($tad_meeting_data_uid, 0);
         }
 
         //過濾讀出的變數值
