@@ -1,10 +1,10 @@
 <?php
-<?php
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
 use XoopsModules\Tadtools\Utility;
 /********************* 自訂函數 *********************/
+/**
  * @param string $tad_meeting_sn
  * @param string $tad_meeting_cate_sn
  */
@@ -156,7 +156,7 @@ function update_tad_meeting($tad_meeting_sn = '')
 
     $tad_meeting_sn = (int) $_POST['tad_meeting_sn'];
     $tad_meeting_title = $myts->addSlashes($_POST['tad_meeting_title']);
-    $tad_meeting_cate_sn = (int)$_POST['tad_meeting_cate_sn'];
+    $tad_meeting_cate_sn = (int) $_POST['tad_meeting_cate_sn'];
     $tad_meeting_datetime = $myts->addSlashes($_POST['tad_meeting_datetime']);
     $tad_meeting_place = $_POST['tad_meeting_place'];
     $tad_meeting_chairman = $myts->addSlashes($_POST['tad_meeting_chairman']);
