@@ -10,7 +10,7 @@ if (!$read_report) {
     redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
 }
 
-$tad_meeting_sn = (int)$_REQUEST['tad_meeting_sn'];
+$tad_meeting_sn = (int) $_REQUEST['tad_meeting_sn'];
 
 $tad_meeting = get_tad_meeting($tad_meeting_sn);
 
@@ -20,11 +20,12 @@ $tad_meeting_cate_arr = get_tad_meeting_cate($tad_meeting['tad_meeting_cate_sn']
 $page_title = "{$xoopsModuleConfig['file_title']}{$tad_meeting['tad_meeting_title']}";
 $filename = str_replace(' ', '', $page_title);
 
-require_once XOOPS_ROOT_PATH . '/modules/tadtools/PHPWord.php';
-$PHPWord = new PHPWord();
+require_once XOOPS_ROOT_PATH . '/modules/tadtools/vendor/autoload.php';
+$PHPWord = new \PhpOffice\PhpWord\PhpWord();
+
 $PHPWord->setDefaultFontName('標楷體'); //設定預設字型
 $PHPWord->setDefaultFontSize(11); //設定預設字型大小
-$section = $PHPWord->createSection($sectionStyle); //建立一個頁面
+$section = $PHPWord->addSection($sectionStyle); //建立一個頁面
 
 $h1Style = ['color' => '000000', 'size' => 18, 'bold' => true]; //文字樣式設定
 $h1aragraph = ['align' => 'both', 'spaceAfter' => 300]; //段落設定
@@ -63,8 +64,7 @@ $meeting_data = list_tad_meeting_data($tad_meeting_sn, 'return', 'file_text_url'
 
 $paragraphStyle = ['indentLeft' => 550];
 $listParagraphStyle = ['align' => 'left', 'spaceBefore' => '0', 'indentLeft' => 900];
-// $styleTable         = array('borderColor' => 'ffffff', 'borderSize' => 0, 'cellMargin' => 50); //表格樣式
-$listStyle = ['listType' => PHPWord_Style_ListItem::TYPE_BULLET_FILLED, 'spaceAfter' => 0, 'spaceBefore' => 0, 'spacing' => 0];
+$listStyle = ['listType' => \PhpOffice\PhpWord\Style\ListItem::TYPE_NUMBER_NESTED, 'spaceAfter' => 0, 'spaceBefore' => 0, 'spacing' => 0];
 foreach ($meeting_data as $i => $data) {
     $section->addTitle($data['number2chinese'] . _MD_TADMEETIN_COMMA . $data['tad_meeting_data_title'], 2);
 
@@ -77,7 +77,7 @@ foreach ($meeting_data as $i => $data) {
         $list_file = explode(',', $data['list_file']);
         foreach ($list_file as $list) {
             if ($list) {
-                $section->addListItem($list, 0, $contentfontStyle, $listStyle, $listParagraphStyle); //新增清單項目
+                $section->addListItem(htmlspecialchars($list), 0, $contentfontStyle, $listStyle, $listParagraphStyle); //新增清單項目
             }
         }
     }
@@ -85,9 +85,11 @@ foreach ($meeting_data as $i => $data) {
 }
 
 //內容設定
-$filename = iconv('UTF-8', 'Big5', $filename);
-header('Content-Type: application/vnd.ms-word');
-header("Content-Disposition: attachment;filename={$filename}.docx");
+$filename = str_replace(" ", "", $filename);
+$filename = iconv("UTF-8", "Big5", $filename);
+$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($PHPWord, 'Word2007');
 header('Cache-Control: max-age=0');
-$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
+header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+header("Content-Disposition: attachment;filename={$filename}.docx");
+
 $objWriter->save('php://output');

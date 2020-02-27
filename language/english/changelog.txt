@@ -1,3 +1,7 @@
+tad_meeting 2.1 (2020-02-27 release)
+====================================================
+1. Switch to new PHPWord objects
+
 Tad_meeting 2.0 (released from 2019-05-10)
 =========================================================
 1. Support XOOPS 2.5.10
