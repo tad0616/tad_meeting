@@ -62,15 +62,18 @@ $table->addCell(3100, $cellStyle)->addText($tad_meeting['tad_meeting_chairman'],
 $section->addTextBreak(1);
 $meeting_data = list_tad_meeting_data($tad_meeting_sn, 'return', 'file_text_url');
 
-$paragraphStyle = ['indentLeft' => 550];
+$paragraphStyle = ['indentLeft' => 550, 'spaceAfter' => 125];
 $listParagraphStyle = ['align' => 'left', 'spaceBefore' => '0', 'indentLeft' => 900];
-$listStyle = ['listType' => \PhpOffice\PhpWord\Style\ListItem::TYPE_NUMBER_NESTED, 'spaceAfter' => 0, 'spaceBefore' => 0, 'spacing' => 0];
+$listStyle = ['listType' => \PhpOffice\PhpWord\Style\ListItem::TYPE_BULLET_FILLED, 'spaceAfter' => 0, 'spaceBefore' => 0, 'spacing' => 0];
 foreach ($meeting_data as $i => $data) {
     $section->addTitle($data['number2chinese'] . _MD_TADMEETIN_COMMA . $data['tad_meeting_data_title'], 2);
 
     $tad_meeting_data_content = $data['tad_meeting_data_content'] ?: _MD_TADMEETIN_NONE;
+    $content_arr = explode("\n", $tad_meeting_data_content);
 
-    $section->addText($tad_meeting_data_content, $contentfontStyle, $paragraphStyle); //新增文字段落
+    foreach ($content_arr as $content) {
+        $section->addText(htmlspecialchars($content), $contentfontStyle, $paragraphStyle);
+    }
 
     if ($data['list_file']) {
         $section->addTextBreak(1);
