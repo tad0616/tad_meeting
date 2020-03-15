@@ -26,7 +26,7 @@
 
           <!--報告標題-->
           <h3>
-            <div class="pull-right" style="font-size: 11px; color: gray;">
+            <div class="pull-right" style="font-size: 0.9em; color: gray;">
               <div class="text-right">
                 <!--處室-->
                 <{$data.tad_meeting_data_unit}>

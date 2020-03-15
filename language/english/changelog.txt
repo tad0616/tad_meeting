@@ -1,14 +1,18 @@
+tad_meeting 2.2 (2020-03-15 release)
+====================================
+1. Correction for accessibility 2.0 AA standard
+
 tad_meeting 2.1 (2020-02-27 release)
 ====================================================
 1. Switch to new PHPWord objects
 
-Tad_meeting 2.0 (released from 2019-05-10)
+Tad_meeting 2.0 (2019-05-10 release)
 =========================================================
 1. Support XOOPS 2.5.10
 2. No longer supports PHP 5.3
 
 
-tad_meeting 1.9 (released on 2019-01-01)
+tad_meeting 1.9 (2019-01-01 release)
  =================================================
 1.Support BootStrap4
 2.Attached support panoramic picture
@@ -16,13 +20,13 @@ tad_meeting 1.9 (released on 2019-01-01)
 4. Support MySQL database strict mode
 
 
-Tad_meeting 1.8 (released on 2018-09-18)
+Tad_meeting 1.8 (2018-09-18 release)
   ==========================================================
 1. Fixed the problem that the block could not display the quantity correctly.
 2. Block join more link
 
 
-Tad_meeting 1.7 (released on 2018-05-21)
+Tad_meeting 1.7 (2018-05-21 release)
 ================================================== ================
 1. Support PHP 7.2
 2. Support database strict mode
@@ -51,7 +55,7 @@ tad_meeting 1.3 (2017-03-20 release)
 1. The meeting is changed to date
 
 
-tad_meeting 1.2 (2017-02-21)
+tad_meeting 1.2 (2017-02-21 release)
 =================================================
 1. Fixed an incorrect number
 2. Add the sort permission settings
@@ -64,6 +68,6 @@ tad_meeting 1.1 (2017-02-20 release)
 3. Fix the problem that the different meeting materials will be mixed together.
 
 
-tad_meeting 1.0 (2017-02-17)
+tad_meeting 1.0 (2017-02-17 release)
 =================================================
 1. officially released
