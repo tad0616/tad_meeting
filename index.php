@@ -14,7 +14,7 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 //以流水號秀出某筆tad_meeting資料內容
 function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsUser;
+    global $xoopsDB, $xoopsTpl, $xoopsUser;
 
     $xoopsTpl->assign('tad_meeting_sn', $tad_meeting_sn);
     $xoopsTpl->assign('tad_meeting_data_sn', $tad_meeting_data_sn);
@@ -80,7 +80,7 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $xoopsTpl->assign('tad_meeting_chairman', $tad_meeting_chairman);
     $xoopsTpl->assign('tad_meeting_note', nl2br($tad_meeting_note));
 
-    if ($isAdmin or $create_meeting) {
+    if ($_SESSION['tad_meeting_adm'] or $create_meeting) {
         $SweetAlert = new SweetAlert();
         $SweetAlert->render('delete_tad_meeting_func', "{$_SERVER['PHP_SELF']}?op=delete_tad_meeting&tad_meeting_sn=", 'tad_meeting_sn');
     }
@@ -92,7 +92,7 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 //列出所有tad_meeting資料
 function list_tad_meeting()
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin;
+    global $xoopsDB, $xoopsTpl;
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -143,7 +143,6 @@ function list_tad_meeting()
 
     $xoopsTpl->assign('bar', $bar);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('isAdmin', $isAdmin);
     $xoopsTpl->assign('all_content', $all_content);
     $xoopsTpl->assign('now_op', 'list_tad_meeting');
 
@@ -170,10 +169,10 @@ function get_tad_meeting_cate_all()
 //tad_meeting_data編輯表單
 function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsUser, $isAdmin, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
 
     $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$isAdmin and !$add_report) {
+    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -280,9 +279,9 @@ function get_tad_meeting_data($tad_meeting_data_sn = '')
 //新增資料到tad_meeting_data中
 function insert_tad_meeting_data()
 {
-    global $xoopsDB, $xoopsUser, $isAdmin;
+    global $xoopsDB, $xoopsUser;
     $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$isAdmin and !$add_report) {
+    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -341,9 +340,9 @@ function insert_tad_meeting_data()
 //更新tad_meeting_data某一筆資料
 function update_tad_meeting_data($tad_meeting_data_sn = '')
 {
-    global $xoopsDB, $isAdmin, $xoopsUser;
+    global $xoopsDB, $xoopsUser;
     $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$isAdmin and !$add_report) {
+    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -459,5 +458,4 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu));
-$xoopsTpl->assign('isAdmin', $isAdmin);
 require_once XOOPS_ROOT_PATH . '/footer.php';

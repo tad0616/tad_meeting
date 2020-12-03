@@ -1,9 +1,9 @@
 <{if $all_data_content}>
-    <{if $isAdmin or $create_meeting}>
+    <{if $smarty.session.tad_meeting_adm or $create_meeting}>
         <{$delete_tad_meeting_data_func}>
     <{/if}>
 
-    <{if $isAdmin or $sort_report}>
+    <{if $smarty.session.tad_meeting_adm or $sort_report}>
         <{$tad_meeting_data_jquery_ui}>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -48,11 +48,11 @@
                         <{else}>
                             <{$smarty.const._MD_TADMEETIN_NONE}>
                         <{/if}>
-                        <{if $isAdmin or $now_uid==$data.tad_meeting_data_uid}>
+                        <{if $smarty.session.tad_meeting_adm or $now_uid==$data.tad_meeting_data_uid}>
                             <div class="text-right">
                                 <a href="javascript:delete_tad_meeting_data_func(<{$data.tad_meeting_data_sn}>);" class="btn btn-sm btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
                                 <a href="<{$xoops_url}>/modules/tad_meeting/index.php?tad_meeting_sn=<{$tad_meeting_sn}>&tad_meeting_data_sn=<{$data.tad_meeting_data_sn}>#tad_meeting_data_form" class="btn btn-sm btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
-                                <{if $isAdmin or $sort_report}>
+                                <{if $smarty.session.tad_meeting_adm or $sort_report}>
                                 <img src="<{$xoops_url}>/modules/tadtools/treeTable/images/updown_s.png" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._TAD_SORTABLE}>" title="<{$smarty.const._TAD_SORTABLE}>">
                                 <{/if}>
                             </div>
@@ -64,7 +64,7 @@
             <{/foreach}>
         </div>
 <{else}>
-    <{if $isAdmin or $create_meeting}>
+    <{if $smarty.session.tad_meeting_adm or $create_meeting}>
         <div class="jumbotron text-center">
             <h3><{$smarty.const._TAD_EMPTY}></h3>
         </div>

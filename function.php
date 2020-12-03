@@ -13,13 +13,13 @@ use XoopsModules\Tadtools\Utility;
 //tad_meeting編輯表單
 function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig;
 
     //判斷目前使用者是否有：建立會議
     $create_meeting = Utility::power_chk('tad_meeting', 1);
     $xoopsTpl->assign('create_meeting', $create_meeting);
 
-    if (!$isAdmin and !$create_meeting) {
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -92,10 +92,10 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 //新增資料到tad_meeting中
 function insert_tad_meeting()
 {
-    global $xoopsDB, $xoopsUser, $isAdmin;
+    global $xoopsDB, $xoopsUser;
     //判斷目前使用者是否有：建立會議
     $create_meeting = Utility::power_chk('tad_meeting', 1);
-    if (!$isAdmin and !$create_meeting) {
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -141,9 +141,9 @@ function insert_tad_meeting()
 //更新tad_meeting某一筆資料
 function update_tad_meeting($tad_meeting_sn = '')
 {
-    global $xoopsDB, $isAdmin, $xoopsUser;
+    global $xoopsDB, $xoopsUser;
     $create_meeting = Utility::power_chk('tad_meeting', 1);
-    if (!$isAdmin and !$create_meeting) {
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -179,9 +179,9 @@ function update_tad_meeting($tad_meeting_sn = '')
 //刪除tad_meeting某筆資料資料
 function delete_tad_meeting($tad_meeting_sn = '')
 {
-    global $xoopsDB, $isAdmin;
+    global $xoopsDB;
     $create_meeting = Utility::power_chk('tad_meeting', 1);
-    if (!$isAdmin and !$create_meeting) {
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -204,9 +204,9 @@ function delete_tad_meeting($tad_meeting_sn = '')
 //刪除tad_meeting_data某筆資料資料
 function delete_tad_meeting_data($tad_meeting_data_sn = '')
 {
-    global $xoopsDB, $isAdmin;
+    global $xoopsDB;
     $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$isAdmin and !$add_report) {
+    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -260,7 +260,7 @@ function get_tad_meeting_cate($tad_meeting_cate_sn = '')
 //列出所有tad_meeting_data資料
 function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = '')
 {
-    global $xoopsDB, $xoopsTpl, $isAdmin, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig;
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -332,7 +332,6 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
     $xoopsTpl->assign('tad_meeting_data_jquery_ui', Utility::get_jquery(true));
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('isAdmin', $isAdmin);
     $xoopsTpl->assign('all_data_content', $all_content);
 }
 

@@ -12,7 +12,7 @@
 
     <h2 class="text-center">
         <div class="btn-group pull-right" role="group" >
-            <{if $isAdmin or $create_meeting}>
+            <{if $smarty.session.tad_meeting_adm or $create_meeting}>
                 <a href="javascript:delete_tad_meeting_func(<{$tad_meeting_sn}>);" class="btn btn-sm btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
                 <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
                 <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form" class="btn btn-sm btn-xs btn-info"><{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>

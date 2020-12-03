@@ -25,8 +25,8 @@
                 <!--會議主席-->
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}>
             </th>
-            <{if $isAdmin}>
-            <th><{$smarty.const._TAD_FUNCTION}></th>
+            <{if $smarty.session.tad_meeting_adm}>
+                <th><{$smarty.const._TAD_FUNCTION}></th>
             <{/if}>
         </tr>
         </thead>
@@ -42,8 +42,8 @@
 
                     <td>
                         <!--會議類別-->
-                        <{if $isAdmin}>
-                            <a href="main.php?tad_meeting_cate_sn=<{$data.tad_meeting_cate_sn}>"><{$data.tad_meeting_cate_title}></a>
+                        <{if $smarty.session.tad_meeting_adm}>
+                            <a href="<{$xoops_url}>/modules/tad_meeting/admin/main.php?tad_meeting_cate_sn=<{$data.tad_meeting_cate_sn}>"><{$data.tad_meeting_cate_title}></a>
                         <{else}>
                             <{$data.tad_meeting_cate_title}>
                         <{/if}>
@@ -65,7 +65,7 @@
                         <{$data.tad_meeting_chairman}>
                     </td>
 
-                    <{if $isAdmin}>
+                    <{if $smarty.session.tad_meeting_adm}>
                         <td>
                             <a href="javascript:delete_tad_meeting_func(<{$data.tad_meeting_sn}>);" class="btn btn-sm btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
                             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$data.tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
@@ -76,7 +76,7 @@
         </tbody>
     </table>
 
-    <{if $isAdmin or $create_meeting}>
+    <{if $smarty.session.tad_meeting_adm or $create_meeting}>
         <div class="text-right">
             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         </div>
@@ -85,7 +85,7 @@
     <{$bar}>
 <{else}>
     <div class="jumbotron text-center">
-        <{if $isAdmin or $create_meeting}>
+        <{if $smarty.session.tad_meeting_adm or $create_meeting}>
             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         <{else}>
             <h3><{$smarty.const._TAD_EMPTY}></h3>

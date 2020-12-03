@@ -5,7 +5,6 @@ use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\Utility;
 use XoopsModules\Tadtools\Ztree;
 /*-----------引入檔案區--------------*/
-$isAdmin = true;
 $xoopsOption['template_main'] = 'tad_meeting_adm_main.tpl';
 require_once __DIR__ . '/header.php';
 require_once dirname(__DIR__) . '/function.php';
@@ -162,7 +161,7 @@ function get_tad_meeting_cate_sub($tad_meeting_cate_sn = '0')
 //取得所有tad_meeting_cate分類選單的選項（模式 = edit or show,目前分類編號,目前分類的所屬編號）
 function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_meeting_cate_sn = '0', $default_tad_meeting_cate_parent_sn = '0', $unselect_level = '', $start_search_sn = '0', $level = 0)
 {
-    global $xoopsDB, $xoopsModule, $isAdmin;
+    global $xoopsDB, $xoopsModule;
 
     $post_cate_arr = chk_cate_power('tad_meeting_post');
 
@@ -181,7 +180,7 @@ function get_tad_meeting_cate_options($page = '', $mode = 'edit', $default_tad_m
     $main = '';
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
         // $tad_meeting_post = $modulepermHandler->getGroupIds("tad_meeting_post", $tad_meeting_cate_sn, $mod_id);
-        if (!$isAdmin and !in_array($tad_meeting_cate_sn, $post_cate_arr)) {
+        if (!$_SESSION['tad_meeting_adm'] and !in_array($tad_meeting_cate_sn, $post_cate_arr)) {
             continue;
         }
 
@@ -228,8 +227,8 @@ function get_tad_meeting_cate_all()
 //tad_meeting_cate編輯表單
 function tad_meeting_cate_form($tad_meeting_cate_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsUser, $isAdmin, $xoopsModule;
-    if (!$isAdmin) {
+    global $xoopsDB, $xoopsTpl, $xoopsUser, $xoopsModule;
+    if (!$_SESSION['tad_meeting_adm']) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -317,8 +316,8 @@ function tad_meeting_cate_max_sort()
 //新增資料到tad_meeting_cate中
 function insert_tad_meeting_cate()
 {
-    global $xoopsDB, $xoopsUser, $isAdmin;
-    if (!$isAdmin) {
+    global $xoopsDB, $xoopsUser;
+    if (!$_SESSION['tad_meeting_adm']) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -366,8 +365,8 @@ function insert_tad_meeting_cate()
 //更新tad_meeting_cate某一筆資料
 function update_tad_meeting_cate($tad_meeting_cate_sn = '')
 {
-    global $xoopsDB, $isAdmin, $xoopsUser;
-    if (!$isAdmin) {
+    global $xoopsDB, $xoopsUser;
+    if (!$_SESSION['tad_meeting_adm']) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -405,8 +404,8 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
 //刪除tad_meeting_cate某筆資料資料
 function delete_tad_meeting_cate($tad_meeting_cate_sn = '')
 {
-    global $xoopsDB, $isAdmin;
-    if (!$isAdmin) {
+    global $xoopsDB;
+    if (!$_SESSION['tad_meeting_adm']) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -478,7 +477,6 @@ switch ($op) {
 }
 
 /*-----------秀出結果區--------------*/
-$xoopsTpl->assign('isAdmin', true);
 $xoTheme->addStylesheet(XOOPS_URL . "/modules/tadtools/css/xoops_adm{$_SESSION['bootstrap']}.css");
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/tadtools/css/font-awesome/css/font-awesome.css');
 require_once __DIR__ . '/footer.php';
