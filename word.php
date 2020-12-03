@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
 
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -10,7 +11,7 @@ if (!$read_report) {
     redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
 }
 
-$tad_meeting_sn = (int) $_REQUEST['tad_meeting_sn'];
+$tad_meeting_sn = Request::getInt('tad_meeting_sn');
 
 $tad_meeting = get_tad_meeting($tad_meeting_sn);
 

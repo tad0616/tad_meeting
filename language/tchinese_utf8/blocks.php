@@ -17,3 +17,4 @@
  * @version    $Id $
  **/
 define('_MB_TAD_MEETING_SHOW1_OPT0', '顯示資料數');
+define('_MB_TAD_MEETING_SHOW1_OPT1', '僅顯示今天以後的會議');

@@ -7,8 +7,8 @@ require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.php';
 require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
-//取得本模組編號
-$module_id = $xoopsModule->getVar('mid');
+/*-----------function區--------------*/
+$module_id = $xoopsModule->mid();
 
 //頁面標題
 $perm_page_title = _MA_TADMEETIN_PERM_TITLE;
@@ -39,5 +39,9 @@ foreach ($item_list as $item_id => $item_name) {
     $formi->addItem($item_id, $item_name);
 }
 
-echo $formi->render();
+$permission_content = $formi->render();
+$xoopsTpl->assign('permission_content', $permission_content);
+
+$xoTheme->addStylesheet(XOOPS_URL . "/modules/tadtools/css/xoops_adm{$_SESSION['bootstrap']}.css");
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/tadtools/css/font-awesome/css/font-awesome.css');
 require_once __DIR__ . '/footer.php';

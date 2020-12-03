@@ -37,6 +37,12 @@ $adminmenu[$i]['desc'] = _MI_TADMEETIN_GROUPPERM_DESC;
 $adminmenu[$i]['icon'] = 'images/admin/keys.png';
 
 $i++;
+$adminmenu[$i]['title'] = _MI_TADMEETIN_GROUPPERM2;
+$adminmenu[$i]['link'] = 'admin/power.php';
+$adminmenu[$i]['desc'] = _MI_TADMEETIN_GROUPPERM2_DESC;
+$adminmenu[$i]['icon'] = 'images/admin/keys.png';
+
+$i++;
 $adminmenu[$i]['title'] = _MI_TAD_ADMIN_ABOUT;
 $adminmenu[$i]['link'] = 'admin/about.php';
 $adminmenu[$i]['desc'] = _MI_TAD_ADMIN_ABOUT_DESC;

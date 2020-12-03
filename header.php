@@ -22,7 +22,7 @@ require_once __DIR__ . '/function.php';
 //判斷是否對該模組有管理權限
 $isAdmin = false;
 if ($xoopsUser) {
-    $module_id = $xoopsModule->getVar('mid');
+    $module_id = $xoopsModule->mid();
     $isAdmin = $xoopsUser->isAdmin($module_id);
 }
 

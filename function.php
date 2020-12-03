@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
@@ -106,13 +107,13 @@ function insert_tad_meeting()
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $tad_meeting_sn = (int) $_POST['tad_meeting_sn'];
-    $tad_meeting_title = $myts->addSlashes($_POST['tad_meeting_title']);
-    $tad_meeting_cate_sn = (int) $_POST['tad_meeting_cate_sn'];
-    $tad_meeting_datetime = $myts->addSlashes($_POST['tad_meeting_datetime']);
-    $tad_meeting_place = $_POST['tad_meeting_place'];
-    $tad_meeting_chairman = $myts->addSlashes($_POST['tad_meeting_chairman']);
-    $tad_meeting_note = $myts->addSlashes($_POST['tad_meeting_note']);
+    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
+    $tad_meeting_title = $myts->addSlashes(Request::getString('tad_meeting_title'));
+    $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
+    $tad_meeting_datetime = $myts->addSlashes(Request::getString('tad_meeting_datetime'));
+    $tad_meeting_place = $myts->addSlashes(Request::getString('tad_meeting_place'));
+    $tad_meeting_chairman = $myts->addSlashes(Request::getString('tad_meeting_chairman'));
+    $tad_meeting_note = $myts->addSlashes(Request::getString('tad_meeting_note'));
 
     $sql = 'insert into `' . $xoopsDB->prefix('tad_meeting') . "` (
         `tad_meeting_title`,
@@ -154,21 +155,21 @@ function update_tad_meeting($tad_meeting_sn = '')
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $tad_meeting_sn = (int) $_POST['tad_meeting_sn'];
-    $tad_meeting_title = $myts->addSlashes($_POST['tad_meeting_title']);
-    $tad_meeting_cate_sn = (int) $_POST['tad_meeting_cate_sn'];
-    $tad_meeting_datetime = $myts->addSlashes($_POST['tad_meeting_datetime']);
-    $tad_meeting_place = $_POST['tad_meeting_place'];
-    $tad_meeting_chairman = $myts->addSlashes($_POST['tad_meeting_chairman']);
-    $tad_meeting_note = $myts->addSlashes($_POST['tad_meeting_note']);
+    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
+    $tad_meeting_title = $myts->addSlashes(Request::getString('tad_meeting_title'));
+    $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
+    $tad_meeting_datetime = $myts->addSlashes(Request::getString('tad_meeting_datetime'));
+    $tad_meeting_place = $myts->addSlashes(Request::getString('tad_meeting_place'));
+    $tad_meeting_chairman = $myts->addSlashes(Request::getString('tad_meeting_chairman'));
+    $tad_meeting_note = $myts->addSlashes(Request::getString('tad_meeting_note'));
 
     $sql = 'update `' . $xoopsDB->prefix('tad_meeting') . "` set
-       `tad_meeting_title` = '{$tad_meeting_title}',
-       `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}',
-       `tad_meeting_datetime` = '{$tad_meeting_datetime}',
-       `tad_meeting_place` = '{$tad_meeting_place}',
-       `tad_meeting_chairman` = '{$tad_meeting_chairman}',
-       `tad_meeting_note` = '{$tad_meeting_note}'
+        `tad_meeting_title` = '{$tad_meeting_title}',
+        `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}',
+        `tad_meeting_datetime` = '{$tad_meeting_datetime}',
+        `tad_meeting_place` = '{$tad_meeting_place}',
+        `tad_meeting_chairman` = '{$tad_meeting_chairman}',
+        `tad_meeting_note` = '{$tad_meeting_note}'
     where `tad_meeting_sn` = '$tad_meeting_sn'";
     $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
@@ -384,4 +385,37 @@ function number2chinese($num, $type = '')
     $retval = implode('', array_reverse($out)) . $retval;
 
     return $retval;
+}
+
+//儲存權限
+function saveItem_Permissions($groups, $itemid, $perm_name)
+{
+    global $xoopsModule;
+    $module_id = $xoopsModule->mid();
+    $gpermHandler = xoops_getHandler('groupperm');
+
+    // First, if the permissions are already there, delete them
+    $gpermHandler->deleteByModule($module_id, $perm_name, $itemid);
+
+    // Save the new permissions
+    if (count($groups) > 0) {
+        foreach ($groups as $group_id) {
+            $gpermHandler->addRight($perm_name, $itemid, $group_id, $module_id);
+        }
+    }
+}
+
+//取回權限的函數
+function getItem_Permissions($itemid, $gperm_name)
+{
+    global $xoopsModule, $xoopsDB;
+    $module_id = $xoopsModule->mid();
+    $sql = ' SELECT gperm_groupid FROM ' . $xoopsDB->prefix('group_permission') . " where gperm_modid='$module_id' and gperm_itemid ='$itemid' and gperm_name='$gperm_name' ";
+    //echo $sql ;
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    while (false !== ($row = $xoopsDB->fetchArray($result))) {
+        $data[] = $row['gperm_groupid'];
+    }
+
+    return $data;
 }

@@ -17,3 +17,4 @@
  * @version    $Id $
  **/
 define('_MB_TAD_MEETING_SHOW1_OPT0', 'Show data');
+define('_MB_TAD_MEETING_SHOW1_OPT1', 'Show only meetings from today onwards');

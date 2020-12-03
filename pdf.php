@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
 
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
@@ -13,7 +14,7 @@ if (!$read_report) {
 set_time_limit(0);
 ini_set('memory_limit', '150M');
 
-$tad_meeting_sn = (int)$_REQUEST['tad_meeting_sn'];
+$tad_meeting_sn = Request::getInt('tad_meeting_sn');
 
 $tad_meeting = get_tad_meeting($tad_meeting_sn);
 

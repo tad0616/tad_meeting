@@ -15,6 +15,8 @@ define('_MI_TAD_MEETING_SHOW1_BLOCK_DESC', '近期會議區塊 (tad_meeting_show
 
 define('_MI_TADMEETIN_GROUPPERM', '權限設定');
 define('_MI_TADMEETIN_GROUPPERM_DESC', '細部權限設定');
+define('_MI_TADMEETIN_GROUPPERM2', '分類權限設定');
+define('_MI_TADMEETIN_GROUPPERM2_DESC', '分類權限設定');
 
 define('_MI_TADMEETIN_MEETING_PLACE', '會議地點');
 define('_MI_TADMEETIN_MEETING_PLACE_DESC', '請用小寫分號「;」隔開選項');

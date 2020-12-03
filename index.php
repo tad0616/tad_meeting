@@ -1,4 +1,5 @@
 <?php
+use Xmf\Request;
 use XoopsModules\Tadtools\FormValidator;
 use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\TadUpFiles;
@@ -123,7 +124,8 @@ function list_tad_meeting()
 
         $all_content[$i]['tad_meeting_sn'] = $tad_meeting_sn;
         $all_content[$i]['tad_meeting_title'] = $tad_meeting_title;
-        $all_content[$i]['tad_meeting_cate_sn'] = $tad_meeting_cate_arr[$tad_meeting_cate_sn]['tad_meeting_cate_title'];
+        $all_content[$i]['tad_meeting_cate_sn'] = $tad_meeting_cate_sn;
+        $all_content[$i]['tad_meeting_cate_title'] = $tad_meeting_cate_arr[$tad_meeting_cate_sn]['tad_meeting_cate_title'];
         $all_content[$i]['tad_meeting_datetime'] = $tad_meeting_datetime;
         $all_content[$i]['tad_meeting_place'] = $tad_meeting_place;
         $all_content[$i]['tad_meeting_chairman'] = $tad_meeting_chairman;
@@ -292,16 +294,17 @@ function insert_tad_meeting_data()
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $tad_meeting_sn = (int) $_POST['tad_meeting_sn'];
-    $tad_meeting_data_sn = (int) $_POST['tad_meeting_data_sn'];
-    $tad_meeting_data_unit = $_POST['tad_meeting_data_unit'];
-    $tad_meeting_data_job = $_POST['tad_meeting_data_job'];
-    $tad_meeting_data_title = $myts->addSlashes($_POST['tad_meeting_data_title']);
-    $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
+    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
+    $tad_meeting_data_sn = Request::getInt('tad_meeting_data_sn');
+    $tad_meeting_data_unit = $myts->addSlashes(Request::getString('tad_meeting_data_unit'));
+    $tad_meeting_data_job = $myts->addSlashes(Request::getString('tad_meeting_data_job'));
+    $tad_meeting_data_title = $myts->addSlashes(Request::getString('tad_meeting_data_title'));
+    $tad_meeting_data_content = $myts->addSlashes(Request::getString('tad_meeting_data_content'));
+
     //取得使用者編號
-    $tad_meeting_data_uid = $xoopsUser ? $xoopsUser->uid() : '';
-    $tad_meeting_data_uid = !empty($_POST['tad_meeting_data_uid']) ? (int) $_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
-    $tad_meeting_data_sort = (int) $_POST['tad_meeting_data_sort'];
+    $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
+    $tad_meeting_data_uid = empty($tad_meeting_data_uid) and $xoopsUser ? $xoopsUser->uid() : $tad_meeting_data_uid;
+    $tad_meeting_data_sort = Request::getInt('tad_meeting_data_sort');
     $tad_meeting_data_date = date('Y-m-d H:i:s', xoops_getUserTimestamp(time()));
 
     $sql = 'insert into `' . $xoopsDB->prefix('tad_meeting_data') . "` (
@@ -352,14 +355,14 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $tad_meeting_data_unit = $_POST['tad_meeting_data_unit'];
-    $tad_meeting_data_job = $_POST['tad_meeting_data_job'];
-    $tad_meeting_data_title = $myts->addSlashes($_POST['tad_meeting_data_title']);
-    $tad_meeting_data_content = $myts->addSlashes($_POST['tad_meeting_data_content']);
+    $tad_meeting_data_unit = $myts->addSlashes(Request::getString('tad_meeting_data_unit'));
+    $tad_meeting_data_job = $myts->addSlashes(Request::getString('tad_meeting_data_job'));
+    $tad_meeting_data_title = $myts->addSlashes(Request::getString('tad_meeting_data_title'));
+    $tad_meeting_data_content = $myts->addSlashes(Request::getString('tad_meeting_data_content'));
     //取得使用者編號
-    $tad_meeting_data_uid = $xoopsUser ? $xoopsUser->uid() : '';
-    $tad_meeting_data_uid = !empty($_POST['tad_meeting_data_uid']) ? (int) $_POST['tad_meeting_data_uid'] : $tad_meeting_data_uid;
-    $tad_meeting_data_sort = (int) $_POST['tad_meeting_data_sort'];
+    $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
+    $tad_meeting_data_uid = empty($tad_meeting_data_uid) and $xoopsUser ? $xoopsUser->uid() : $tad_meeting_data_uid;
+    $tad_meeting_data_sort = Request::getInt('tad_meeting_data_sort');
     $tad_meeting_data_date = date('Y-m-d H:i:s', xoops_getUserTimestamp(time()));
 
     $sql = 'update `' . $xoopsDB->prefix('tad_meeting_data') . "` set
@@ -381,12 +384,11 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
 }
 
 /*-----------執行動作判斷區----------*/
-require_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
-$tad_meeting_sn = system_CleanVars($_REQUEST, 'tad_meeting_sn', '', 'int');
-$tad_meeting_cate_sn = system_CleanVars($_REQUEST, 'tad_meeting_cate_sn', '', 'int');
-$tad_meeting_data_sn = system_CleanVars($_REQUEST, 'tad_meeting_data_sn', '', 'int');
-$files_sn = system_CleanVars($_REQUEST, 'files_sn', '', 'int');
+$op = Request::getString('op');
+$tad_meeting_sn = Request::getInt('tad_meeting_sn');
+$tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
+$tad_meeting_data_sn = Request::getInt('tad_meeting_data_sn');
+$files_sn = Request::getInt('files_sn');
 
 switch ($op) {
     /*---判斷動作請貼在下方---*/
@@ -447,7 +449,7 @@ switch ($op) {
     default:
         if (empty($tad_meeting_sn)) {
             list_tad_meeting();
-        //$main .= tad_meeting_form($tad_meeting_sn);
+            //$main .= tad_meeting_form($tad_meeting_sn);
         } else {
             show_one_tad_meeting($tad_meeting_sn, $tad_meeting_data_sn);
         }

@@ -62,7 +62,7 @@ $modversion['search']['func'] = 'tad_meeting_search';
 //---樣板設定---//
 $i = 0;
 $modversion['templates'][$i]['file'] = 'tad_meeting_adm_main.tpl';
-$modversion['templates'][$i]['description'] = 'tad_meeting_adm_main.tpl for bootstrap3';
+$modversion['templates'][$i]['description'] = 'tad_meeting_adm_main.tpl';
 
 $i++;
 $modversion['templates'][$i]['file'] = 'tad_meeting_index.tpl';
@@ -81,7 +81,7 @@ $modversion['blocks'][$i]['description'] = _MI_TAD_MEETING_SHOW1_BLOCK_DESC;
 $modversion['blocks'][$i]['show_func'] = 'tad_meeting_show1';
 $modversion['blocks'][$i]['template'] = 'tad_meeting_show1.tpl';
 $modversion['blocks'][$i]['edit_func'] = 'tad_meeting_show1_edit';
-$modversion['blocks'][$i]['options'] = '5';
+$modversion['blocks'][$i]['options'] = '5|0';
 
 //---偏好設定---//
 $i = 0;
