@@ -37,7 +37,7 @@
     <{/if}>
 
     <!-- 判斷目前使用者是否有：觀看會議內容 -->
-    <{if $read_report}>
+    <{if $view_meeting}>
         <table class="table table-bordered table-hover">
             <tbody>
                 <tr>
@@ -70,7 +70,7 @@
     <{/if}>
 
     <!-- 判斷目前使用者是否有：填寫會議內容 -->
-    <{if $add_report}>
+    <{if $post_meeting}>
         <{includeq file="$xoops_rootpath/modules/tad_meeting/templates/sub_data_edit_form.tpl"}>
     <{/if}>
 

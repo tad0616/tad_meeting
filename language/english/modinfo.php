@@ -13,8 +13,8 @@ define('_MI_TADMEETIN_SMNAME2', 'Group reports');
 define('_MI_TAD_MEETING_SHOW1_BLOCK_NAME', 'Recent meeting');
 define('_MI_TAD_MEETING_SHOW1_BLOCK_DESC', 'Recent Meeting Block (tad_meeting_show1)');
 
-define('_MI_TADMEETIN_GROUPPERM', 'Permissions');
-define('_MI_TADMEETIN_GROUPPERM_DESC', 'Detail permission');
+define('_MI_TADMEETIN_GROUPPERM2', 'Category permission setting');
+define('_MI_TADMEETIN_GROUPPERM2_DESC', 'Category permission setting');
 
 define('_MI_TADMEETIN_MEETING_PLACE', 'Meeting place');
 define('_MI_TADMEETIN_MEETING_PLACE_DESC', 'Please use the lowercase semicolon ";" to separate the option');

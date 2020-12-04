@@ -15,12 +15,18 @@ define('_MA_TADMEETIN_TAD_MEETING_CATE_ENABLE', '狀態');
 
 define('_MA_TADMEETIN_PERM_TITLE', '會議系統細部權限設定');
 define('_MA_TADMEETIN_PERM_DESC', '請勾選欲開放給群組使用的權限：');
-define('_MA_TADMEETIN_CREATE_MEETING', '建立會議');
-define('_MA_TADMEETIN_ADD_REPORT', '填寫會議內容');
-define('_MA_TADMEETIN_READ_REPORT', '觀看會議內容');
-define('_MA_TADMEETIN_SORT_REPORT', '排序會議內容');
 
-define('_MA_TADMEETIN_CAN_ACCESS_GROUPS', '可<b>讀取</b>的群組');
-define('_MA_TADMEETIN_CAN_POST_GROUPS', '可<b>發布</b>的群組');
+define('_MA_TADMEETIN_CAN_ACCESS', '可「讀取會議」');
+define('_MA_TADMEETIN_CAN_POST', '可「發布會議」');
+define('_MA_TADMEETIN_CAN_CREATE', '可「建立會議」');
+define('_MA_TADMEETIN_CAN_SORT', '可「排序會議」');
+define('_MA_TADMEETIN_CAN_ACCESS_GROUPS', '可「讀取會議」的群組');
+define('_MA_TADMEETIN_CAN_POST_GROUPS', '可「發布會議」的群組');
+define('_MA_TADMEETIN_CAN_CREATE_GROUPS', '可「建立會議」的群組');
+define('_MA_TADMEETIN_CAN_SORT_GROUPS', '可「排序會議」的群組');
+define('_MA_TADMEETIN_CAN_ACCESS_CATE', '設定該群組可「讀取會議」的分類');
+define('_MA_TADMEETIN_CAN_POST_CATE', '設定該群組可「發布會議」的分類');
+define('_MA_TADMEETIN_CAN_CREATE_CATE', '設定該群組可「建立會議」的分類');
+define('_MA_TADMEETIN_CAN_SORT_CATE', '設定該群組可「排序會議」的分類');
 define('_MA_TADMEETIN_ALL_OK', '全部開放');
 define('_MA_TADMEETIN_ONLY_ROOT', '僅管理員');

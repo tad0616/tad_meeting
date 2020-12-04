@@ -15,19 +15,19 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 {
     global $xoopsDB, $xoopsTpl, $xoopsModuleConfig;
 
-    //判斷目前使用者是否有：建立會議
-    $create_meeting = Utility::power_chk('tad_meeting', 1);
-    $xoopsTpl->assign('create_meeting', $create_meeting);
-
-    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
-        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
-    }
-
     //抓取預設值
     if (!empty($tad_meeting_sn)) {
         $DBV = get_tad_meeting($tad_meeting_sn);
     } else {
         $DBV = [];
+    }
+
+    //判斷目前使用者是否有：建立會議
+    $create_meeting = Utility::power_chk('create_meeting', $DBV['tad_meeting_cate_sn']);
+    $xoopsTpl->assign('create_meeting', $create_meeting);
+
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
+        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
     //預設值設定
@@ -93,17 +93,6 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 function insert_tad_meeting()
 {
     global $xoopsDB, $xoopsUser;
-    //判斷目前使用者是否有：建立會議
-    $create_meeting = Utility::power_chk('tad_meeting', 1);
-    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
-        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
-    }
-
-    //XOOPS表單安全檢查
-    if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
-        redirect_header($_SERVER['PHP_SELF'], 3, $error);
-    }
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -114,6 +103,18 @@ function insert_tad_meeting()
     $tad_meeting_place = $myts->addSlashes(Request::getString('tad_meeting_place'));
     $tad_meeting_chairman = $myts->addSlashes(Request::getString('tad_meeting_chairman'));
     $tad_meeting_note = $myts->addSlashes(Request::getString('tad_meeting_note'));
+
+    //判斷目前使用者是否有：建立會議
+    $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
+        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
+    }
+
+    //XOOPS表單安全檢查
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
+        redirect_header($_SERVER['PHP_SELF'], 3, $error);
+    }
 
     $sql = 'insert into `' . $xoopsDB->prefix('tad_meeting') . "` (
         `tad_meeting_title`,
@@ -142,16 +143,6 @@ function insert_tad_meeting()
 function update_tad_meeting($tad_meeting_sn = '')
 {
     global $xoopsDB, $xoopsUser;
-    $create_meeting = Utility::power_chk('tad_meeting', 1);
-    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
-        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
-    }
-
-    //XOOPS表單安全檢查
-    if (!$GLOBALS['xoopsSecurity']->check()) {
-        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
-        redirect_header($_SERVER['PHP_SELF'], 3, $error);
-    }
 
     $myts = \MyTextSanitizer::getInstance();
 
@@ -163,6 +154,16 @@ function update_tad_meeting($tad_meeting_sn = '')
     $tad_meeting_chairman = $myts->addSlashes(Request::getString('tad_meeting_chairman'));
     $tad_meeting_note = $myts->addSlashes(Request::getString('tad_meeting_note'));
 
+    $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
+        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
+    }
+
+    //XOOPS表單安全檢查
+    if (!$GLOBALS['xoopsSecurity']->check()) {
+        $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
+        redirect_header($_SERVER['PHP_SELF'], 3, $error);
+    }
     $sql = 'update `' . $xoopsDB->prefix('tad_meeting') . "` set
         `tad_meeting_title` = '{$tad_meeting_title}',
         `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}',
@@ -180,13 +181,15 @@ function update_tad_meeting($tad_meeting_sn = '')
 function delete_tad_meeting($tad_meeting_sn = '')
 {
     global $xoopsDB;
-    $create_meeting = Utility::power_chk('tad_meeting', 1);
-    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
-        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
-    }
 
     if (empty($tad_meeting_sn)) {
         return;
+    }
+    $DBV = get_tad_meeting($tad_meeting_sn);
+
+    $create_meeting = Utility::power_chk('create_meeting', $DBV['tad_meeting_cate_sn']);
+    if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
+        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
     $sql = 'select tad_meeting_data_sn from `' . $xoopsDB->prefix('tad_meeting_data') . "`
@@ -205,13 +208,16 @@ function delete_tad_meeting($tad_meeting_sn = '')
 function delete_tad_meeting_data($tad_meeting_data_sn = '')
 {
     global $xoopsDB;
-    $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
-        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
-    }
 
     if (empty($tad_meeting_data_sn)) {
         return;
+    }
+    $data = get_tad_meeting_data($tad_meeting_data_sn);
+    $DBV = get_tad_meeting($data['tad_meeting_sn']);
+
+    $post_meeting = Utility::power_chk('post_meeting', $DBV['tad_meeting_cate_sn']);
+    if (!$_SESSION['tad_meeting_adm'] and !$post_meeting) {
+        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
     $sql = 'delete from `' . $xoopsDB->prefix('tad_meeting_data') . "`

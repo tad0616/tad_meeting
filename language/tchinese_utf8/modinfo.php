@@ -13,8 +13,6 @@ define('_MI_TADMEETIN_SMNAME2', '各組報告');
 define('_MI_TAD_MEETING_SHOW1_BLOCK_NAME', '近期會議');
 define('_MI_TAD_MEETING_SHOW1_BLOCK_DESC', '近期會議區塊 (tad_meeting_show1)');
 
-define('_MI_TADMEETIN_GROUPPERM', '權限設定');
-define('_MI_TADMEETIN_GROUPPERM_DESC', '細部權限設定');
 define('_MI_TADMEETIN_GROUPPERM2', '分類權限設定');
 define('_MI_TADMEETIN_GROUPPERM2_DESC', '分類權限設定');
 

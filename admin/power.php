@@ -1,4 +1,5 @@
 <?php
+use XoopsModules\Tadtools\EasyResponsiveTabs;
 use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
 $GLOBALS['xoopsOption']['template_main'] = 'tad_meeting_adm_groupperm.tpl';
@@ -22,23 +23,31 @@ while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow(
     $item_list[$tad_meeting_cate_sn] = $tad_meeting_cate_title;
 }
 
-$perm_desc = '';
-$formi = new \XoopsGroupPermForm('', $module_id, 'view_meeting', $perm_desc);
-foreach ($item_list as $item_id => $item_name) {
-    $formi->addItem($item_id, $item_name);
+$permission_kind['create_meeting'] = _MA_TADMEETIN_CAN_CREATE;
+$permission_kind['post_meeting'] = _MA_TADMEETIN_CAN_POST;
+$permission_kind['view_meeting'] = _MA_TADMEETIN_CAN_ACCESS;
+$permission_kind['sort_meeting'] = _MA_TADMEETIN_CAN_SORT;
+
+$permission['create_meeting'] = _MA_TADMEETIN_CAN_CREATE_CATE;
+$permission['post_meeting'] = _MA_TADMEETIN_CAN_POST_CATE;
+$permission['view_meeting'] = _MA_TADMEETIN_CAN_ACCESS_CATE;
+$permission['sort_meeting'] = _MA_TADMEETIN_CAN_SORT_CATE;
+
+$EasyResponsiveTabs = new EasyResponsiveTabs('#grouppermformTab', 'default');
+$EasyResponsiveTabs->rander();
+
+foreach ($permission as $item => $perm_desc) {
+    $formi = new \XoopsGroupPermForm('', $module_id, $item, $perm_desc);
+    foreach ($item_list as $item_id => $item_name) {
+        $formi->addItem($item_id, $item_name);
+    }
+    $title[$item] = $permission_kind[$item];
+    $form[$item] = $formi->render();
 }
 
-$main1 = $formi->render();
-$xoopsTpl->assign('main1', $main1);
-
-$formi = new \XoopsGroupPermForm('', $module_id, 'post_meeting', $perm_desc);
-foreach ($item_list as $item_id => $item_name) {
-    $formi->addItem($item_id, $item_name);
-}
-
-$main2 = $formi->render();
-$xoopsTpl->assign('main2', $main2);
 $xoopsTpl->assign('now_op', 'power');
+$xoopsTpl->assign('title', $title);
+$xoopsTpl->assign('form', $form);
 
 $xoTheme->addStylesheet(XOOPS_URL . "/modules/tadtools/css/xoops_adm{$_SESSION['bootstrap']}.css");
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/tadtools/css/font-awesome/css/font-awesome.css');

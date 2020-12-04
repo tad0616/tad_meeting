@@ -6,8 +6,8 @@ require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/function.php';
 
 //判斷目前使用者是否有：觀看會議內容
-$read_report = Utility::power_chk('tad_meeting', 3);
-if (!$read_report) {
+$view_meeting = Utility::power_chk('view_meeting', 3);
+if (!$view_meeting) {
     redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
 }
 

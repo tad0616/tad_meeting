@@ -12,6 +12,10 @@ function xoops_module_update_tad_meeting($module, $old_version)
     if (Update::chk_fc_tag()) {
         Update::go_fc_tag();
     }
+    //修改權限
+    if (Update::chk_permission()) {
+        Update::go_permission();
+    }
 
     return true;
 }

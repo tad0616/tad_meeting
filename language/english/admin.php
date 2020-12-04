@@ -16,12 +16,18 @@ define('_MA_TADMEETIN_TAD_MEETING_CATE_ENABLE', 'State');
 
 define('_MA_TADMEETIN_PERM_TITLE', 'Detail permission');
 define('_MA_TADMEETIN_PERM_DESC', 'Check the permissions you want to open to the group:');
-define('_MA_TADMEETIN_CREATE_MEETING', 'Create a meeting');
-define('_MA_TADMEETIN_ADD_REPORT', 'Fill in meeting content');
-define('_MA_TADMEETIN_READ_REPORT', 'Watch meeting content');
-define('_MA_TADMEETIN_SORT_REPORT', 'Sort meeting content');
 
-define('_MA_TADMEETIN_CAN_ACCESS_GROUPS', 'Groups that are <b>readable</b>.');
-define('_MA_TADMEETIN_CAN_POST_GROUPS', 'Groups that can be <b>published</b>.');
+define('_MA_TADMEETIN_CAN_ACCESS', 'can "Read a meeting".');
+define('_MA_TADMEETIN_CAN_POST', 'can "Post a meeting".');
+define('_MA_TADMEETIN_CAN_CREATE', 'can "Create a meeting".');
+define('_MA_TADMEETIN_CAN_SORT', 'can "Sort meeting".');
+define('_MA_TADMEETIN_CAN_ACCESS_GROUPS', 'Groups that can "Read a Meeting"');
+define('_MA_TADMEETIN_CAN_POST_GROUPS', 'Groups that can "Post a Meeting"');
+define('_MA_TADMEETIN_CAN_CREATE_GROUPS', 'Groups that can "Create a Meeting"');
+define('_MA_TADMEETIN_CAN_SORT_GROUPS', 'Groups that can "Sort a Meeting"');
+define('_MA_TADMEETIN_CAN_ACCESS_CATE', 'Set the categories in which the group can "Read Meetings".');
+define('_MA_TADMEETIN_CAN_POST_CATE', 'Set the categories in which the group can "Post Meetings".');
+define('_MA_TADMEETIN_CAN_CREATE_CATE', 'Set the categories in which the group can "Create Meetings".');
+define('_MA_TADMEETIN_CAN_SORT_CATE', 'Set the categories in which the group can "Sort Meetings".');
 define('_MA_TADMEETIN_ALL_OK', 'Open All');
 define('_MA_TADMEETIN_ONLY_ROOT', 'Administrators Only');

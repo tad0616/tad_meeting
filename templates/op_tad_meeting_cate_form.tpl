@@ -1,6 +1,6 @@
 <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
     <div class="row" style="margin: 10px 0px;">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <!--分類標題-->
             <div class="form-group row">
                 <label class="col-sm-3 control-label col-form-label text-sm-right">
@@ -38,25 +38,33 @@
                 </label>
                 <div class="col-sm-9">
                     <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_1" value="1" <{if $tad_meeting_cate_enable == "1"}>checked<{/if}>>
-                    <label class="form-check-label" for="tad_meeting_cate_enable_1"><{$smarty.const._YES}></label>
+                        <input class="form-check-input" type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_1" value="1" <{if $tad_meeting_cate_enable == "1"}>checked<{/if}>>
+                        <label class="form-check-label" for="tad_meeting_cate_enable_1"><{$smarty.const._YES}></label>
                     </div>
                     <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_0" value="0" <{if $tad_meeting_cate_enable != "1"}>checked<{/if}>>
-                    <label class="form-check-label" for="tad_meeting_cate_enable_0"><{$smarty.const._NO}></label>
+                        <input class="form-check-input" type="radio" name="tad_meeting_cate_enable" id="tad_meeting_cate_enable_0" value="0" <{if $tad_meeting_cate_enable != "1"}>checked<{/if}>>
+                        <label class="form-check-label" for="tad_meeting_cate_enable_0"><{$smarty.const._NO}></label>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <label><{$smarty.const._MA_TADMEETIN_CAN_ACCESS_GROUPS}></label>
             <{$enable_group}>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-2">
+            <label><{$smarty.const._MA_TADMEETIN_CAN_CREATE_GROUPS}></label>
+            <{$enable_create_group}>
+        </div>
+        <div class="col-sm-2">
             <label><{$smarty.const._MA_TADMEETIN_CAN_POST_GROUPS}></label>
             <{$enable_post_group}>
+        </div>
+        <div class="col-sm-2">
+            <label><{$smarty.const._MA_TADMEETIN_CAN_SORT_GROUPS}></label>
+            <{$enable_sort_group}>
         </div>
     </div>
 

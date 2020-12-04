@@ -19,29 +19,35 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $xoopsTpl->assign('tad_meeting_sn', $tad_meeting_sn);
     $xoopsTpl->assign('tad_meeting_data_sn', $tad_meeting_data_sn);
 
+    $all = get_tad_meeting($tad_meeting_sn);
+    //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
+    foreach ($all as $k => $v) {
+        $$k = $v;
+    }
+
     //判斷目前使用者是否有：觀看會議內容
-    $read_report = Utility::power_chk('tad_meeting', 3);
-    $xoopsTpl->assign('read_report', $read_report);
-    if (!$read_report) {
+    $view_meeting = Utility::power_chk('view_meeting', $tad_meeting_cate_sn);
+    $xoopsTpl->assign('view_meeting', $view_meeting);
+    if (!$view_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
     list_tad_meeting_data($tad_meeting_sn);
 
     //判斷目前使用者是否有：建立會議
-    $create_meeting = Utility::power_chk('tad_meeting', 1);
+    $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
     $xoopsTpl->assign('create_meeting', $create_meeting);
 
     //判斷目前使用者是否有：填寫會議內容
-    $add_report = Utility::power_chk('tad_meeting', 2);
-    $xoopsTpl->assign('add_report', $add_report);
+    $post_meeting = Utility::power_chk('post_meeting', $tad_meeting_cate_sn);
+    $xoopsTpl->assign('post_meeting', $post_meeting);
 
-    if ($add_report) {
+    if ($post_meeting) {
         tad_meeting_data_form($tad_meeting_sn, $tad_meeting_data_sn);
     }
 
     //判斷目前使用者是否有：排序會議內容
-    $sort_report = Utility::power_chk('tad_meeting', 4);
-    $xoopsTpl->assign('sort_report', $sort_report);
+    $sort_meeting = Utility::power_chk('sort_meeting', $tad_meeting_cate_sn);
+    $xoopsTpl->assign('sort_meeting', $sort_meeting);
 
     if (empty($tad_meeting_sn)) {
         return;
@@ -52,16 +58,6 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $xoopsTpl->assign('now_uid', $now_uid);
 
     $myts = \MyTextSanitizer::getInstance();
-
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting') . "`
-    where `tad_meeting_sn` = '{$tad_meeting_sn}' ";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
-    $all = $xoopsDB->fetchArray($result);
-
-    //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
-    foreach ($all as $k => $v) {
-        $$k = $v;
-    }
 
     //取得分類資料(tad_meeting_cate)
     $tad_meeting_cate_arr = get_tad_meeting_cate($tad_meeting_cate_sn);
@@ -110,6 +106,7 @@ function list_tad_meeting()
     $tad_meeting_cate_arr = get_tad_meeting_cate_all();
     $all_content = [];
     $i = 0;
+    $create_meeting = false;
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
         //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
         foreach ($all as $k => $v) {
@@ -131,6 +128,11 @@ function list_tad_meeting()
         $all_content[$i]['tad_meeting_chairman'] = $tad_meeting_chairman;
         $all_content[$i]['tad_meeting_note'] = $tad_meeting_note;
         $i++;
+
+        //判斷目前使用者是否有：建立會議
+        if (!$create_meeting) {
+            $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
+        }
     }
 
     //刪除確認的JS
@@ -145,9 +147,6 @@ function list_tad_meeting()
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('all_content', $all_content);
     $xoopsTpl->assign('now_op', 'list_tad_meeting');
-
-    //判斷目前使用者是否有：建立會議
-    $create_meeting = Utility::power_chk('tad_meeting', 1);
     $xoopsTpl->assign('create_meeting', $create_meeting);
 }
 
@@ -171,16 +170,17 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 {
     global $xoopsDB, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
 
-    $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
-        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
-    }
-
     //抓取預設值
     if (!empty($tad_meeting_data_sn)) {
         $DBV = get_tad_meeting_data($tad_meeting_data_sn);
+        $meeting = get_tad_meeting($DBV['tad_meeting_sn']);
     } else {
         $DBV = [];
+    }
+
+    $post_meeting = Utility::power_chk('post_meeting', $meeting['tad_meeting_cate_sn']);
+    if (!$_SESSION['tad_meeting_adm'] and !$post_meeting) {
+        redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
     //預設值設定
@@ -280,8 +280,12 @@ function get_tad_meeting_data($tad_meeting_data_sn = '')
 function insert_tad_meeting_data()
 {
     global $xoopsDB, $xoopsUser;
-    $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
+
+    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
+    $meeting = get_tad_meeting($tad_meeting_sn);
+
+    $post_meeting = Utility::power_chk('post_meeting', $meeting['tad_meeting_cate_sn']);
+    if (!$_SESSION['tad_meeting_adm'] and !$post_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -292,8 +296,6 @@ function insert_tad_meeting_data()
     }
 
     $myts = \MyTextSanitizer::getInstance();
-
-    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
     $tad_meeting_data_sn = Request::getInt('tad_meeting_data_sn');
     $tad_meeting_data_unit = $myts->addSlashes(Request::getString('tad_meeting_data_unit'));
     $tad_meeting_data_job = $myts->addSlashes(Request::getString('tad_meeting_data_job'));
@@ -341,8 +343,12 @@ function insert_tad_meeting_data()
 function update_tad_meeting_data($tad_meeting_data_sn = '')
 {
     global $xoopsDB, $xoopsUser;
-    $add_report = Utility::power_chk('tad_meeting', 2);
-    if (!$_SESSION['tad_meeting_adm'] and !$add_report) {
+
+    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
+    $meeting = get_tad_meeting($tad_meeting_sn);
+
+    $post_meeting = Utility::power_chk('post_meeting', $meeting['tad_meeting_cate_sn']);
+    if (!$_SESSION['tad_meeting_adm'] and !$post_meeting) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -365,13 +371,13 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
     $tad_meeting_data_date = date('Y-m-d H:i:s', xoops_getUserTimestamp(time()));
 
     $sql = 'update `' . $xoopsDB->prefix('tad_meeting_data') . "` set
-       `tad_meeting_data_unit` = '{$tad_meeting_data_unit}',
-       `tad_meeting_data_job` = '{$tad_meeting_data_job}',
-       `tad_meeting_data_title` = '{$tad_meeting_data_title}',
-       `tad_meeting_data_content` = '{$tad_meeting_data_content}',
-       `tad_meeting_data_uid` = '{$tad_meeting_data_uid}',
-       `tad_meeting_data_sort` = '{$tad_meeting_data_sort}',
-       `tad_meeting_data_date` = '{$tad_meeting_data_date}'
+    `tad_meeting_data_unit` = '{$tad_meeting_data_unit}',
+    `tad_meeting_data_job` = '{$tad_meeting_data_job}',
+    `tad_meeting_data_title` = '{$tad_meeting_data_title}',
+    `tad_meeting_data_content` = '{$tad_meeting_data_content}',
+    `tad_meeting_data_uid` = '{$tad_meeting_data_uid}',
+    `tad_meeting_data_sort` = '{$tad_meeting_data_sort}',
+    `tad_meeting_data_date` = '{$tad_meeting_data_date}'
     where `tad_meeting_data_sn` = '$tad_meeting_data_sn'";
     $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 

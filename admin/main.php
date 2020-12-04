@@ -22,13 +22,24 @@ function list_tad_meeting($tad_meeting_cate_sn = '')
     $tad_meeting_cate_arr = get_tad_meeting_cate_all();
     $cate = [];
     if ($tad_meeting_cate_sn) {
+
         $cate = get_tad_meeting_cate($tad_meeting_cate_sn);
+
         $view_meeting = getItem_Permissions($tad_meeting_cate_sn, 'view_meeting');
-        $post_meeting = getItem_Permissions($tad_meeting_cate_sn, 'post_meeting');
         $view_meeting_txt = Utility::txt_to_group_name(implode(',', $view_meeting), _MA_TADMEETIN_ALL_OK, ' , ');
-        $post_meeting_txt = Utility::txt_to_group_name(implode(',', $post_meeting), _MA_TADMEETIN_ONLY_ROOT, ' , ');
         $xoopsTpl->assign('view_meeting_txt', $view_meeting_txt);
+
+        $create_meeting = getItem_Permissions($tad_meeting_cate_sn, 'create_meeting');
+        $create_meeting_txt = Utility::txt_to_group_name(implode(',', $create_meeting), _MA_TADMEETIN_ONLY_ROOT, ' , ');
+        $xoopsTpl->assign('create_meeting_txt', $create_meeting_txt);
+
+        $post_meeting = getItem_Permissions($tad_meeting_cate_sn, 'post_meeting');
+        $post_meeting_txt = Utility::txt_to_group_name(implode(',', $post_meeting), _MA_TADMEETIN_ONLY_ROOT, ' , ');
         $xoopsTpl->assign('post_meeting_txt', $post_meeting_txt);
+
+        $sort_meeting = getItem_Permissions($tad_meeting_cate_sn, 'sort_meeting');
+        $sort_meeting_txt = Utility::txt_to_group_name(implode(',', $sort_meeting), _MA_TADMEETIN_ONLY_ROOT, ' , ');
+        $xoopsTpl->assign('sort_meeting_txt', $sort_meeting_txt);
     }
 
     $where_tad_meeting_cate_sn = !empty($tad_meeting_cate_sn) ? "where a.tad_meeting_cate_sn='{$tad_meeting_cate_sn}'" : '';
@@ -289,6 +300,17 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
     $enable_group = $SelectGroup_name->render();
     $xoopsTpl->assign('enable_group', $enable_group);
 
+    //可建立群組
+    $create_group = $modulepermHandler->getGroupIds('create_meeting', $tad_meeting_cate_sn, $mod_id);
+    if (empty($create_group)) {
+        $create_group = [1];
+    }
+
+    $SelectGroup_name = new \XoopsFormSelectGroup('create_group', 'create_meeting', true, $create_group, 6, true);
+    $SelectGroup_name->setExtra("class='form-control' id='create_group'");
+    $enable_create_group = $SelectGroup_name->render();
+    $xoopsTpl->assign('enable_create_group', $enable_create_group);
+
     //可上傳群組
     $post_group = $modulepermHandler->getGroupIds('post_meeting', $tad_meeting_cate_sn, $mod_id);
     if (empty($post_group)) {
@@ -299,6 +321,17 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
     $SelectGroup_name->setExtra("class='form-control' id='post_group'");
     $enable_post_group = $SelectGroup_name->render();
     $xoopsTpl->assign('enable_post_group', $enable_post_group);
+
+    //可排序群組
+    $sort_group = $modulepermHandler->getGroupIds('sort_meeting', $tad_meeting_cate_sn, $mod_id);
+    if (empty($sort_group)) {
+        $sort_group = [1];
+    }
+
+    $SelectGroup_name = new \XoopsFormSelectGroup('sort_group', 'sort_meeting', true, $sort_group, 6, true);
+    $SelectGroup_name->setExtra("class='form-control' id='sort_group'");
+    $enable_sort_group = $SelectGroup_name->render();
+    $xoopsTpl->assign('enable_sort_group', $enable_sort_group);
 
 }
 

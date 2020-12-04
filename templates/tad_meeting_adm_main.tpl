@@ -11,7 +11,9 @@
                     <h4><{$cate.tad_meeting_cate_title}></h4>
                     <ol>
                         <li><{$smarty.const._MA_TADMEETIN_CAN_ACCESS_GROUPS}>: <{$view_meeting_txt}></li>
+                        <li><{$smarty.const._MA_TADMEETIN_CAN_CREATE_GROUPS}>: <{$create_meeting_txt}></li>
                         <li><{$smarty.const._MA_TADMEETIN_CAN_POST_GROUPS}>: <{$post_meeting_txt}></li>
+                        <li><{$smarty.const._MA_TADMEETIN_CAN_SORT_GROUPS}>: <{$sort_meeting_txt}></li>
                     </ol>
                 </div>
             <{/if}>

@@ -2,8 +2,8 @@
 use XoopsModules\Tadtools\Utility;
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 
-$sort_report = Utility::power_chk('tad_meeting', 4);
-if ($sort_report) {
+$sort_meeting = Utility::power_chk('sort_meeting', 4);
+if ($sort_meeting) {
     $sort = 1;
     foreach ($_POST['tr'] as $tad_meeting_data_sn) {
 

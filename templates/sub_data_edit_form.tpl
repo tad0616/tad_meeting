@@ -27,7 +27,7 @@
     });
 </script>
 
-<{if $add_report}>
+<{if $post_meeting}>
     <a name="tad_meeting_data_form"> </a>
     <div class="text-center" style="margin: 30px auto;">
         <button type="button" id="data_edit_form" class="btn btn-primary"><{$smarty.const._MD_TADMEETIN_ADD_REPORT}></button>

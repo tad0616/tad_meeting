@@ -1,20 +1,13 @@
-
-<script type="text/javascript" src="<{$xoops_url}>/modules/tadtools/jqueryCookie/jquery.cookie.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var $tabs = $("#grouppermform-tabs").tabs({ cookie: { expires: 30 } , collapsible: true});
-    });
-</script>
-
-<div id="grouppermform-tabs">
-    <ul>
-        <li><a href="#tabs-1"><{$smarty.const._MA_TADMEETIN_CAN_ACCESS_GROUPS}></a></li>
-        <li><a href="#tabs-2"><{$smarty.const._MA_TADMEETIN_CAN_POST_GROUPS}></a></li>
+<div id="grouppermformTab">
+    <ul class="resp-tabs-list vert">
+        <{foreach from=$title item=power_title}>
+            <li> <{$power_title}> </li>
+        <{/foreach}>
     </ul>
-    <div id="tabs-1">
-        <{$main1}>
-    </div>
-    <div id="tabs-2">
-        <{$main2}>
+
+    <div class="resp-tabs-container vert">
+        <{foreach from=$form item=power_form}>
+            <div> <{$power_form}> </div>
+        <{/foreach}>
     </div>
 </div>
