@@ -30,3 +30,4 @@ define('_MA_TADMEETIN_CAN_CREATE_CATE', '設定該群組可「建立會議」的
 define('_MA_TADMEETIN_CAN_SORT_CATE', '設定該群組可「排序會議」的分類');
 define('_MA_TADMEETIN_ALL_OK', '全部開放');
 define('_MA_TADMEETIN_ONLY_ROOT', '僅管理員');
+define('_MA_TADMEETIN_ALL_MEETING', '所有會議');

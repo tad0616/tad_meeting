@@ -30,7 +30,7 @@
 <{if $post_meeting}>
     <a name="tad_meeting_data_form"> </a>
     <div class="text-center" style="margin: 30px auto;">
-        <button type="button" id="data_edit_form" class="btn btn-primary"><{$smarty.const._MD_TADMEETIN_ADD_REPORT}></button>
+        <button type="button" id="data_edit_form" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_REPORT}></button>
     </div>
 
     <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form" <{if !$tad_meeting_data_sn}>style="display: none;"<{/if}>>
@@ -100,7 +100,7 @@
                 <input type='hidden' name="tad_meeting_data_sn" value="<{$tad_meeting_data_sn}>">
                 <{$token_form}>
                 <input type="hidden" name="op" value="<{$next_op}>">
-                <button type="submit" class="btn btn-primary"><{$smarty.const._TAD_SAVE}></button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
             </div>
         </div>
     </form>

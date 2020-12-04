@@ -78,7 +78,6 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('now_op', 'tad_meeting_form');
     $xoopsTpl->assign('next_op', $op);
 
     $meeting_place_arr = [];

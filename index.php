@@ -14,10 +14,12 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 //以流水號秀出某筆tad_meeting資料內容
 function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsUser;
-
+    global $xoopsDB, $xoopsTpl, $xoopsUser, $xoopsModuleConfig;
+    $orderby = $xoopsModuleConfig['orderby'] == 'auto' ? _MD_TADMEETIN_ORDERBY_OPT1 : _MD_TADMEETIN_ORDERBY_OPT2;
     $xoopsTpl->assign('tad_meeting_sn', $tad_meeting_sn);
     $xoopsTpl->assign('tad_meeting_data_sn', $tad_meeting_data_sn);
+    $xoopsTpl->assign('orderby', $orderby);
+    $xoopsTpl->assign('file_title', $xoopsModuleConfig['file_title']);
 
     $all = get_tad_meeting($tad_meeting_sn);
     //以下會產生這些變數： $tad_meeting_sn, $tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note
@@ -82,7 +84,6 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     }
 
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('now_op', 'show_one_tad_meeting');
 }
 
 //列出所有tad_meeting資料
@@ -146,7 +147,6 @@ function list_tad_meeting()
     $xoopsTpl->assign('bar', $bar);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('all_content', $all_content);
-    $xoopsTpl->assign('now_op', 'list_tad_meeting');
     $xoopsTpl->assign('create_meeting', $create_meeting);
 }
 
@@ -230,7 +230,6 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('now_op', 'tad_meeting_data_form');
     $xoopsTpl->assign('next_op', $op);
 
     $meeting_unit_arr = [];
@@ -401,6 +400,7 @@ switch ($op) {
     case 'tad_meeting_form':
         tad_meeting_form($tad_meeting_sn);
         break;
+
     //新增資料
     case 'insert_tad_meeting':
         $tad_meeting_sn = insert_tad_meeting();
@@ -434,6 +434,7 @@ switch ($op) {
     case 'tad_meeting_data_form':
         tad_meeting_data_form($tad_meeting_sn, $tad_meeting_data_sn);
         break;
+
     //刪除報告
     case 'delete_tad_meeting_data':
         delete_tad_meeting_data($tad_meeting_data_sn);
@@ -445,7 +446,7 @@ switch ($op) {
         $TadUpFiles = new TadUpFiles('tad_meeting');
         $TadUpFiles->add_file_counter($files_sn, false);
         exit;
-        break;
+
     //更新排序
     case 'update_tad_meeting_data_sort':
         $msg = update_tad_meeting_data_sort();
@@ -454,9 +455,10 @@ switch ($op) {
     default:
         if (empty($tad_meeting_sn)) {
             list_tad_meeting();
-            //$main .= tad_meeting_form($tad_meeting_sn);
+            $op = 'list_tad_meeting';
         } else {
             show_one_tad_meeting($tad_meeting_sn, $tad_meeting_data_sn);
+            $op = 'show_one_tad_meeting';
         }
         break;
         /*---判斷動作請貼在上方---*/
@@ -464,4 +466,6 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('toolbar', Utility::toolbar_bootstrap($interface_menu));
+$xoopsTpl->assign('now_op', $op);
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/tad_meeting/css/module.css');
 require_once XOOPS_ROOT_PATH . '/footer.php';

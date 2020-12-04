@@ -5,7 +5,7 @@ use XoopsModules\Tadtools\SweetAlert;
 use XoopsModules\Tadtools\Utility;
 use XoopsModules\Tadtools\Ztree;
 /*-----------引入檔案區--------------*/
-$xoopsOption['template_main'] = 'tad_meeting_adm_main.tpl';
+$xoopsOption['template_main'] = 'tad_meeting_admin.tpl';
 require_once __DIR__ . '/header.php';
 require_once dirname(__DIR__) . '/function.php';
 
@@ -69,7 +69,6 @@ function list_tad_meeting($tad_meeting_cate_sn = '')
     $SweetAlert2 = new SweetAlert();
     $SweetAlert2->render('delete_tad_meeting_func', "main.php?op=delete_tad_meeting&tad_meeting_cate_sn=$tad_meeting_cate_sn&g2p=$g2p&tad_meeting_sn=", 'tad_meeting_sn');
 
-    $xoopsTpl->assign('now_op', 'list_tad_meeting');
     $xoopsTpl->assign('tad_meeting_cate_sn', $tad_meeting_cate_sn);
     $xoopsTpl->assign('all_content', $all_content);
     $xoopsTpl->assign('cate', $cate);
@@ -283,7 +282,6 @@ function tad_meeting_cate_form($tad_meeting_cate_sn = '')
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
-    $xoopsTpl->assign('now_op', 'tad_meeting_cate_form');
     $xoopsTpl->assign('next_op', $op);
 
     $mod_id = $xoopsModule->mid();
@@ -506,10 +504,13 @@ switch ($op) {
     default:
         list_tad_meeting_cate_tree($tad_meeting_cate_sn);
         list_tad_meeting($tad_meeting_cate_sn);
+        $op = 'list_tad_meeting';
         break;
 }
 
 /*-----------秀出結果區--------------*/
+$xoopsTpl->assign('now_op', $op);
+$xoTheme->addStylesheet(XOOPS_URL . '/modules/tad_meeting/css/module.css');
 $xoTheme->addStylesheet(XOOPS_URL . "/modules/tadtools/css/xoops_adm{$_SESSION['bootstrap']}.css");
 $xoTheme->addStylesheet(XOOPS_URL . '/modules/tadtools/css/font-awesome/css/font-awesome.css');
 require_once __DIR__ . '/footer.php';

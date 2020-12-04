@@ -3,32 +3,31 @@
     <div id="tad_meeting_save_msg"></div>
     <table class="table table-striped table-hover">
         <thead>
-        <tr>
-
-            <th>
-                <!--會議名稱-->
-                <{$smarty.const._MD_TADMEETIN_TAD_MEETING_TITLE}>
-            </th>
-            <th>
-                <!--會議類別-->
-                <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CATE_SN}>
-            </th>
-            <th>
-                <!--開會日期-->
-                <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATETIME}>
-            </th>
-            <th>
-                <!--會議地點-->
-                <{$smarty.const._MD_TADMEETIN_TAD_MEETING_PLACE}>
-            </th>
-            <th>
-                <!--會議主席-->
-                <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}>
-            </th>
-            <{if $smarty.session.tad_meeting_adm}>
-                <th><{$smarty.const._TAD_FUNCTION}></th>
-            <{/if}>
-        </tr>
+            <tr class="bg-info white">
+                <th class="c">
+                    <!--會議名稱-->
+                    <{$smarty.const._MD_TADMEETIN_TAD_MEETING_TITLE}>
+                </th>
+                <th class="c">
+                    <!--會議類別-->
+                    <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CATE_SN}>
+                </th>
+                <th class="c">
+                    <!--開會日期-->
+                    <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATETIME}>
+                </th>
+                <th class="c">
+                    <!--會議地點-->
+                    <{$smarty.const._MD_TADMEETIN_TAD_MEETING_PLACE}>
+                </th>
+                <th class="c">
+                    <!--會議主席-->
+                    <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}>
+                </th>
+                <{if $smarty.session.tad_meeting_adm}>
+                    <th class="c"><{$smarty.const._TAD_FUNCTION}></th>
+                <{/if}>
+            </tr>
         </thead>
 
         <tbody id="tad_meeting_sort">
@@ -67,8 +66,8 @@
 
                     <{if $smarty.session.tad_meeting_adm}>
                         <td>
-                            <a href="javascript:delete_tad_meeting_func(<{$data.tad_meeting_sn}>);" class="btn btn-sm btn-xs btn-danger"><{$smarty.const._TAD_DEL}></a>
-                            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$data.tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><{$smarty.const._TAD_EDIT}></a>
+                            <a href="javascript:delete_tad_meeting_func(<{$data.tad_meeting_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
+                            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$data.tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
                         </td>
                     <{/if}>
                 </tr>
@@ -78,7 +77,7 @@
 
     <{if $smarty.session.tad_meeting_adm or $create_meeting}>
         <div class="text-right">
-            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
+            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         </div>
     <{/if}>
 
@@ -86,7 +85,7 @@
 <{else}>
     <div class="jumbotron text-center">
         <{if $smarty.session.tad_meeting_adm or $create_meeting}>
-            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
+            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         <{else}>
             <h3><{$smarty.const._TAD_EMPTY}></h3>
         <{/if}>

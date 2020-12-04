@@ -61,16 +61,16 @@ $modversion['search']['func'] = 'tad_meeting_search';
 
 //---樣板設定---//
 $i = 0;
-$modversion['templates'][$i]['file'] = 'tad_meeting_adm_main.tpl';
-$modversion['templates'][$i]['description'] = 'tad_meeting_adm_main.tpl';
+$modversion['templates'][$i]['file'] = 'tad_meeting_admin.tpl';
+$modversion['templates'][$i]['description'] = 'tad_meeting_admin.tpl';
 
 $i++;
 $modversion['templates'][$i]['file'] = 'tad_meeting_index.tpl';
 $modversion['templates'][$i]['description'] = 'tad_meeting_index.tpl';
 
 $i++;
-$modversion['templates'][$i]['file'] = 'tad_meeting_adm_groupperm.tpl';
-$modversion['templates'][$i]['description'] = 'tad_meeting_adm_groupperm.tpl';
+$modversion['templates'][$i]['file'] = 'tad_meeting_power.tpl';
+$modversion['templates'][$i]['description'] = 'tad_meeting_power.tpl';
 
 //---區塊設定---//
 $i = 0;

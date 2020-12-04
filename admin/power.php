@@ -2,7 +2,7 @@
 use XoopsModules\Tadtools\EasyResponsiveTabs;
 use XoopsModules\Tadtools\Utility;
 /*-----------引入檔案區--------------*/
-$GLOBALS['xoopsOption']['template_main'] = 'tad_meeting_adm_groupperm.tpl';
+$GLOBALS['xoopsOption']['template_main'] = 'tad_meeting_power.tpl';
 require_once __DIR__ . '/header.php';
 require_once dirname(__DIR__) . '/function.php';
 require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.php';

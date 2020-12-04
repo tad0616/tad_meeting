@@ -31,3 +31,4 @@ define('_MA_TADMEETIN_CAN_CREATE_CATE', 'Set the categories in which the group c
 define('_MA_TADMEETIN_CAN_SORT_CATE', 'Set the categories in which the group can "Sort Meetings".');
 define('_MA_TADMEETIN_ALL_OK', 'Open All');
 define('_MA_TADMEETIN_ONLY_ROOT', 'Administrators Only');
+define('_MA_TADMEETIN_ALL_MEETING', 'All Conferences');

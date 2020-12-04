@@ -29,7 +29,11 @@ define('_MD_TADMEETIN_ADD_REPORT', '新增會議報告');
 define('_MD_TADMEETIN_REPORT', '報告');
 define('_MD_TADMEETIN_BRACKETS_L', '（');
 define('_MD_TADMEETIN_BRACKETS_R', '）');
-define('_MD_TADMEETIN_DOWNLOAD_PDF', '下載會議記錄（PDF）');
-define('_MD_TADMEETIN_DOWNLOAD_WORD', '下載會議記錄（Word）');
+define('_MD_TADMEETIN_DOWNLOAD', '下載會議記錄：');
+define('_MD_TADMEETIN_DOWNLOAD_PDF', 'PDF 檔');
+define('_MD_TADMEETIN_DOWNLOAD_WORD', 'Word 檔');
 define('_MD_TADMEETIN_NONE', '無');
 define('_MD_TADMEETIN_COMMA', '、');
+
+define('_MD_TADMEETIN_ORDERBY_OPT1', '自動排序（依據「處室設定」順序）');
+define('_MD_TADMEETIN_ORDERBY_OPT2', '自訂排序');

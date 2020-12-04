@@ -32,7 +32,11 @@ define('_MD_TADMEETIN_ADD_REPORT', 'Add meeting report');
 define('_MD_TADMEETIN_REPORT', 'Report');
 define('_MD_TADMEETIN_BRACKETS_L', '(');
 define('_MD_TADMEETIN_BRACKETS_R', ')');
-define('_MD_TADMEETIN_DOWNLOAD_PDF', 'Download meeting record (PDF)');
-define('_MD_TADMEETIN_DOWNLOAD_WORD', 'Download the meeting record (Word)');
+define('_MD_TADMEETIN_DOWNLOAD', 'Download meeting record: ');
+define('_MD_TADMEETIN_DOWNLOAD_PDF', 'PDF');
+define('_MD_TADMEETIN_DOWNLOAD_WORD', 'Word');
 define('_MD_TADMEETIN_NONE', 'No');
 define('_MD_TADMEETIN_COMMA', ',');
+
+define('_MD_TADMEETIN_ORDERBY_OPT1', 'Automatic Sorting (in order of "Preferences")');
+define('_MD_TADMEETIN_ORDERBY_OPT2', 'Custom Sorting');
