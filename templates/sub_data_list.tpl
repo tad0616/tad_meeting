@@ -51,8 +51,8 @@
                         <div class="text-right">
                             <a href="javascript:delete_tad_meeting_data_func(<{$data.tad_meeting_data_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
                             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?tad_meeting_sn=<{$tad_meeting_sn}>&tad_meeting_data_sn=<{$data.tad_meeting_data_sn}>#tad_meeting_data_form" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
-                            <{if $smarty.session.tad_meeting_adm or $sort_meeting}>
-                            <img src="<{$xoops_url}>/modules/tadtools/treeTable/images/updown_s.png" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._TAD_SORTABLE}>" title="<{$smarty.const._TAD_SORTABLE}>">
+                            <{if $sort_meeting}>
+                                <img src="<{$xoops_url}>/modules/tadtools/treeTable/images/updown_s.png" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._TAD_SORTABLE}>" title="<{$smarty.const._TAD_SORTABLE}>">
                             <{/if}>
                         </div>
                     <{/if}>

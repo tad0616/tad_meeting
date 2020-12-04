@@ -6,7 +6,7 @@
     <{/if}>
 </div>
 <h2 class="my">
-    <{$file_title}><{$tad_meeting_title}>
+    <{$tad_meeting_title}>
 </h2>
 
 <!--相關補充說明-->

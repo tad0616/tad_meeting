@@ -3,7 +3,7 @@
     <div id="tad_meeting_save_msg"></div>
     <table class="table table-striped table-hover">
         <thead>
-            <tr class="bg-info white">
+            <tr class="bg-primary white">
                 <th class="c">
                     <!--會議名稱-->
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_TITLE}>

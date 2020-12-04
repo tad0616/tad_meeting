@@ -48,7 +48,7 @@ function show_one_tad_meeting($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     }
 
     //判斷目前使用者是否有：排序會議內容
-    $sort_meeting = Utility::power_chk('sort_meeting', $tad_meeting_cate_sn);
+    $sort_meeting = $xoopsModuleConfig['orderby'] == 'auto' ? false : Utility::power_chk('sort_meeting', $tad_meeting_cate_sn);
     $xoopsTpl->assign('sort_meeting', $sort_meeting);
 
     if (empty($tad_meeting_sn)) {
