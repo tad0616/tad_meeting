@@ -303,7 +303,10 @@ function insert_tad_meeting_data()
 
     //取得使用者編號
     $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
-    $tad_meeting_data_uid = empty($tad_meeting_data_uid) and $xoopsUser ? $xoopsUser->uid() : $tad_meeting_data_uid;
+    if (empty($tad_meeting_data_uid) and $xoopsUser) {
+        $tad_meeting_data_uid = $xoopsUser->uid();
+    }
+
     $tad_meeting_data_sort = Request::getInt('tad_meeting_data_sort');
     $tad_meeting_data_date = date('Y-m-d H:i:s', xoops_getUserTimestamp(time()));
 
@@ -326,6 +329,7 @@ function insert_tad_meeting_data()
         '{$tad_meeting_data_sort}',
         '{$tad_meeting_data_date}'
     )";
+
     $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
@@ -365,7 +369,9 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
     $tad_meeting_data_content = $myts->addSlashes(Request::getString('tad_meeting_data_content'));
     //取得使用者編號
     $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
-    $tad_meeting_data_uid = empty($tad_meeting_data_uid) and $xoopsUser ? $xoopsUser->uid() : $tad_meeting_data_uid;
+    if (empty($tad_meeting_data_uid) and $xoopsUser) {
+        $tad_meeting_data_uid = $xoopsUser->uid();
+    }
     $tad_meeting_data_sort = Request::getInt('tad_meeting_data_sort');
     $tad_meeting_data_date = date('Y-m-d H:i:s', xoops_getUserTimestamp(time()));
 

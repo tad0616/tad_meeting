@@ -5,15 +5,15 @@ use XoopsModules\Tadtools\Utility;
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 require_once __DIR__ . '/function.php';
 
-//判斷目前使用者是否有：觀看會議內容
-$view_meeting = Utility::power_chk('view_meeting', 3);
-if (!$view_meeting) {
-    redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
-}
-
 $tad_meeting_sn = Request::getInt('tad_meeting_sn');
 
 $tad_meeting = get_tad_meeting($tad_meeting_sn);
+
+//判斷目前使用者是否有：觀看會議內容
+$view_meeting = Utility::power_chk('view_meeting', $tad_meeting['tad_meeting_cate_sn']);
+if (!$view_meeting) {
+    redirect_header('index.php', 3, _TAD_PERMISSION_DENIED);
+}
 
 //取得分類資料(tad_meeting_cate)
 $tad_meeting_cate_arr = get_tad_meeting_cate($tad_meeting['tad_meeting_cate_sn']);
