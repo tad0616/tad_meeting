@@ -26,18 +26,18 @@
         <tbody>
             <tr>
                 <!--會議類別-->
-                <th class="c"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_CATE_SN}></th>
+                <th class="c" scope="row"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_CATE_SN}></th>
                 <td class="c"><{$tad_meeting_cate_sn_title}></td>
                 <!--開會日期-->
-                <th class="c"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATETIME}></th>
+                <th class="c" scope="row"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATETIME}></th>
                 <td class="c"><{$tad_meeting_datetime}></td>
             </tr>
             <tr>
                 <!--會議地點-->
-                <th class="c"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_PLACE}></th>
+                <th class="c" scope="row"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_PLACE}></th>
                 <td class="c"><{$tad_meeting_place}></td>
                 <!--會議主席-->
-                <th class="c"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}></th>
+                <th class="c" scope="row"><{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}></th>
                 <td class="c"><{$tad_meeting_chairman}></td>
             </tr>
         </tbody>

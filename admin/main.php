@@ -117,7 +117,7 @@ function get_tad_meeting_cate_path($the_tad_meeting_cate_sn = '', $include_self 
     global $xoopsDB;
 
     $arr[0]['tad_meeting_cate_sn'] = '0';
-    $arr[0]['tad_meeting_cate_title'] = "<i class='fa fa-home'></i>";
+    $arr[0]['tad_meeting_cate_title'] = "&#xf015;";
     $arr[0]['sub'] = get_tad_meeting_cate_sub(0);
     if (!empty($the_tad_meeting_cate_sn)) {
         $tbl = $xoopsDB->prefix('tad_meeting_cate');

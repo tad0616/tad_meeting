@@ -1,5 +1,6 @@
-<{if $all_content}>
+<h2 class="sr-only">List Meeting</h2>
 
+<{if $all_content}>
     <div id="tad_meeting_save_msg"></div>
     <table class="table table-striped table-hover">
         <thead>
