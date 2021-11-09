@@ -1,4 +1,8 @@
-tad_meeting 2.4 (Released 2021-08-01)
+tad_meeting 2.5 (Released on 2021-08-24)
+====================================
+1.Search function security correction
+
+tad_meeting 2.4 (Released on 2021-08-01)
 ====================================
 1.Compliant with the new Accessibility AA Standard 2021/07
 2.Merge BootStrap3 and 4 templates
