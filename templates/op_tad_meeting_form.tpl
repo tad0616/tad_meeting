@@ -21,7 +21,7 @@
 
 <{if $create_meeting}>
     <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
-        <div class="form-group row">
+        <div class="form-group row mb-3">
             <!--開會日期 datetime-->
             <label class="col-sm-2 control-label col-form-label text-sm-right">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATETIME}>
@@ -45,7 +45,7 @@
         </div>
 
         <!--會議名稱-->
-        <div class="form-group row">
+        <div class="form-group row mb-3">
             <label class="col-sm-2 control-label col-form-label text-sm-right">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_TITLE}>
             </label>
@@ -55,7 +55,7 @@
         </div>
 
         <!--會議地點-->
-        <div class="form-group row">
+        <div class="form-group row mb-3">
             <label class="col-sm-2 control-label col-form-label text-sm-right">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_PLACE}>
             </label>
@@ -77,7 +77,7 @@
         </div>
 
         <!--相關補充說明-->
-        <div class="form-group row">
+        <div class="form-group row mb-3">
             <label class="col-sm-2 control-label col-form-label text-sm-right">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_NOTE}>
             </label>

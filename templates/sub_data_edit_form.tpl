@@ -36,7 +36,7 @@
     <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form" <{if !$tad_meeting_data_sn}>style="display: none;"<{/if}>>
         <div class="alert alert-info">
             <!--處室-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-2 control-label col-form-label text-sm-right">
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_UNIT}>
                 </label>
@@ -64,7 +64,7 @@
             </div>
 
             <!--報告標題-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-2 control-label col-form-label text-sm-right">
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_TITLE}>
                 </label>
@@ -74,7 +74,7 @@
             </div>
 
             <!--報告內容-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-2 control-label col-form-label text-sm-right">
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_CONTENT}>
                 </label>
@@ -84,7 +84,7 @@
             </div>
 
             <!--上傳-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-2 control-label col-form-label text-sm-right">
                     <{$smarty.const._MD_TADMEETIN_UP_TAD_MEETING_DATA_SN}>
                 </label>

@@ -24,8 +24,8 @@
         <{foreach from=$all_data_content item=data}>
             <div id="tr_<{$data.tad_meeting_data_sn}>">
                 <!--報告標題-->
-                <div class="pull-right" style="font-size: 0.9rem; color: rgb(43, 90, 151);">
-                    <div class="text-right">
+                <div class="pull-right float-right pull-end" style="font-size: 0.9rem; color: rgb(43, 90, 151);">
+                    <div class="text-right text-end">
                         <!--處室-->
                         <{$data.tad_meeting_data_unit}>
                         <!--職務-->
@@ -33,7 +33,7 @@
                         <!--報告者-->
                         <{$data.tad_meeting_data_uid_name}>
                     </div>
-                    <div class="text-right">
+                    <div class="text-right text-end">
                         <{$data.tad_meeting_data_date}>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <{$smarty.const._MD_TADMEETIN_NONE}>
                     <{/if}>
                     <{if $smarty.session.tad_meeting_adm or $now_uid==$data.tad_meeting_data_uid}>
-                        <div class="text-right">
+                        <div class="text-right text-end">
                             <a href="javascript:delete_tad_meeting_data_func(<{$data.tad_meeting_data_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
                             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?tad_meeting_sn=<{$tad_meeting_sn}>&tad_meeting_data_sn=<{$data.tad_meeting_data_sn}>#tad_meeting_data_form" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
                             <{if $sort_meeting}>

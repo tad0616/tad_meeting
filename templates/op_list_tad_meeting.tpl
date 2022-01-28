@@ -1,4 +1,4 @@
-<h2 class="sr-only">List Meeting</h2>
+<h2 class="sr-only visually-hidden">List Meeting</h2>
 
 <{if $all_content}>
     <div id="tad_meeting_save_msg"></div>
@@ -77,7 +77,7 @@
     </table>
 
     <{if $smarty.session.tad_meeting_adm or $create_meeting}>
-        <div class="text-right">
+        <div class="text-right text-end">
             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         </div>
     <{/if}>

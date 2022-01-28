@@ -221,7 +221,7 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
 
     $TadUpFiles = new TadUpFiles('tad_meeting');
     $TadUpFiles->set_col('tad_meeting_data_sn', $tad_meeting_data_sn);
-    $up_tad_meeting_data_sn_form = $TadUpFiles->upform(true, 'up_tad_meeting_data_sn', '');
+    $up_tad_meeting_data_sn_form = $TadUpFiles->upform('list', 'up_tad_meeting_data_sn', '');
     $xoopsTpl->assign('up_tad_meeting_data_sn_form', $up_tad_meeting_data_sn_form);
 
     //加入Token安全機制

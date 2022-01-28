@@ -4,7 +4,9 @@
             <div id="save_msg"></div>
             <{$ztree_code}>
 
-            <a href="main.php?op=tad_meeting_cate_form" class="btn btn-info btn-block"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD_CATE}></a>
+            <div class="d-grid gap-2">
+                <a href="main.php?op=tad_meeting_cate_form" class="btn btn-info btn-block"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD_CATE}></a>
+            </div>
 
             <{if $tad_meeting_cate_sn > 0}>
                 <div class="alert alert-info" style="margin-top:20px;">
@@ -25,7 +27,7 @@
                         <div class="col-sm-4">
                             <h1 class="my"><{$cate.tad_meeting_cate_title}></h1>
                         </div>
-                        <div class="col-sm-8 text-right">
+                        <div class="col-sm-8 text-right text-end">
                             <div style="margin-top: 10px;">
                                 <a href="javascript:delete_tad_meeting_cate_func(<{$cate.tad_meeting_cate_sn}>);" class="btn btn-danger <{if $cate_count.$tad_meeting_cate_sn > 0}>disabled<{/if}>"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
                                 <a href="main.php?op=tad_meeting_cate_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>

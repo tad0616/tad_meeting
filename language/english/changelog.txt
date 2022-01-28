@@ -1,3 +1,8 @@
+tad_meeting 2.6 (released on 2022-01-28)
+====================================
+1.Fix the problem that there is no permission to go to the backend directly
+2. Support BootStrap5
+
 tad_meeting 2.5 (Released on 2021-08-24)
 ====================================
 1.Search function security correction

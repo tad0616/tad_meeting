@@ -2,7 +2,7 @@
     <div class="row" style="margin: 10px 0px;">
         <div class="col-sm-4">
             <!--分類標題-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-3 control-label col-form-label text-sm-right">
                     <{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_TITLE}>
                 </label>
@@ -12,7 +12,7 @@
             </div>
 
             <!--分類說明-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-3 control-label col-form-label text-sm-right">
                     <{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_DESC}>
                 </label>
@@ -22,7 +22,7 @@
             </div>
 
             <!--分類排序-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-3 control-label col-form-label text-sm-right">
                     <{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_SORT}>
                 </label>
@@ -32,7 +32,7 @@
             </div>
 
             <!--狀態-->
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label class="col-sm-3 control-label col-form-label text-sm-right">
                     <{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_ENABLE}>
                 </label>
