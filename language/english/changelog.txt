@@ -1,3 +1,8 @@
+tad_meeting 2.7 (released on 2022-08-13)
+====================================
+1. CSS reduce the introduction of external style files
+2. Fixed font
+
 tad_meeting 2.6 (released on 2022-01-28)
 ====================================
 1.Fix the problem that there is no permission to go to the backend directly
