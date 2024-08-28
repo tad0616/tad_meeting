@@ -91,17 +91,15 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 //新增資料到tad_meeting中
 function insert_tad_meeting()
 {
-    global $xoopsDB, $xoopsUser;
-
-    $myts = \MyTextSanitizer::getInstance();
+    global $xoopsDB;
 
     $tad_meeting_sn = Request::getInt('tad_meeting_sn');
-    $tad_meeting_title = $myts->addSlashes(Request::getString('tad_meeting_title'));
+    $tad_meeting_title = $xoopsDB->escape(Request::getString('tad_meeting_title'));
     $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
-    $tad_meeting_datetime = $myts->addSlashes(Request::getString('tad_meeting_datetime'));
-    $tad_meeting_place = $myts->addSlashes(Request::getString('tad_meeting_place'));
-    $tad_meeting_chairman = $myts->addSlashes(Request::getString('tad_meeting_chairman'));
-    $tad_meeting_note = $myts->addSlashes(Request::getString('tad_meeting_note'));
+    $tad_meeting_datetime = $xoopsDB->escape(Request::getString('tad_meeting_datetime'));
+    $tad_meeting_place = $xoopsDB->escape(Request::getString('tad_meeting_place'));
+    $tad_meeting_chairman = $xoopsDB->escape(Request::getString('tad_meeting_chairman'));
+    $tad_meeting_note = $xoopsDB->escape(Request::getString('tad_meeting_note'));
 
     //判斷目前使用者是否有：建立會議
     $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
@@ -141,17 +139,15 @@ function insert_tad_meeting()
 //更新tad_meeting某一筆資料
 function update_tad_meeting($tad_meeting_sn = '')
 {
-    global $xoopsDB, $xoopsUser;
-
-    $myts = \MyTextSanitizer::getInstance();
+    global $xoopsDB;
 
     $tad_meeting_sn = Request::getInt('tad_meeting_sn');
-    $tad_meeting_title = $myts->addSlashes(Request::getString('tad_meeting_title'));
+    $tad_meeting_title = $xoopsDB->escape(Request::getString('tad_meeting_title'));
     $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
-    $tad_meeting_datetime = $myts->addSlashes(Request::getString('tad_meeting_datetime'));
-    $tad_meeting_place = $myts->addSlashes(Request::getString('tad_meeting_place'));
-    $tad_meeting_chairman = $myts->addSlashes(Request::getString('tad_meeting_chairman'));
-    $tad_meeting_note = $myts->addSlashes(Request::getString('tad_meeting_note'));
+    $tad_meeting_datetime = $xoopsDB->escape(Request::getString('tad_meeting_datetime'));
+    $tad_meeting_place = $xoopsDB->escape(Request::getString('tad_meeting_place'));
+    $tad_meeting_chairman = $xoopsDB->escape(Request::getString('tad_meeting_chairman'));
+    $tad_meeting_note = $xoopsDB->escape(Request::getString('tad_meeting_note'));
 
     $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
     if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {

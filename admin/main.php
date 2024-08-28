@@ -347,7 +347,7 @@ function tad_meeting_cate_max_sort()
 //新增資料到tad_meeting_cate中
 function insert_tad_meeting_cate()
 {
-    global $xoopsDB, $xoopsUser;
+    global $xoopsDB;
     if (!$_SESSION['tad_meeting_adm']) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
@@ -358,12 +358,10 @@ function insert_tad_meeting_cate()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = \MyTextSanitizer::getInstance();
-
     $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
     $tad_meeting_cate_parent_sn = Request::getInt('tad_meeting_cate_parent_sn');
-    $tad_meeting_cate_title = $myts->addSlashes(Request::getString('tad_meeting_cate_title'));
-    $tad_meeting_cate_desc = $myts->addSlashes(Request::getString('tad_meeting_cate_desc'));
+    $tad_meeting_cate_title = $xoopsDB->escape(Request::getString('tad_meeting_cate_title'));
+    $tad_meeting_cate_desc = $xoopsDB->escape(Request::getString('tad_meeting_cate_desc'));
     $tad_meeting_cate_sort = Request::getInt('tad_meeting_cate_sort');
     $tad_meeting_cate_enable = Request::getInt('tad_meeting_cate_enable');
 
@@ -411,8 +409,8 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
 
     $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
     $tad_meeting_cate_parent_sn = Request::getInt('tad_meeting_cate_parent_sn');
-    $tad_meeting_cate_title = $myts->addSlashes(Request::getString('tad_meeting_cate_title'));
-    $tad_meeting_cate_desc = $myts->addSlashes(Request::getString('tad_meeting_cate_desc'));
+    $tad_meeting_cate_title = $xoopsDB->escape(Request::getString('tad_meeting_cate_title'));
+    $tad_meeting_cate_desc = $xoopsDB->escape(Request::getString('tad_meeting_cate_desc'));
     $tad_meeting_cate_sort = Request::getInt('tad_meeting_cate_sort');
     $tad_meeting_cate_enable = Request::getInt('tad_meeting_cate_enable');
 

@@ -237,6 +237,9 @@ function tad_meeting_data_form($tad_meeting_sn = '', $tad_meeting_data_sn = '')
     foreach ($meeting_unit as $value) {
         $meeting_unit_arr[] = trim($value);
     }
+    if ($_GET['test']) {
+        Utility::dd($xoopsModuleConfig);
+    }
     $xoopsTpl->assign('meeting_unit', $meeting_unit_arr);
 
     $meeting_job_arr = [];
@@ -294,12 +297,11 @@ function insert_tad_meeting_data()
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $myts = \MyTextSanitizer::getInstance();
     $tad_meeting_data_sn = Request::getInt('tad_meeting_data_sn');
-    $tad_meeting_data_unit = $myts->addSlashes(Request::getString('tad_meeting_data_unit'));
-    $tad_meeting_data_job = $myts->addSlashes(Request::getString('tad_meeting_data_job'));
-    $tad_meeting_data_title = $myts->addSlashes(Request::getString('tad_meeting_data_title'));
-    $tad_meeting_data_content = $myts->addSlashes(Request::getString('tad_meeting_data_content'));
+    $tad_meeting_data_unit = $xoopsDB->escape(Request::getString('tad_meeting_data_unit'));
+    $tad_meeting_data_job = $xoopsDB->escape(Request::getString('tad_meeting_data_job'));
+    $tad_meeting_data_title = $xoopsDB->escape(Request::getString('tad_meeting_data_title'));
+    $tad_meeting_data_content = $xoopsDB->escape(Request::getString('tad_meeting_data_content'));
 
     //取得使用者編號
     $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
@@ -363,10 +365,10 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $tad_meeting_data_unit = $myts->addSlashes(Request::getString('tad_meeting_data_unit'));
-    $tad_meeting_data_job = $myts->addSlashes(Request::getString('tad_meeting_data_job'));
-    $tad_meeting_data_title = $myts->addSlashes(Request::getString('tad_meeting_data_title'));
-    $tad_meeting_data_content = $myts->addSlashes(Request::getString('tad_meeting_data_content'));
+    $tad_meeting_data_unit = $xoopsDB->escape(Request::getString('tad_meeting_data_unit'));
+    $tad_meeting_data_job = $xoopsDB->escape(Request::getString('tad_meeting_data_job'));
+    $tad_meeting_data_title = $xoopsDB->escape(Request::getString('tad_meeting_data_title'));
+    $tad_meeting_data_content = $xoopsDB->escape(Request::getString('tad_meeting_data_content'));
     //取得使用者編號
     $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
     if (empty($tad_meeting_data_uid) and $xoopsUser) {

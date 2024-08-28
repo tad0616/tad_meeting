@@ -90,10 +90,13 @@ foreach ($meeting_data as $i => $data) {
 
 //內容設定
 $filename = str_replace(" ", "", $filename);
-$filename = iconv("UTF-8", "Big5", $filename);
+// $filename = iconv("UTF-8", "Big5", $filename);
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($PHPWord, 'Word2007');
 header('Cache-Control: max-age=0');
 header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
 header("Content-Disposition: attachment;filename={$filename}.docx");
 
-$objWriter->save('php://output');
+// $objWriter->save('php://output');
+$objWriter->save(XOOPS_ROOT_PATH . "/uploads/tad_meeting/tmp/{$filename}.docx");
+header("location: " . XOOPS_URL . "/uploads/tad_meeting/tmp/{$filename}.docx");
+exit;

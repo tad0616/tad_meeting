@@ -6,7 +6,11 @@ if (!class_exists('XoopsModules\Tad_meeting\Update')) {
 }
 function xoops_module_update_tad_meeting($module, $old_version)
 {
-    global $xoopsDB;
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting');
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting/file');
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting/tmp');
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting/image');
+    Utility::mk_dir(XOOPS_ROOT_PATH . '/uploads/tad_meeting/image/.thumbs');
 
     //新增檔案欄位
     if (Update::chk_fc_tag()) {

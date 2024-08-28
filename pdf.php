@@ -71,5 +71,8 @@ foreach ($meeting_data as $data) {
         $pdf->Ln(2);
     }
 }
-$filename = iconv('UTF-8', 'Big5', $filename);
-$pdf->Output(" {$filename}.pdf", 'D');
+// $filename = iconv('UTF-8', 'Big5', $filename);
+// $pdf->Output(" {$filename}.pdf", 'D');
+$pdf->Output(XOOPS_ROOT_PATH . "/uploads/tad_meeting/tmp/{$filename}.pdf", 'F');
+header("location: " . XOOPS_URL . "/uploads/tad_meeting/tmp/{$filename}.pdf");
+exit;

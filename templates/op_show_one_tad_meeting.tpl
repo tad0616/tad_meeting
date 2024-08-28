@@ -55,11 +55,11 @@
     </div>
 
     <!--列出所有資料-->
-    <{includeq file="$xoops_rootpath/modules/tad_meeting/templates/sub_data_list.tpl"}>
+    <{include file="$xoops_rootpath/modules/tad_meeting/templates/sub_data_list.tpl"}>
 
 <{/if}>
 
 <!-- 判斷目前使用者是否有：填寫會議內容 -->
 <{if $post_meeting}>
-    <{includeq file="$xoops_rootpath/modules/tad_meeting/templates/sub_data_edit_form.tpl"}>
+    <{include file="$xoops_rootpath/modules/tad_meeting/templates/sub_data_edit_form.tpl"}>
 <{/if}>

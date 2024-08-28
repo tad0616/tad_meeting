@@ -41,12 +41,12 @@
             </div>
 
             <{if $now_op=="tad_meeting_cate_form"}>
-                <{includeq file="$xoops_rootpath/modules/tad_meeting/templates/op_`$now_op`.tpl"}>
+                <{include file="$xoops_rootpath/modules/tad_meeting/templates/op_`$now_op`.tpl"}>
             <{elseif $now_op=="tad_meeting_form"}>
-                <{includeq file="$xoops_rootpath/modules/tad_meeting/templates/op_`$now_op`.tpl"}>
+                <{include file="$xoops_rootpath/modules/tad_meeting/templates/op_`$now_op`.tpl"}>
             <{elseif $now_op=="list_tad_meeting"}>
                 <form action="main.php" method="post" class="form-horizontal" role="form">
-                    <{includeq file="$xoops_rootpath/modules/tad_meeting/templates/op_`$now_op`.tpl"}>
+                    <{include file="$xoops_rootpath/modules/tad_meeting/templates/op_`$now_op`.tpl"}>
                 </form>
             <{else}>
                 <div class="alert alert-danger text-center">
