@@ -64,7 +64,7 @@
     </div>
 <{else}>
     <{if $smarty.session.tad_meeting_adm or $create_meeting}>
-        <div class="jumbotron text-center">
+        <div class="jumbotron bg-light p-5 rounded-lg m-3 text-center">
             <h3><{$smarty.const._TAD_EMPTY}></h3>
         </div>
     <{/if}>

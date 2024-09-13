@@ -84,7 +84,7 @@
 
     <{$bar}>
 <{else}>
-    <div class="jumbotron text-center">
+    <div class="jumbotron bg-light p-5 rounded-lg m-3 text-center">
         <{if $smarty.session.tad_meeting_adm or $create_meeting}>
             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         <{else}>
