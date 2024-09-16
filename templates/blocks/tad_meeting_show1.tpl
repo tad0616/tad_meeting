@@ -1,4 +1,4 @@
-<{if $block}>
+<{if $block|default:false}>
     <ul class="vertical_menu">
         <{foreach from=$block item=data}>
             <li>

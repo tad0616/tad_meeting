@@ -1,4 +1,4 @@
-<{if $all_data_content}>
+<{if $all_data_content|default:false}>
     <{if $smarty.session.tad_meeting_adm or $create_meeting}>
         <{$delete_tad_meeting_data_func}>
     <{/if}>
@@ -42,7 +42,7 @@
                 </h3>
 
                 <div style="line-height: 1.8; padding: 10px 0px 0px 48px; text-align: justify;">
-                    <{if $data.tad_meeting_data_content_html}>
+                    <{if $data.tad_meeting_data_content_html|default:false}>
                         <{$data.tad_meeting_data_content_html}>
                     <{else}>
                         <{$smarty.const._MD_TADMEETIN_NONE}>
@@ -51,7 +51,7 @@
                         <div class="text-right text-end">
                             <a href="javascript:delete_tad_meeting_data_func(<{$data.tad_meeting_data_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
                             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?tad_meeting_sn=<{$tad_meeting_sn}>&tad_meeting_data_sn=<{$data.tad_meeting_data_sn}>#tad_meeting_data_form" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
-                            <{if $sort_meeting}>
+                            <{if $sort_meeting|default:false}>
                                 <img src="<{$xoops_url}>/modules/tadtools/treeTable/images/updown_s.png" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._TAD_SORTABLE}>" title="<{$smarty.const._TAD_SORTABLE}>">
                             <{/if}>
                         </div>

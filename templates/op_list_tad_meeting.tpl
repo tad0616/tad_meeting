@@ -1,6 +1,6 @@
 <h2 class="sr-only visually-hidden">List Meeting</h2>
 
-<{if $all_content}>
+<{if $all_content|default:false}>
     <div id="tad_meeting_save_msg"></div>
     <table class="table table-striped table-hover">
         <thead>
@@ -25,7 +25,7 @@
                     <!--會議主席-->
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}>
                 </th>
-                <{if $smarty.session.tad_meeting_adm}>
+                <{if $smarty.session.tad_meeting_adm|default:false}>
                     <th class="c"><{$smarty.const._TAD_FUNCTION}></th>
                 <{/if}>
             </tr>
@@ -42,7 +42,7 @@
 
                     <td>
                         <!--會議類別-->
-                        <{if $smarty.session.tad_meeting_adm}>
+                        <{if $smarty.session.tad_meeting_adm|default:false}>
                             <a href="<{$xoops_url}>/modules/tad_meeting/admin/main.php?tad_meeting_cate_sn=<{$data.tad_meeting_cate_sn}>"><{$data.tad_meeting_cate_title}></a>
                         <{else}>
                             <{$data.tad_meeting_cate_title}>
@@ -65,7 +65,7 @@
                         <{$data.tad_meeting_chairman}>
                     </td>
 
-                    <{if $smarty.session.tad_meeting_adm}>
+                    <{if $smarty.session.tad_meeting_adm|default:false}>
                         <td>
                             <a href="javascript:delete_tad_meeting_func(<{$data.tad_meeting_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
                             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$data.tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>

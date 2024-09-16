@@ -10,7 +10,7 @@
 </h2>
 
 <!--相關補充說明-->
-<{if $tad_meeting_note}>
+<{if $tad_meeting_note|default:false}>
     <div class="row">
         <div class="col-sm-12">
             <div class="alert alert-info">
@@ -21,7 +21,7 @@
 <{/if}>
 
 <!-- 判斷目前使用者是否有：觀看會議內容 -->
-<{if $view_meeting}>
+<{if $view_meeting|default:false}>
     <table class="table table-bordered table-hover table-condensed table-sm bg-white">
         <tbody>
             <tr>
@@ -60,6 +60,6 @@
 <{/if}>
 
 <!-- 判斷目前使用者是否有：填寫會議內容 -->
-<{if $post_meeting}>
+<{if $post_meeting|default:false}>
     <{include file="$xoops_rootpath/modules/tad_meeting/templates/sub_data_edit_form.tpl"}>
 <{/if}>

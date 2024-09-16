@@ -19,7 +19,7 @@
     });
 </script>
 
-<{if $create_meeting}>
+<{if $create_meeting|default:false}>
     <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
         <div class="form-group row mb-3">
             <!--開會日期 datetime-->
