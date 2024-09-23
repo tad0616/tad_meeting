@@ -1,4 +1,4 @@
-<form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
+<form action="<{$action|default:''}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
     <div class="row" style="margin: 10px 0px;">
         <div class="col-sm-4">
             <!--分類標題-->
@@ -7,7 +7,7 @@
                     <{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_TITLE}>
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="tad_meeting_cate_title" id="tad_meeting_cate_title" class="form-control validate[required]" value="<{$tad_meeting_cate_title}>" placeholder="<{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_TITLE}>">
+                    <input type="text" name="tad_meeting_cate_title" id="tad_meeting_cate_title" class="form-control validate[required]" value="<{$tad_meeting_cate_title|default:''}>" placeholder="<{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_TITLE}>">
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                     <{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_DESC}>
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="tad_meeting_cate_desc" id="tad_meeting_cate_desc" class="form-control " value="<{$tad_meeting_cate_desc}>" placeholder="<{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_DESC}>">
+                    <input type="text" name="tad_meeting_cate_desc" id="tad_meeting_cate_desc" class="form-control " value="<{$tad_meeting_cate_desc|default:''}>" placeholder="<{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_DESC}>">
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                     <{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_SORT}>
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="tad_meeting_cate_sort" id="tad_meeting_cate_sort" class="form-control " value="<{$tad_meeting_cate_sort}>" placeholder="<{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_SORT}>">
+                    <input type="text" name="tad_meeting_cate_sort" id="tad_meeting_cate_sort" class="form-control " value="<{$tad_meeting_cate_sort|default:''}>" placeholder="<{$smarty.const._MA_TADMEETIN_TAD_MEETING_CATE_SORT}>">
                 </div>
             </div>
 
@@ -51,27 +51,27 @@
 
         <div class="col-sm-2">
             <label><{$smarty.const._MA_TADMEETIN_CAN_ACCESS_GROUPS}></label>
-            <{$enable_group}>
+            <{$enable_group|default:''}>
         </div>
 
         <div class="col-sm-2">
             <label><{$smarty.const._MA_TADMEETIN_CAN_CREATE_GROUPS}></label>
-            <{$enable_create_group}>
+            <{$enable_create_group|default:''}>
         </div>
         <div class="col-sm-2">
             <label><{$smarty.const._MA_TADMEETIN_CAN_POST_GROUPS}></label>
-            <{$enable_post_group}>
+            <{$enable_post_group|default:''}>
         </div>
         <div class="col-sm-2">
             <label><{$smarty.const._MA_TADMEETIN_CAN_SORT_GROUPS}></label>
-            <{$enable_sort_group}>
+            <{$enable_sort_group|default:''}>
         </div>
     </div>
 
     <div class="text-center">
-        <input type='hidden' name="tad_meeting_cate_sn" value="<{$tad_meeting_cate_sn}>">
-        <{$token_form}>
-        <input type="hidden" name="op" value="<{$next_op}>">
+        <input type='hidden' name="tad_meeting_cate_sn" value="<{$tad_meeting_cate_sn|default:''}>">
+        <{$token_form|default:''}>
+        <input type="hidden" name="op" value="<{$next_op|default:''}>">
         <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
     </div>
 </form>

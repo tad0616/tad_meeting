@@ -33,7 +33,7 @@
         <button type="button" id="data_edit_form" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_REPORT}></button>
     </div>
 
-    <form action="<{$action}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form" <{if !$tad_meeting_data_sn}>style="display: none;"<{/if}>>
+    <form action="<{$action|default:''}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form" <{if !$tad_meeting_data_sn}>style="display: none;"<{/if}>>
         <div class="alert alert-info">
             <!--處室-->
             <div class="form-group row mb-3">
@@ -44,7 +44,7 @@
                     <select name="tad_meeting_data_unit" id="tad_meeting_data_unit" class="form-control" size=1>
                         <option value="" <{if $tad_meeting_data_unit == ""}>selected="selected"<{/if}>></option>
                         <{foreach from=$meeting_unit item=unit}>
-                        <option value="<{$unit}>" <{if $tad_meeting_data_unit == $unit}>selected="selected"<{/if}>><{$unit}></option>
+                        <option value="<{$unit|default:''}>" <{if $tad_meeting_data_unit == $unit}>selected="selected"<{/if}>><{$unit|default:''}></option>
                         <{/foreach}>
                     </select>
                 </div>
@@ -57,7 +57,7 @@
                     <select name="tad_meeting_data_job" id="tad_meeting_data_job" class="form-control" size=1>
                         <option value="" <{if $tad_meeting_data_job == ""}>selected="selected"<{/if}>></option>
                         <{foreach from=$meeting_job item=job}>
-                        <option value="<{$job}>" <{if $tad_meeting_data_job == $job}>selected="selected"<{/if}>><{$job}></option>
+                        <option value="<{$job|default:''}>" <{if $tad_meeting_data_job == $job}>selected="selected"<{/if}>><{$job|default:''}></option>
                         <{/foreach}>
                     </select>
                 </div>
@@ -69,7 +69,7 @@
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_TITLE}>
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" name="tad_meeting_data_title" id="tad_meeting_data_title" class="form-control " value="<{$tad_meeting_data_title}>" placeholder="<{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_TITLE}>">
+                    <input type="text" name="tad_meeting_data_title" id="tad_meeting_data_title" class="form-control " value="<{$tad_meeting_data_title|default:''}>" placeholder="<{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_TITLE}>">
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_CONTENT}>
                 </label>
                 <div class="col-sm-10">
-                    <textarea name="tad_meeting_data_content" rows=8 id="tad_meeting_data_content" class="form-control " placeholder="<{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_CONTENT}>"><{$tad_meeting_data_content}></textarea>
+                    <textarea name="tad_meeting_data_content" rows=8 id="tad_meeting_data_content" class="form-control " placeholder="<{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_CONTENT}>"><{$tad_meeting_data_content|default:''}></textarea>
                 </div>
             </div>
 
@@ -89,17 +89,17 @@
                     <{$smarty.const._MD_TADMEETIN_UP_TAD_MEETING_DATA_SN}>
                 </label>
                 <div class="col-sm-10">
-                    <{$up_tad_meeting_data_sn_form}>
+                    <{$up_tad_meeting_data_sn_form|default:''}>
                 </div>
             </div>
 
             <div class="text-center">
-                <input type="hidden" name="tad_meeting_data_sort" id="tad_meeting_data_sort" value="<{$tad_meeting_data_sort}>">
-                <input type='hidden' name="tad_meeting_data_uid" value="<{$tad_meeting_data_uid}>">
-                <input type='hidden' name="tad_meeting_sn" value="<{$tad_meeting_sn}>">
-                <input type='hidden' name="tad_meeting_data_sn" value="<{$tad_meeting_data_sn}>">
-                <{$token_form}>
-                <input type="hidden" name="op" value="<{$next_op}>">
+                <input type="hidden" name="tad_meeting_data_sort" id="tad_meeting_data_sort" value="<{$tad_meeting_data_sort|default:''}>">
+                <input type='hidden' name="tad_meeting_data_uid" value="<{$tad_meeting_data_uid|default:''}>">
+                <input type='hidden' name="tad_meeting_sn" value="<{$tad_meeting_sn|default:''}>">
+                <input type='hidden' name="tad_meeting_data_sn" value="<{$tad_meeting_data_sn|default:''}>">
+                <{$token_form|default:''}>
+                <input type="hidden" name="op" value="<{$next_op|default:''}>">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
             </div>
         </div>

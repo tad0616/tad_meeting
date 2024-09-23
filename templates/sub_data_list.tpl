@@ -1,15 +1,15 @@
 <{if $all_data_content|default:false}>
     <{if $smarty.session.tad_meeting_adm or $create_meeting}>
-        <{$delete_tad_meeting_data_func}>
+        <{$delete_tad_meeting_data_func|default:''}>
     <{/if}>
 
     <{if $smarty.session.tad_meeting_adm or $sort_meeting}>
-        <{$tad_meeting_data_jquery_ui}>
+        <{$tad_meeting_data_jquery_ui|default:''}>
         <script type="text/javascript">
             $(document).ready(function(){
                 $("#tad_meeting_data_sort").sortable({ opacity: 0.6, cursor: "move", update: function() {
                     var order = $(this).sortable("serialize");
-                    $.post("<{$xoops_url}>/modules/tad_meeting/tad_meeting_data_save_sort.php", order + "&op=update_tad_meeting_data_sort&tad_meeting_cate_sn=<{$tad_meeting_cate_sn}>", function(theResponse){
+                    $.post("<{$xoops_url}>/modules/tad_meeting/tad_meeting_data_save_sort.php", order + "&op=update_tad_meeting_data_sort&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>", function(theResponse){
                         $("#tad_meeting_data_save_msg").html(theResponse);
                     });
                 }
@@ -50,7 +50,7 @@
                     <{if $smarty.session.tad_meeting_adm or $now_uid==$data.tad_meeting_data_uid}>
                         <div class="text-right text-end">
                             <a href="javascript:delete_tad_meeting_data_func(<{$data.tad_meeting_data_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
-                            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?tad_meeting_sn=<{$tad_meeting_sn}>&tad_meeting_data_sn=<{$data.tad_meeting_data_sn}>#tad_meeting_data_form" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
+                            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?tad_meeting_sn=<{$tad_meeting_sn|default:''}>&tad_meeting_data_sn=<{$data.tad_meeting_data_sn}>#tad_meeting_data_form" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
                             <{if $sort_meeting|default:false}>
                                 <img src="<{$xoops_url}>/modules/tadtools/treeTable/images/updown_s.png" style="cursor: s-resize;margin:0px 4px;" alt="<{$smarty.const._TAD_SORTABLE}>" title="<{$smarty.const._TAD_SORTABLE}>">
                             <{/if}>
