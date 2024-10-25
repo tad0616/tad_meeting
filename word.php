@@ -26,7 +26,7 @@ $PHPWord = new \PhpOffice\PhpWord\PhpWord();
 
 $PHPWord->setDefaultFontName('標楷體'); //設定預設字型
 $PHPWord->setDefaultFontSize(11); //設定預設字型大小
-$section = $PHPWord->addSection($sectionStyle); //建立一個頁面
+$section = $PHPWord->addSection(); //建立一個頁面
 
 $h1Style = ['color' => '000000', 'size' => 18, 'bold' => true]; //文字樣式設定
 $h1aragraph = ['align' => 'both', 'spaceAfter' => 300]; //段落設定

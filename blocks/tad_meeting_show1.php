@@ -8,11 +8,15 @@ function tad_meeting_show1($options)
 
     //{$options[0]} : 顯示資料數
     $today = date('Y-m-d 00:00:00');
-    $after_today = $options[1] ? "where tad_meeting_datetime >= '$today'" : '';
+    $after_today = $options[1] ? "WHERE tad_meeting_datetime >= ?" : '';
 
-    $limit = empty($options[0]) ? 5 : $options[0];
-    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_meeting') . "` $after_today ORDER BY `tad_meeting_datetime` DESC limit 0,$limit";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $limit = empty($options[0]) ? 5 : (int) $options[0];
+    $sql = "SELECT * FROM `" . $xoopsDB->prefix('tad_meeting') . "` $after_today ORDER BY `tad_meeting_datetime` DESC LIMIT 0, ?";
+
+    $params = $options[1] ? [$today, $limit] : [$limit];
+    $types = $options[1] ? 'si' : 'i';
+    $result = Utility::query($sql, $types, $params) or Utility::web_error($sql, __FILE__, __LINE__);
+
     $block = [];
     $i = 0;
     while (false !== ($all = $xoopsDB->fetchArray($result))) {

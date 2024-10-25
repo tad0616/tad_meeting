@@ -1,5 +1,6 @@
 <?php
 $modversion = [];
+global $xoopsConfig;
 
 //---模組基本資訊---//
 $modversion['name'] = _MI_TADMEETIN_NAME;
@@ -24,11 +25,12 @@ $modversion['min_php'] = '5.4';
 $modversion['min_xoops'] = '2.5';
 
 //---paypal資訊---//
-$modversion['paypal'] = [];
-$modversion['paypal']['business'] = 'tad0616@gmail.com';
-$modversion['paypal']['item_name'] = 'Donation :' . _MI_TADMEETIN_AUTHOR;
-$modversion['paypal']['amount'] = 0;
-$modversion['paypal']['currency_code'] = 'USD';
+$modversion['paypal'] = [
+    'business' => 'tad0616@gmail.com',
+    'item_name' => 'Donation : ' . _MI_TAD_WEB,
+    'amount' => 0,
+    'currency_code' => 'USD',
+];
 
 //---安裝設定---//
 $modversion['onInstall'] = 'include/onInstall.php';
@@ -40,10 +42,12 @@ $modversion['system_menu'] = 1;
 
 //---資料表架構---//
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
-$modversion['tables'][1] = 'tad_meeting';
-$modversion['tables'][2] = 'tad_meeting_cate';
-$modversion['tables'][3] = 'tad_meeting_data';
-$modversion['tables'][4] = 'tad_meeting_files_center';
+$modversion['tables'] = [
+    'tad_meeting',
+    'tad_meeting_cate',
+    'tad_meeting_data',
+    'tad_meeting_files_center',
+];
 
 //---管理介面設定---//
 $modversion['hasAdmin'] = 1;
@@ -58,70 +62,26 @@ $i = 0;
 $modversion['hasSearch'] = 1;
 $modversion['search']['file'] = 'include/tad_meeting_search.php';
 $modversion['search']['func'] = 'tad_meeting_search';
+$modversion['templates'] = [
+    ['file' => 'tad_meeting_admin.tpl', 'description' => 'tad_meeting_admin.tpl'],
+    ['file' => 'tad_meeting_index.tpl', 'description' => 'tad_meeting_index.tpl'],
+    ['file' => 'tad_meeting_power.tpl', 'description' => 'tad_meeting_power.tpl'],
+];
 
-//---樣板設定---//
-$i = 0;
-$modversion['templates'][$i]['file'] = 'tad_meeting_admin.tpl';
-$modversion['templates'][$i]['description'] = 'tad_meeting_admin.tpl';
+$modversion['blocks'][] = [
+    'file' => 'tad_meeting_show1.php',
+    'name' => _MI_TAD_MEETING_SHOW1_BLOCK_NAME,
+    'description' => _MI_TAD_MEETING_SHOW1_BLOCK_DESC,
+    'show_func' => 'tad_meeting_show1',
+    'template' => 'tad_meeting_show1.tpl',
+    'edit_func' => 'tad_meeting_show1_edit',
+    'options' => '5|0',
+];
 
-$i++;
-$modversion['templates'][$i]['file'] = 'tad_meeting_index.tpl';
-$modversion['templates'][$i]['description'] = 'tad_meeting_index.tpl';
-
-$i++;
-$modversion['templates'][$i]['file'] = 'tad_meeting_power.tpl';
-$modversion['templates'][$i]['description'] = 'tad_meeting_power.tpl';
-
-//---區塊設定---//
-$i = 0;
-$i++;
-$modversion['blocks'][$i]['file'] = 'tad_meeting_show1.php';
-$modversion['blocks'][$i]['name'] = _MI_TAD_MEETING_SHOW1_BLOCK_NAME;
-$modversion['blocks'][$i]['description'] = _MI_TAD_MEETING_SHOW1_BLOCK_DESC;
-$modversion['blocks'][$i]['show_func'] = 'tad_meeting_show1';
-$modversion['blocks'][$i]['template'] = 'tad_meeting_show1.tpl';
-$modversion['blocks'][$i]['edit_func'] = 'tad_meeting_show1_edit';
-$modversion['blocks'][$i]['options'] = '5|0';
-
-//---偏好設定---//
-$i = 0;
-$i++;
-$modversion['config'][$i]['name'] = 'meeting_place';
-$modversion['config'][$i]['title'] = '_MI_TADMEETIN_MEETING_PLACE';
-$modversion['config'][$i]['description'] = '_MI_TADMEETIN_MEETING_PLACE_DESC';
-$modversion['config'][$i]['formtype'] = 'textbox';
-$modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['default'] = _MI_TADMEETIN_MEETING_PLACE_DEFAULT;
-
-$i++;
-$modversion['config'][$i]['name'] = 'meeting_unit';
-$modversion['config'][$i]['title'] = '_MI_TADMEETIN_MEETING_UNIT';
-$modversion['config'][$i]['description'] = '_MI_TADMEETIN_MEETING_UNIT_DESC';
-$modversion['config'][$i]['formtype'] = 'textbox';
-$modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['default'] = _MI_TADMEETIN_MEETING_UNIT_DEFAULT;
-
-$i++;
-$modversion['config'][$i]['name'] = 'meeting_job';
-$modversion['config'][$i]['title'] = '_MI_TADMEETIN_MEETING_JOB';
-$modversion['config'][$i]['description'] = '_MI_TADMEETIN_MEETING_JOB_DESC';
-$modversion['config'][$i]['formtype'] = 'textbox';
-$modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['default'] = _MI_TADMEETIN_MEETING_JOB_DEFAULT;
-
-$i++;
-$modversion['config'][$i]['name'] = 'file_title';
-$modversion['config'][$i]['title'] = '_MI_TADMEETIN_FILE_TITLE';
-$modversion['config'][$i]['description'] = '_MI_TADMEETIN_FILE_TITLE_DESC';
-$modversion['config'][$i]['formtype'] = 'textbox';
-$modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['default'] = _MI_TADMEETIN_FILE_TITLE_DEFAULT;
-
-$i++;
-$modversion['config'][$i]['name'] = 'orderby';
-$modversion['config'][$i]['title'] = '_MI_TADMEETIN_ORDERBY';
-$modversion['config'][$i]['description'] = '_MI_TADMEETIN_ORDERBY_DESC';
-$modversion['config'][$i]['formtype'] = 'select';
-$modversion['config'][$i]['valuetype'] = 'text';
-$modversion['config'][$i]['default'] = 'auto';
-$modversion['config'][$i]['options'] = ['_MI_TADMEETIN_ORDERBY_OPT1' => 'auto', '_MI_TADMEETIN_ORDERBY_OPT2' => 'tad_meeting_data_sort'];
+$modversion['config'] = [
+    ['name' => 'meeting_place', 'title' => '_MI_TADMEETIN_MEETING_PLACE', 'description' => '_MI_TADMEETIN_MEETING_PLACE_DESC', 'formtype' => 'textbox', 'valuetype' => 'text', 'default' => _MI_TADMEETIN_MEETING_PLACE_DEFAULT],
+    ['name' => 'meeting_unit', 'title' => '_MI_TADMEETIN_MEETING_UNIT', 'description' => '_MI_TADMEETIN_MEETING_UNIT_DESC', 'formtype' => 'textbox', 'valuetype' => 'text', 'default' => _MI_TADMEETIN_MEETING_UNIT_DEFAULT],
+    ['name' => 'meeting_job', 'title' => '_MI_TADMEETIN_MEETING_JOB', 'description' => '_MI_TADMEETIN_MEETING_JOB_DESC', 'formtype' => 'textbox', 'valuetype' => 'text', 'default' => _MI_TADMEETIN_MEETING_JOB_DEFAULT],
+    ['name' => 'file_title', 'title' => '_MI_TADMEETIN_FILE_TITLE', 'description' => '_MI_TADMEETIN_FILE_TITLE_DESC', 'formtype' => 'textbox', 'valuetype' => 'text', 'default' => _MI_TADMEETIN_FILE_TITLE_DEFAULT],
+    ['name' => 'orderby', 'title' => '_MI_TADMEETIN_ORDERBY', 'description' => '_MI_TADMEETIN_ORDERBY_DESC', 'formtype' => 'select', 'valuetype' => 'text', 'default' => 'auto', 'options' => ['_MI_TADMEETIN_ORDERBY_OPT1' => 'auto', '_MI_TADMEETIN_ORDERBY_OPT2' => 'tad_meeting_data_sort']],
+];

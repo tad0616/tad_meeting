@@ -25,10 +25,5 @@ if (!isset($_SESSION['tad_meeting_adm'])) {
 }
 
 //$interface_menu[_TAD_TO_MOD]="index.php";
-$interface_menu[_MD_TADMEETIN_SMNAME1] = 'index.php';
-$interface_icon[_MD_TADMEETIN_SMNAME1] = 'fa-chevron-right';
-
-if ($_SESSION['tad_meeting_adm']) {
-    $interface_menu[_TAD_TO_ADMIN] = 'admin/main.php';
-    $interface_icon[_TAD_TO_ADMIN] = 'fa-sign-in';
-}
+$interface_menu[_MD_TADMEETIN_INDEX] = 'index.php';
+$interface_icon[_MD_TADMEETIN_INDEX] = 'fa-users';

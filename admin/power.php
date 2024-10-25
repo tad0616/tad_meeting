@@ -17,8 +17,8 @@ Utility::get_jquery(true);
 //抓取所有資料夾
 
 $item_list = [];
-$sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM ' . $xoopsDB->prefix('tad_meeting_cate');
-$result = $xoopsDB->query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, _MA_TADUP_DB_ERROR1);
+$sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
+$result = Utility::query($sql) or redirect_header($_SERVER['PHP_SELF'], 3, _MA_TADUP_DB_ERROR1);
 while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
     $item_list[$tad_meeting_cate_sn] = $tad_meeting_cate_title;
 }

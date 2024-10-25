@@ -9,7 +9,7 @@
             $(document).ready(function(){
                 $("#tad_meeting_data_sort").sortable({ opacity: 0.6, cursor: "move", update: function() {
                     var order = $(this).sortable("serialize");
-                    $.post("<{$xoops_url}>/modules/tad_meeting/tad_meeting_data_save_sort.php", order + "&op=update_tad_meeting_data_sort&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>", function(theResponse){
+                    $.post("<{$xoops_url}>/modules/tad_meeting/tad_meeting_data_save_sort.php", order + "&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>", function(theResponse){
                         $("#tad_meeting_data_save_msg").html(theResponse);
                     });
                 }

@@ -1,6 +1,5 @@
 <?php
 xoops_loadLanguage('main', 'tadtools');
-define('_TAD_NEED_TADTOOLS', '需要 tadtools 模組，可至<a href="http://campus-xoops.tn.edu.tw/modules/tad_modules/index.php?module_sn=1" target="_blank">XOOPS輕鬆架</a>下載。');
 
 //tad_meeting-list
 define('_MD_TADMEETIN_TAD_MEETING_CATE_SN', '會議類別');
@@ -22,8 +21,7 @@ define('_MD_TADMEETIN_TAD_MEETING_DATA_SORT', '排序');
 define('_MD_TADMEETIN_TAD_MEETING_DATA_DATE', '最後編輯日期');
 define('_MD_TADMEETIN_UP_TAD_MEETING_DATA_SN', '上傳');
 define('_MD_TADMEETIN_SHOW_TAD_MEETING_DATA_SN_FILES', '上傳');
-define('_MD_TADMEETIN_SMNAME1', '會議系統主頁');
-define('_MD_TADMEETIN_SMNAME2', '各組報告');
+define('_MD_TADMEETIN_INDEX', '所有會議');
 define('_MD_TADMEETIN_ADD_MEETING', '新增會議');
 define('_MD_TADMEETIN_ADD_REPORT', '新增會議報告');
 define('_MD_TADMEETIN_REPORT', '報告');

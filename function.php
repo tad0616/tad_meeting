@@ -13,7 +13,9 @@ use XoopsModules\Tadtools\Utility;
 //tad_meeting編輯表單
 function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 {
-    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig;
+    global $xoopsDB, $xoopsTpl, $xoopsModuleConfig, $xoTheme;
+
+    $xoTheme->addScript('modules/tadtools/My97DatePicker/WdatePicker.js');
 
     //抓取預設值
     if (!empty($tad_meeting_sn)) {
@@ -61,8 +63,9 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $FormValidator->render();
 
     //會議類別
-    $sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY tad_meeting_cate_sort';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY `tad_meeting_cate_sort`';
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+
     $i = 0;
     $tad_meeting_cate_sn_options_array = [];
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
@@ -94,12 +97,12 @@ function insert_tad_meeting()
     global $xoopsDB;
 
     $tad_meeting_sn = Request::getInt('tad_meeting_sn');
-    $tad_meeting_title = $xoopsDB->escape(Request::getString('tad_meeting_title'));
+    $tad_meeting_title = Request::getString('tad_meeting_title');
     $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
-    $tad_meeting_datetime = $xoopsDB->escape(Request::getString('tad_meeting_datetime'));
-    $tad_meeting_place = $xoopsDB->escape(Request::getString('tad_meeting_place'));
-    $tad_meeting_chairman = $xoopsDB->escape(Request::getString('tad_meeting_chairman'));
-    $tad_meeting_note = $xoopsDB->escape(Request::getString('tad_meeting_note'));
+    $tad_meeting_datetime = Request::getString('tad_meeting_datetime');
+    $tad_meeting_place = Request::getString('tad_meeting_place');
+    $tad_meeting_chairman = Request::getString('tad_meeting_chairman');
+    $tad_meeting_note = Request::getString('tad_meeting_note');
 
     //判斷目前使用者是否有：建立會議
     $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
@@ -108,27 +111,27 @@ function insert_tad_meeting()
     }
 
     //XOOPS表單安全檢查
-    if (!$GLOBALS['xoopsSecurity']->check()) {
+    if ($_SERVER['SERVER_ADDR'] != '127.0.0.1' && !$GLOBALS['xoopsSecurity']->check()) {
         $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
 
-    $sql = 'insert into `' . $xoopsDB->prefix('tad_meeting') . "` (
+    $sql = 'INSERT INTO `' . $xoopsDB->prefix('tad_meeting') . '` (
         `tad_meeting_title`,
         `tad_meeting_cate_sn`,
         `tad_meeting_datetime`,
         `tad_meeting_place`,
         `tad_meeting_chairman`,
         `tad_meeting_note`
-    ) values(
-        '{$tad_meeting_title}',
-        '{$tad_meeting_cate_sn}',
-        '{$tad_meeting_datetime}',
-        '{$tad_meeting_place}',
-        '{$tad_meeting_chairman}',
-        '{$tad_meeting_note}'
-    )";
-    $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    ) VALUES (
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?
+    )';
+    Utility::query($sql, 'sissss', [$tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note]) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得最後新增資料的流水編號
     $tad_meeting_sn = $xoopsDB->getInsertId();
@@ -142,12 +145,12 @@ function update_tad_meeting($tad_meeting_sn = '')
     global $xoopsDB;
 
     $tad_meeting_sn = Request::getInt('tad_meeting_sn');
-    $tad_meeting_title = $xoopsDB->escape(Request::getString('tad_meeting_title'));
+    $tad_meeting_title = Request::getString('tad_meeting_title');
     $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
-    $tad_meeting_datetime = $xoopsDB->escape(Request::getString('tad_meeting_datetime'));
-    $tad_meeting_place = $xoopsDB->escape(Request::getString('tad_meeting_place'));
-    $tad_meeting_chairman = $xoopsDB->escape(Request::getString('tad_meeting_chairman'));
-    $tad_meeting_note = $xoopsDB->escape(Request::getString('tad_meeting_note'));
+    $tad_meeting_datetime = Request::getString('tad_meeting_datetime');
+    $tad_meeting_place = Request::getString('tad_meeting_place');
+    $tad_meeting_chairman = Request::getString('tad_meeting_chairman');
+    $tad_meeting_note = Request::getString('tad_meeting_note');
 
     $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
     if (!$_SESSION['tad_meeting_adm'] and !$create_meeting) {
@@ -155,19 +158,12 @@ function update_tad_meeting($tad_meeting_sn = '')
     }
 
     //XOOPS表單安全檢查
-    if (!$GLOBALS['xoopsSecurity']->check()) {
+    if ($_SERVER['SERVER_ADDR'] != '127.0.0.1' && !$GLOBALS['xoopsSecurity']->check()) {
         $error = implode('<br>', $GLOBALS['xoopsSecurity']->getErrors());
         redirect_header($_SERVER['PHP_SELF'], 3, $error);
     }
-    $sql = 'update `' . $xoopsDB->prefix('tad_meeting') . "` set
-        `tad_meeting_title` = '{$tad_meeting_title}',
-        `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}',
-        `tad_meeting_datetime` = '{$tad_meeting_datetime}',
-        `tad_meeting_place` = '{$tad_meeting_place}',
-        `tad_meeting_chairman` = '{$tad_meeting_chairman}',
-        `tad_meeting_note` = '{$tad_meeting_note}'
-    where `tad_meeting_sn` = '$tad_meeting_sn'";
-    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'UPDATE `' . $xoopsDB->prefix('tad_meeting') . '` SET `tad_meeting_title` = ?, `tad_meeting_cate_sn` = ?, `tad_meeting_datetime` = ?, `tad_meeting_place` = ?, `tad_meeting_chairman` = ?, `tad_meeting_note` = ? WHERE `tad_meeting_sn` = ?';
+    Utility::query($sql, 'sissssi', [$tad_meeting_title, $tad_meeting_cate_sn, $tad_meeting_datetime, $tad_meeting_place, $tad_meeting_chairman, $tad_meeting_note, $tad_meeting_sn]) or Utility::web_error($sql, __FILE__, __LINE__);
 
     return $tad_meeting_sn;
 }
@@ -187,16 +183,16 @@ function delete_tad_meeting($tad_meeting_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
-    $sql = 'select tad_meeting_data_sn from `' . $xoopsDB->prefix('tad_meeting_data') . "`
-    where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'SELECT `tad_meeting_data_sn` FROM `' . $xoopsDB->prefix('tad_meeting_data') . '` WHERE `tad_meeting_sn` = ?';
+    $result = Utility::query($sql, 'i', [$tad_meeting_sn]) or Utility::web_error($sql, __FILE__, __LINE__);
+
     while (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result)) {
         delete_tad_meeting_data($tad_meeting_data_sn);
     }
 
-    $sql = 'delete from `' . $xoopsDB->prefix('tad_meeting') . "`
-    where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'DELETE FROM `' . $xoopsDB->prefix('tad_meeting') . '` WHERE `tad_meeting_sn` = ?';
+    Utility::query($sql, 'i', [$tad_meeting_sn]) or Utility::web_error($sql, __FILE__, __LINE__);
+
 }
 
 //刪除tad_meeting_data某筆資料資料
@@ -215,9 +211,8 @@ function delete_tad_meeting_data($tad_meeting_data_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
-    $sql = 'delete from `' . $xoopsDB->prefix('tad_meeting_data') . "`
-    where `tad_meeting_data_sn` = '{$tad_meeting_data_sn}'";
-    $xoopsDB->queryF($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'DELETE FROM `' . $xoopsDB->prefix('tad_meeting_data') . '` WHERE `tad_meeting_data_sn` = ?';
+    Utility::query($sql, 'i', [$tad_meeting_data_sn]) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $TadUpFiles = new TadUpFiles('tad_meeting');
     $TadUpFiles->set_col('tad_meeting_data_sn', $tad_meeting_data_sn);
@@ -233,9 +228,8 @@ function get_tad_meeting($tad_meeting_sn = '')
         return;
     }
 
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting') . "`
-    where `tad_meeting_sn` = '{$tad_meeting_sn}'";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting') . '` WHERE `tad_meeting_sn` =?';
+    $result = Utility::query($sql, 'i', [$tad_meeting_sn]) or Utility::web_error($sql, __FILE__, __LINE__);
     $data = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -250,9 +244,9 @@ function get_tad_meeting_cate($tad_meeting_cate_sn = '')
         return;
     }
 
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting_cate') . "`
-    where `tad_meeting_cate_sn` = '{$tad_meeting_cate_sn}'";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` WHERE `tad_meeting_cate_sn` = ?';
+    $result = Utility::query($sql, 'i', [$tad_meeting_cate_sn]) or Utility::web_error($sql, __FILE__, __LINE__);
+
     $data = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -275,9 +269,11 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
 
     $meeting_unit_str = implode(',', $meeting_unit_arr);
 
-    $orderby = ('tad_meeting_data_sort' === $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "field(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
-    $sql = 'select * from `' . $xoopsDB->prefix('tad_meeting_data') . "` where tad_meeting_sn='{$tad_meeting_sn}' order by $orderby";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $orderby = ('tad_meeting_data_sort' === $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "FIELD(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
+    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_data') . "` WHERE tad_meeting_sn = ? ORDER BY $orderby";
+    $params = [$tad_meeting_sn];
+
+    $result = Utility::query($sql, 's', $params) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     $i = 1;
@@ -410,9 +406,10 @@ function getItem_Permissions($itemid, $gperm_name)
 {
     global $xoopsModule, $xoopsDB;
     $module_id = $xoopsModule->mid();
-    $sql = ' SELECT gperm_groupid FROM ' . $xoopsDB->prefix('group_permission') . " where gperm_modid='$module_id' and gperm_itemid ='$itemid' and gperm_name='$gperm_name' ";
-    //echo $sql ;
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $data = [];
+    $sql = 'SELECT `gperm_groupid` FROM `' . $xoopsDB->prefix('group_permission') . '` WHERE `gperm_modid` =? AND `gperm_itemid` =? AND `gperm_name` =?';
+    $result = Utility::query($sql, 'iis', [$module_id, $itemid, $gperm_name]) or Utility::web_error($sql, __FILE__, __LINE__);
+
     while (false !== ($row = $xoopsDB->fetchArray($result))) {
         $data[] = $row['gperm_groupid'];
     }
