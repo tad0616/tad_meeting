@@ -382,37 +382,3 @@ function number2chinese($num, $type = '')
 
     return $retval;
 }
-
-//儲存權限
-function saveItem_Permissions($groups, $itemid, $perm_name)
-{
-    global $xoopsModule;
-    $module_id = $xoopsModule->mid();
-    $gpermHandler = xoops_getHandler('groupperm');
-
-    // First, if the permissions are already there, delete them
-    $gpermHandler->deleteByModule($module_id, $perm_name, $itemid);
-
-    // Save the new permissions
-    if (count($groups) > 0) {
-        foreach ($groups as $group_id) {
-            $gpermHandler->addRight($perm_name, $itemid, $group_id, $module_id);
-        }
-    }
-}
-
-//取回權限的函數
-function getItem_Permissions($itemid, $gperm_name)
-{
-    global $xoopsModule, $xoopsDB;
-    $module_id = $xoopsModule->mid();
-    $data = [];
-    $sql = 'SELECT `gperm_groupid` FROM `' . $xoopsDB->prefix('group_permission') . '` WHERE `gperm_modid` =? AND `gperm_itemid` =? AND `gperm_name` =?';
-    $result = Utility::query($sql, 'iis', [$module_id, $itemid, $gperm_name]) or Utility::web_error($sql, __FILE__, __LINE__);
-
-    while (false !== ($row = $xoopsDB->fetchArray($result))) {
-        $data[] = $row['gperm_groupid'];
-    }
-
-    return $data;
-}

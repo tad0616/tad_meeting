@@ -37,11 +37,11 @@
         <div class="alert alert-info">
             <!--處室-->
             <div class="form-group row mb-3">
-                <label class="col-sm-2 control-label col-form-label text-sm-right">
+                <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_UNIT}>
                 </label>
                 <div class="col-sm-4">
-                    <select name="tad_meeting_data_unit" id="tad_meeting_data_unit" class="form-control" size=1>
+                    <select name="tad_meeting_data_unit" id="tad_meeting_data_unit" class="form-select" size=1>
                         <option value="" <{if $tad_meeting_data_unit == ""}>selected="selected"<{/if}>></option>
                         <{foreach from=$meeting_unit item=unit}>
                         <option value="<{$unit|default:''}>" <{if $tad_meeting_data_unit == $unit}>selected="selected"<{/if}>><{$unit|default:''}></option>
@@ -50,11 +50,11 @@
                 </div>
 
                 <!--職務-->
-                <label class="col-sm-2 control-label col-form-label text-sm-right">
+                <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_JOB}>
                 </label>
                 <div class="col-sm-4">
-                    <select name="tad_meeting_data_job" id="tad_meeting_data_job" class="form-control" size=1>
+                    <select name="tad_meeting_data_job" id="tad_meeting_data_job" class="form-select" size=1>
                         <option value="" <{if $tad_meeting_data_job == ""}>selected="selected"<{/if}>></option>
                         <{foreach from=$meeting_job item=job}>
                         <option value="<{$job|default:''}>" <{if $tad_meeting_data_job == $job}>selected="selected"<{/if}>><{$job|default:''}></option>
@@ -65,7 +65,7 @@
 
             <!--報告標題-->
             <div class="form-group row mb-3">
-                <label class="col-sm-2 control-label col-form-label text-sm-right">
+                <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_TITLE}>
                 </label>
                 <div class="col-sm-10">
@@ -75,7 +75,7 @@
 
             <!--報告內容-->
             <div class="form-group row mb-3">
-                <label class="col-sm-2 control-label col-form-label text-sm-right">
+                <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_CONTENT}>
                 </label>
                 <div class="col-sm-10">
@@ -85,7 +85,7 @@
 
             <!--上傳-->
             <div class="form-group row mb-3">
-                <label class="col-sm-2 control-label col-form-label text-sm-right">
+                <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                     <{$smarty.const._MD_TADMEETIN_UP_TAD_MEETING_DATA_SN}>
                 </label>
                 <div class="col-sm-10">

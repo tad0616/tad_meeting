@@ -21,7 +21,7 @@
     <form action="<{$action|default:''}>" method="post" id="myForm" enctype="multipart/form-data" class="form-horizontal" role="form">
         <div class="form-group row mb-3">
             <!--開會日期 datetime-->
-            <label class="col-sm-2 control-label col-form-label text-sm-right">
+            <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATETIME}>
             </label>
             <div class="col-sm-4">
@@ -29,11 +29,11 @@
             </div>
 
             <!--會議類別-->
-            <label class="col-sm-2 control-label col-form-label text-sm-right">
+            <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CATE_SN}>
             </label>
             <div class="col-sm-4">
-                <select name="tad_meeting_cate_sn" id="tad_meeting_cate" class="form-control validate[required]" size=1>
+                <select name="tad_meeting_cate_sn" id="tad_meeting_cate" class="form-select validate[required]" size=1>
                     <option value=""></option>
                     <{foreach from=$tad_meeting_cate_sn_options item=opt}>
                         <option value="<{$opt.tad_meeting_cate_sn}>" <{if $tad_meeting_cate_sn==$opt.tad_meeting_cate_sn}>selected<{/if}>><{$opt.tad_meeting_cate_title}></option>
@@ -44,7 +44,7 @@
 
         <!--會議名稱-->
         <div class="form-group row mb-3">
-            <label class="col-sm-2 control-label col-form-label text-sm-right">
+            <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_TITLE}>
             </label>
             <div class="col-sm-10">
@@ -54,11 +54,11 @@
 
         <!--會議地點-->
         <div class="form-group row mb-3">
-            <label class="col-sm-2 control-label col-form-label text-sm-right">
+            <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_PLACE}>
             </label>
             <div class="col-sm-4">
-                <select name="tad_meeting_place" class="form-control validate[required]" size=1>
+                <select name="tad_meeting_place" class="form-select validate[required]" size=1>
                 <{foreach from=$meeting_place item=place}>
                     <option value="<{$place|default:''}>" <{if $tad_meeting_place == $place}>selected="selected"<{/if}>><{$place|default:''}></option>
                 <{/foreach}>
@@ -66,7 +66,7 @@
             </div>
 
             <!--會議主席-->
-            <label class="col-sm-2 control-label col-form-label text-sm-right">
+            <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}>
             </label>
             <div class="col-sm-4">
@@ -76,7 +76,7 @@
 
         <!--相關補充說明-->
         <div class="form-group row mb-3">
-            <label class="col-sm-2 control-label col-form-label text-sm-right">
+            <label class="col-sm-2 control-label col-form-label text-sm-right text-sm-end">
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_NOTE}>
             </label>
             <div class="col-sm-10">

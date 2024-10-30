@@ -89,19 +89,19 @@ function list_tad_meeting($tad_meeting_cate_sn = '')
 
         $cate = get_tad_meeting_cate($tad_meeting_cate_sn);
 
-        $view_meeting = getItem_Permissions($tad_meeting_cate_sn, 'view_meeting');
+        $view_meeting = Utility::get_perm($tad_meeting_cate_sn, 'view_meeting');
         $view_meeting_txt = Utility::txt_to_group_name(implode(',', (array) $view_meeting), _MA_TADMEETIN_ALL_OK, ' , ');
         $xoopsTpl->assign('view_meeting_txt', $view_meeting_txt);
 
-        $create_meeting = getItem_Permissions($tad_meeting_cate_sn, 'create_meeting');
+        $create_meeting = Utility::get_perm($tad_meeting_cate_sn, 'create_meeting');
         $create_meeting_txt = Utility::txt_to_group_name(implode(',', (array) $create_meeting), _MA_TADMEETIN_ONLY_ROOT, ' , ');
         $xoopsTpl->assign('create_meeting_txt', $create_meeting_txt);
 
-        $post_meeting = getItem_Permissions($tad_meeting_cate_sn, 'post_meeting');
+        $post_meeting = Utility::get_perm($tad_meeting_cate_sn, 'post_meeting');
         $post_meeting_txt = Utility::txt_to_group_name(implode(',', (array) $post_meeting), _MA_TADMEETIN_ONLY_ROOT, ' , ');
         $xoopsTpl->assign('post_meeting_txt', $post_meeting_txt);
 
-        $sort_meeting = getItem_Permissions($tad_meeting_cate_sn, 'sort_meeting');
+        $sort_meeting = Utility::get_perm($tad_meeting_cate_sn, 'sort_meeting');
         $sort_meeting_txt = Utility::txt_to_group_name(implode(',', (array) $sort_meeting), _MA_TADMEETIN_ONLY_ROOT, ' , ');
         $xoopsTpl->assign('sort_meeting_txt', $sort_meeting_txt);
     }
@@ -344,8 +344,8 @@ function insert_tad_meeting_cate()
 
     $view_meeting = Request::getArray('view_meeting');
     $post_meeting = Request::getArray('post_meeting');
-    saveItem_Permissions($view_meeting, $tad_meeting_cate_sn, 'view_meeting');
-    saveItem_Permissions($post_meeting, $tad_meeting_cate_sn, 'post_meeting');
+    Utility::save_perm($view_meeting, $tad_meeting_cate_sn, 'view_meeting');
+    Utility::save_perm($post_meeting, $tad_meeting_cate_sn, 'post_meeting');
 
     return $tad_meeting_cate_sn;
 }
@@ -382,8 +382,8 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
 
     $view_meeting = Request::getArray('view_meeting');
     $post_meeting = Request::getArray('post_meeting');
-    saveItem_Permissions($view_meeting, $tad_meeting_cate_sn, 'view_meeting');
-    saveItem_Permissions($post_meeting, $tad_meeting_cate_sn, 'post_meeting');
+    Utility::save_perm($view_meeting, $tad_meeting_cate_sn, 'view_meeting');
+    Utility::save_perm($post_meeting, $tad_meeting_cate_sn, 'post_meeting');
     return $tad_meeting_cate_sn;
 }
 
