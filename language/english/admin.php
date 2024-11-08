@@ -1,5 +1,6 @@
 <?php
 xoops_loadLanguage('admin_common', 'tadtools');
+xoops_loadLanguage('main', 'tadtools');
 
 //tad_meeting-edit
 define('_MA_TADMEETIN_TAD_MEETING_TITLE', 'Meeting name');

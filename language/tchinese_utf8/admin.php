@@ -1,5 +1,6 @@
 <?php
 xoops_loadLanguage('admin_common', 'tadtools');
+xoops_loadLanguage('main', 'tadtools');
 //tad_meeting-edit
 define('_MA_TADMEETIN_TAD_MEETING_TITLE', '會議名稱');
 define('_MA_TADMEETIN_TAD_MEETING_CATE_SN', '分類編號');

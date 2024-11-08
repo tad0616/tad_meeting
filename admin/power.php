@@ -8,7 +8,6 @@ require_once dirname(__DIR__) . '/function.php';
 require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.php';
 require_once XOOPS_ROOT_PATH . '/Frameworks/art/functions.admin.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-
 /*-----------function區--------------*/
 $module_id = $xoopsModule->mid();
 
@@ -34,7 +33,7 @@ $permission['view_meeting'] = _MA_TADMEETIN_CAN_ACCESS_CATE;
 $permission['sort_meeting'] = _MA_TADMEETIN_CAN_SORT_CATE;
 
 $EasyResponsiveTabs = new EasyResponsiveTabs('#grouppermformTab', 'default');
-$EasyResponsiveTabs->rander();
+$EasyResponsiveTabs->render();
 
 foreach ($permission as $item => $perm_desc) {
     $formi = new \XoopsGroupPermForm('', $module_id, $item, $perm_desc);

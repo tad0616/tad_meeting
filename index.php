@@ -384,7 +384,7 @@ function insert_tad_meeting_data()
 
     //取得使用者編號
     $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
-    if (empty($tad_meeting_data_uid) and $xoopsUser) {
+    if (empty($tad_meeting_data_uid) and isset($xoopsUser) && \is_object($xoopsUser)) {
         $tad_meeting_data_uid = $xoopsUser->uid();
     }
 
@@ -449,7 +449,7 @@ function update_tad_meeting_data($tad_meeting_data_sn = '')
     $tad_meeting_data_content = Request::getString('tad_meeting_data_content');
     //取得使用者編號
     $tad_meeting_data_uid = Request::getInt('tad_meeting_data_uid');
-    if (empty($tad_meeting_data_uid) and $xoopsUser) {
+    if (empty($tad_meeting_data_uid) and isset($xoopsUser) && \is_object($xoopsUser)) {
         $tad_meeting_data_uid = $xoopsUser->uid();
     }
     $tad_meeting_data_sort = Request::getInt('tad_meeting_data_sort');
