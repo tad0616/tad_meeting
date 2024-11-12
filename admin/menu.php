@@ -1,43 +1,18 @@
 <?php
-/**
- * Tad Meeting module
- *
- * You may not change or alter any portion of this comment or credits
- * of supporting developers from this source code or any supporting source code
- * which is considered copyrighted (c) material of the original comment or credit authors.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @copyright  XOOPS Project (https://xoops.org)
- * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package    Tad Meeting
- * @since      2.5
- * @author     tad
- * @version    $Id $
- **/
-$adminmenu = [];
-$i = 1;
-
-$adminmenu[$i]['title'] = _MI_TAD_ADMIN_HOME;
-$adminmenu[$i]['link'] = 'admin/index.php';
-$adminmenu[$i]['desc'] = _MI_TAD_ADMIN_HOME_DESC;
-$adminmenu[$i]['icon'] = 'images/admin/home.png';
-
-$i++;
-$adminmenu[$i]['title'] = _MI_TADMEETIN_ADMENU1;
-$adminmenu[$i]['link'] = 'admin/main.php';
-$adminmenu[$i]['desc'] = _MI_TADMEETIN_ADMENU1_DESC;
-$adminmenu[$i]['icon'] = 'images/admin/reunion.png';
-
-$i++;
-$adminmenu[$i]['title'] = _MI_TADMEETIN_GROUPPERM2;
-$adminmenu[$i]['link'] = 'admin/power.php';
-$adminmenu[$i]['desc'] = _MI_TADMEETIN_GROUPPERM2_DESC;
-$adminmenu[$i]['icon'] = 'images/admin/keys.png';
-
-$i++;
-$adminmenu[$i]['title'] = _MI_TAD_ADMIN_ABOUT;
-$adminmenu[$i]['link'] = 'admin/about.php';
-$adminmenu[$i]['desc'] = _MI_TAD_ADMIN_ABOUT_DESC;
-$adminmenu[$i]['icon'] = 'images/admin/about.png';
+$adminmenu = [
+    [
+        'title' => _MI_TADMEETIN_ADMENU1,
+        'link' => 'admin/main.php',
+        'icon' => 'images/admin/reunion.png',
+    ],
+    [
+        'title' => _MI_TADMEETIN_GROUPPERM2,
+        'link' => 'admin/power.php',
+        'icon' => 'images/admin/keys.png',
+    ],
+    [
+        'title' => _MI_TAD_ADMIN_ABOUT,
+        'link' => 'admin/about.php',
+        'icon' => 'images/admin/about.png',
+    ],
+];
