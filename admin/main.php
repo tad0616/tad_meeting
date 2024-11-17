@@ -73,6 +73,7 @@ switch ($op) {
 
 /*-----------秀出結果區--------------*/
 $xoopsTpl->assign('now_op', $op);
+$xoopsTpl->assign('tad_meeting_adm', $tad_meeting_adm);
 require_once __DIR__ . '/footer.php';
 
 /*-----------功能函數區--------------*/
@@ -146,7 +147,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
     $cate_count = [];
 
     $sql = 'SELECT COUNT(*), `tad_meeting_cate_sn` FROM `' . $xoopsDB->prefix('tad_meeting') . '` GROUP BY `tad_meeting_cate_sn`';
-    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while (list($count, $tad_meeting_cate_sn) = $xoopsDB->fetchRow($result)) {
         $cate_count[$tad_meeting_cate_sn] = $count;
@@ -160,7 +161,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
     $data[] = "{ id:0, pId:0, name:'All', url:'main.php', target:'_self', open:true}";
 
     $sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_parent_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY `tad_meeting_cate_sort`';
-    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     if ($result->num_rows > 0) {
         while (list($tad_meeting_cate_sn, $tad_meeting_cate_parent_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
@@ -185,7 +186,7 @@ function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
-    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $data_arr = [];
     while (false !== ($data = $xoopsDB->fetchArray($result))) {
@@ -199,8 +200,8 @@ function get_tad_meeting_cate_all()
 //tad_meeting_cate編輯表單
 function tad_meeting_cate_form($tad_meeting_cate_sn = '')
 {
-    global $xoopsTpl, $xoopsModule;
-    if (!$_SESSION['tad_meeting_adm']) {
+    global $xoopsTpl, $xoopsModule, $tad_meeting_adm;
+    if (!$tad_meeting_adm) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -300,7 +301,7 @@ function tad_meeting_cate_max_sort()
 {
     global $xoopsDB;
     $sql = 'SELECT MAX(`tad_meeting_cate_sort`) FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
-    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     list($sort) = $xoopsDB->fetchRow($result);
 
@@ -310,8 +311,8 @@ function tad_meeting_cate_max_sort()
 //新增資料到tad_meeting_cate中
 function insert_tad_meeting_cate()
 {
-    global $xoopsDB;
-    if (!$_SESSION['tad_meeting_adm']) {
+    global $xoopsDB, $tad_meeting_adm;
+    if (!$tad_meeting_adm) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -353,8 +354,8 @@ function insert_tad_meeting_cate()
 //更新tad_meeting_cate某一筆資料
 function update_tad_meeting_cate($tad_meeting_cate_sn = '')
 {
-    global $xoopsDB;
-    if (!$_SESSION['tad_meeting_adm']) {
+    global $xoopsDB, $tad_meeting_adm;
+    if (!$tad_meeting_adm) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
@@ -390,8 +391,8 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
 //刪除tad_meeting_cate某筆資料資料
 function delete_tad_meeting_cate($tad_meeting_cate_sn = '')
 {
-    global $xoopsDB;
-    if (!$_SESSION['tad_meeting_adm']) {
+    global $xoopsDB, $tad_meeting_adm;
+    if (!$tad_meeting_adm) {
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 

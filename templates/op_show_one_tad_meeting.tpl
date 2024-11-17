@@ -1,5 +1,5 @@
 <div class="btn-group pull-right float-right pull-end" role="group" >
-    <{if $smarty.session.tad_meeting_adm or $create_meeting}>
+    <{if $tad_meeting_adm or $create_meeting}>
         <a href="javascript:delete_tad_meeting_func(<{$tad_meeting_sn|default:''}>);" class="btn btn-sm btn-xs btn-danger" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-times" aria-hidden="true"></i></a>
         <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$tad_meeting_sn|default:''}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
         <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form" class="btn btn-sm btn-xs btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>

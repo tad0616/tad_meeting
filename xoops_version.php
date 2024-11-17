@@ -68,14 +68,16 @@ $modversion['templates'] = [
     ['file' => 'tad_meeting_power.tpl', 'description' => 'tad_meeting_power.tpl'],
 ];
 
-$modversion['blocks'][] = [
-    'file' => 'tad_meeting_show1.php',
-    'name' => _MI_TAD_MEETING_SHOW1_BLOCK_NAME,
-    'description' => _MI_TAD_MEETING_SHOW1_BLOCK_DESC,
-    'show_func' => 'tad_meeting_show1',
-    'template' => 'tad_meeting_show1.tpl',
-    'edit_func' => 'tad_meeting_show1_edit',
-    'options' => '5|0',
+$modversion['blocks'] = [
+    1 => [
+        'file' => 'tad_meeting_show1.php',
+        'name' => _MI_TAD_MEETING_SHOW1_BLOCK_NAME,
+        'description' => _MI_TAD_MEETING_SHOW1_BLOCK_DESC,
+        'show_func' => 'tad_meeting_show1',
+        'template' => 'tad_meeting_show1.tpl',
+        'edit_func' => 'tad_meeting_show1_edit',
+        'options' => '5|0',
+    ],
 ];
 
 $modversion['config'] = [

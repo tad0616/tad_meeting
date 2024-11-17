@@ -25,7 +25,7 @@
                     <!--會議主席-->
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CHAIRMAN}>
                 </th>
-                <{if $smarty.session.tad_meeting_adm|default:false}>
+                <{if $tad_meeting_adm|default:false}>
                     <th class="c"><{$smarty.const._TAD_FUNCTION}></th>
                 <{/if}>
             </tr>
@@ -42,7 +42,7 @@
 
                     <td>
                         <!--會議類別-->
-                        <{if $smarty.session.tad_meeting_adm|default:false}>
+                        <{if $tad_meeting_adm|default:false}>
                             <a href="<{$xoops_url}>/modules/tad_meeting/admin/main.php?tad_meeting_cate_sn=<{$data.tad_meeting_cate_sn}>"><{$data.tad_meeting_cate_title}></a>
                         <{else}>
                             <{$data.tad_meeting_cate_title}>
@@ -65,7 +65,7 @@
                         <{$data.tad_meeting_chairman}>
                     </td>
 
-                    <{if $smarty.session.tad_meeting_adm|default:false}>
+                    <{if $tad_meeting_adm|default:false}>
                         <td>
                             <a href="javascript:delete_tad_meeting_func(<{$data.tad_meeting_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
                             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$data.tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
@@ -76,7 +76,7 @@
         </tbody>
     </table>
 
-    <{if $smarty.session.tad_meeting_adm or $create_meeting}>
+    <{if $tad_meeting_adm or $create_meeting}>
         <div class="text-right text-end">
             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         </div>
@@ -85,7 +85,7 @@
     <{$bar|default:''}>
 <{else}>
     <div class="jumbotron bg-light p-5 rounded-lg m-3 text-center">
-        <{if $smarty.session.tad_meeting_adm or $create_meeting}>
+        <{if $tad_meeting_adm or $create_meeting}>
             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
         <{else}>
             <h3><{$smarty.const._TAD_EMPTY}></h3>

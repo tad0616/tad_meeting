@@ -1,9 +1,9 @@
 <{if $all_data_content|default:false}>
-    <{if $smarty.session.tad_meeting_adm or $create_meeting}>
+    <{if $tad_meeting_adm or $create_meeting}>
         <{$delete_tad_meeting_data_func|default:''}>
     <{/if}>
 
-    <{if $smarty.session.tad_meeting_adm or $sort_meeting}>
+    <{if $tad_meeting_adm or $sort_meeting}>
         <{$tad_meeting_data_jquery_ui|default:''}>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -47,7 +47,7 @@
                     <{else}>
                         <{$smarty.const._MD_TADMEETIN_NONE}>
                     <{/if}>
-                    <{if $smarty.session.tad_meeting_adm or $now_uid==$data.tad_meeting_data_uid}>
+                    <{if $tad_meeting_adm or $now_uid==$data.tad_meeting_data_uid}>
                         <div class="text-right text-end">
                             <a href="javascript:delete_tad_meeting_data_func(<{$data.tad_meeting_data_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
                             <a href="<{$xoops_url}>/modules/tad_meeting/index.php?tad_meeting_sn=<{$tad_meeting_sn|default:''}>&tad_meeting_data_sn=<{$data.tad_meeting_data_sn}>#tad_meeting_data_form" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
@@ -63,7 +63,7 @@
         <{/foreach}>
     </div>
 <{else}>
-    <{if $smarty.session.tad_meeting_adm or $create_meeting}>
+    <{if $tad_meeting_adm or $create_meeting}>
         <div class="jumbotron bg-light p-5 rounded-lg m-3 text-center">
             <h3><{$smarty.const._TAD_EMPTY}></h3>
         </div>

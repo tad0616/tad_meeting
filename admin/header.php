@@ -31,4 +31,4 @@ $xoTheme->addStylesheet('modules/tadtools/css/iconize.css');
 $xoTheme->addStylesheet(XOOPS_URL . "/modules/tadtools/css/xoops_adm{$_SESSION['bootstrap']}.css");
 $xoTheme->addStylesheet('modules/' . $xoopsModule->getVar('dirname') . '/css/module.css');
 $xoTheme->addStylesheet('modules/' . $xoopsModule->getVar('dirname') . '/css/admin.css');
-$_SESSION['tad_meeting_adm'] = true;
+$tad_meeting_adm = true;
