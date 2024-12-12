@@ -3,6 +3,7 @@ use XoopsModules\Tadtools\Utility;
 
 require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 // 關閉除錯訊息
+header('HTTP/1.1 200 OK');
 $xoopsLogger->activated = false;
 $of_sn = (int) str_replace('node-_', '', $_POST['tad_meeting_cate_parent_sn']);
 $sn = (int) str_replace('node-_', '', $_POST['tad_meeting_cate_sn']);

@@ -11,7 +11,7 @@
             $('#tad_meeting_data_title').val(data_unit +  data_job + '<{$smarty.const._MD_TADMEETIN_REPORT}>');
         });
 
-        $("#tad_meeting_data_job").change(function(){
+        $("#tad_meeting_data_job").on('change', function(){
             data_unit = $("#tad_meeting_data_unit option:selected").text();
             if($("#tad_meeting_data_job option:selected").text()!= ""){
                 data_job = '<{$smarty.const._MD_TADMEETIN_BRACKETS_L}>' + $("#tad_meeting_data_job option:selected").text() + '<{$smarty.const._MD_TADMEETIN_BRACKETS_R}>';
@@ -41,7 +41,7 @@
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_UNIT}>
                 </label>
                 <div class="col-sm-4">
-                    <select name="tad_meeting_data_unit" id="tad_meeting_data_unit" class="form-select" size=1>
+                    <select name="tad_meeting_data_unit" id="tad_meeting_data_unit" class="form-control form-select" size=1>
                         <option value="" <{if $tad_meeting_data_unit == ""}>selected="selected"<{/if}>></option>
                         <{foreach from=$meeting_unit item=unit}>
                         <option value="<{$unit|default:''}>" <{if $tad_meeting_data_unit == $unit}>selected="selected"<{/if}>><{$unit|default:''}></option>
@@ -54,7 +54,7 @@
                     <{$smarty.const._MD_TADMEETIN_TAD_MEETING_DATA_JOB}>
                 </label>
                 <div class="col-sm-4">
-                    <select name="tad_meeting_data_job" id="tad_meeting_data_job" class="form-select" size=1>
+                    <select name="tad_meeting_data_job" id="tad_meeting_data_job" class="form-control form-select" size=1>
                         <option value="" <{if $tad_meeting_data_job == ""}>selected="selected"<{/if}>></option>
                         <{foreach from=$meeting_job item=job}>
                         <option value="<{$job|default:''}>" <{if $tad_meeting_data_job == $job}>selected="selected"<{/if}>><{$job|default:''}></option>
@@ -100,7 +100,7 @@
                 <input type='hidden' name="tad_meeting_data_sn" value="<{$tad_meeting_data_sn|default:''}>">
                 <{$token_form|default:''}>
                 <input type="hidden" name="op" value="<{$next_op|default:''}>">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
             </div>
         </div>
     </form>

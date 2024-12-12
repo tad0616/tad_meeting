@@ -1,7 +1,7 @@
 <div class="btn-group pull-right float-right pull-end" role="group" >
     <{if $tad_meeting_adm or $create_meeting}>
         <a href="javascript:delete_tad_meeting_func(<{$tad_meeting_sn|default:''}>);" class="btn btn-sm btn-xs btn-danger" title="<{$smarty.const._TAD_DEL}>"><i class="fa fa-times" aria-hidden="true"></i></a>
-        <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$tad_meeting_sn|default:''}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
+        <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$tad_meeting_sn|default:''}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pen-to-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
         <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form" class="btn btn-sm btn-xs btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_ADD_MEETING}></a>
     <{/if}>
 </div>
@@ -49,8 +49,8 @@
         </div>
         <div class="col-sm-7 text-right text-end">
             <{$smarty.const._MD_TADMEETIN_DOWNLOAD}>
-            <a href="pdf.php?tad_meeting_sn=<{$tad_meeting_sn|default:''}>" class="btn btn-danger"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_DOWNLOAD_PDF}></a>
-            <a href="word.php?tad_meeting_sn=<{$tad_meeting_sn|default:''}>" class="btn btn-primary"><i class="fa fa-file-word-o" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_DOWNLOAD_WORD}></a>
+            <a href="pdf.php?tad_meeting_sn=<{$tad_meeting_sn|default:''}>" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_DOWNLOAD_PDF}></a>
+            <a href="word.php?tad_meeting_sn=<{$tad_meeting_sn|default:''}>" class="btn btn-primary"><i class="fa fa-file-word" aria-hidden="true"></i> <{$smarty.const._MD_TADMEETIN_DOWNLOAD_WORD}></a>
         </div>
     </div>
 

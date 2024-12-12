@@ -69,7 +69,7 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 
     //會議類別
     $sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY `tad_meeting_cate_sort`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $i = 0;
     $tad_meeting_cate_sn_options_array = [];
@@ -189,14 +189,14 @@ function delete_tad_meeting($tad_meeting_sn = '')
     }
 
     $sql = 'SELECT `tad_meeting_data_sn` FROM `' . $xoopsDB->prefix('tad_meeting_data') . '` WHERE `tad_meeting_sn` = ' . $tad_meeting_sn;
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result)) {
         delete_tad_meeting_data($tad_meeting_data_sn);
     }
 
     $sql = 'DELETE FROM `' . $xoopsDB->prefix('tad_meeting') . '` WHERE `tad_meeting_sn` = ' . $tad_meeting_sn;
-    $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
 }
 
@@ -234,7 +234,7 @@ function get_tad_meeting($tad_meeting_sn = '')
     }
 
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting') . '` WHERE `tad_meeting_sn` =' . $tad_meeting_sn;
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
     $data = $xoopsDB->fetchArray($result);
 
     return $data;
@@ -250,7 +250,7 @@ function get_tad_meeting_cate($tad_meeting_cate_sn = '')
     }
     $tad_meeting_cate_sn = (int) $tad_meeting_cate_sn;
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` WHERE `tad_meeting_cate_sn` = ' . $tad_meeting_cate_sn;
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $data = $xoopsDB->fetchArray($result);
 
@@ -276,7 +276,7 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
     $tad_meeting_sn = (int) $tad_meeting_sn;
     $orderby = ('tad_meeting_data_sort' === $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "FIELD(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_data') . "` WHERE tad_meeting_sn = '$tad_meeting_sn' ORDER BY $orderby";
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
     $i = 1;

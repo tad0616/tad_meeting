@@ -3,6 +3,7 @@ use Xmf\Request;
 use XoopsModules\Tadtools\Utility;
 require dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 // 關閉除錯訊息
+header('HTTP/1.1 200 OK');
 $xoopsLogger->activated = false;
 $sn = Request::getInt('tad_meeting_cate_sn');
 $sort = Request::getInt('sort');

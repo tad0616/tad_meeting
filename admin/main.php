@@ -115,7 +115,7 @@ function list_tad_meeting($tad_meeting_cate_sn = '')
     $bar = $PageBar['bar'];
     $sql = $PageBar['sql'];
     $total = $PageBar['total'];
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $i = 0;
 
@@ -147,7 +147,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
     $cate_count = [];
 
     $sql = 'SELECT COUNT(*), `tad_meeting_cate_sn` FROM `' . $xoopsDB->prefix('tad_meeting') . '` GROUP BY `tad_meeting_cate_sn`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while (list($count, $tad_meeting_cate_sn) = $xoopsDB->fetchRow($result)) {
         $cate_count[$tad_meeting_cate_sn] = $count;
@@ -161,7 +161,7 @@ function list_tad_meeting_cate_tree($def_tad_meeting_cate_sn = '')
     $data[] = "{ id:0, pId:0, name:'All', url:'main.php', target:'_self', open:true}";
 
     $sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_parent_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY `tad_meeting_cate_sort`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     if ($result->num_rows > 0) {
         while (list($tad_meeting_cate_sn, $tad_meeting_cate_parent_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
@@ -186,7 +186,7 @@ function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $data_arr = [];
     while (false !== ($data = $xoopsDB->fetchArray($result))) {
@@ -301,7 +301,7 @@ function tad_meeting_cate_max_sort()
 {
     global $xoopsDB;
     $sql = 'SELECT MAX(`tad_meeting_cate_sort`) FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     list($sort) = $xoopsDB->fetchRow($result);
 

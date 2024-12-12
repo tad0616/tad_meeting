@@ -179,7 +179,7 @@ function list_tad_meeting()
     $sql = $PageBar['sql'];
     $total = $PageBar['total'];
 
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     //取得分類所有資料陣列
     $tad_meeting_cate_arr = get_tad_meeting_cate_all();
@@ -233,7 +233,7 @@ function get_tad_meeting_cate_all()
 {
     global $xoopsDB;
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $data_arr = [];
     while (false !== ($data = $xoopsDB->fetchArray($result))) {
@@ -332,7 +332,7 @@ function tad_meeting_data_max_sort()
 {
     global $xoopsDB;
     $sql = 'SELECT MAX(`tad_meeting_data_sort`) FROM `' . $xoopsDB->prefix('tad_meeting_data') . '`';
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     list($sort) = $xoopsDB->fetchRow($result);
 
@@ -349,7 +349,7 @@ function get_tad_meeting_data($tad_meeting_data_sn = '')
     }
     $tad_meeting_data_sn = (int) $tad_meeting_data_sn;
     $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_data') . '` WHERE `tad_meeting_data_sn` = ' . $tad_meeting_data_sn;
-    $result = $xoopsDB->query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $data = $xoopsDB->fetchArray($result);
 

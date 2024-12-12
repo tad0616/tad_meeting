@@ -30,7 +30,7 @@
                         <div class="col-sm-8 text-right text-end">
                             <div style="margin-top: 10px;">
                                 <a href="javascript:delete_tad_meeting_cate_func(<{$cate.tad_meeting_cate_sn}>);" class="btn btn-danger <{if $cate_count.$tad_meeting_cate_sn > 0}>disabled<{/if}>"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
-                                <a href="main.php?op=tad_meeting_cate_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
+                                <a href="main.php?op=tad_meeting_cate_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>" class="btn btn-warning"><i class="fa fa-pen-to-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
                                 <a href="main.php?op=tad_meeting_form&tad_meeting_cate_sn=<{$tad_meeting_cate_sn|default:''}>" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i> <{$smarty.const._TAD_ADD}></a>
                             </div>
                         </div>

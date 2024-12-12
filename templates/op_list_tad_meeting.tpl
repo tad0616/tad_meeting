@@ -68,7 +68,7 @@
                     <{if $tad_meeting_adm|default:false}>
                         <td>
                             <a href="javascript:delete_tad_meeting_func(<{$data.tad_meeting_sn}>);" class="btn btn-sm btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i> <{$smarty.const._TAD_DEL}></a>
-                            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$data.tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
+                            <a href="<{$xoops_url}>/modules/tad_meeting/index.php?op=tad_meeting_form&tad_meeting_sn=<{$data.tad_meeting_sn}>" class="btn btn-sm btn-xs btn-warning"><i class="fa fa-pen-to-square" aria-hidden="true"></i> <{$smarty.const._TAD_EDIT}></a>
                         </td>
                     <{/if}>
                 </tr>

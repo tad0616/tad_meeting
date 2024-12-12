@@ -9,7 +9,7 @@
             $('#tad_meeting_title').val(meeting_time + ' ' + meeting_type);
         });
 
-        $("#tad_meeting_cate").change(function(){
+        $("#tad_meeting_cate").on('change', function(){
             meeting_time = $("#tad_meeting_datetime").val().substr(0,10);
             meeting_type = $("#tad_meeting_cate option:selected").text();
             $('#tad_meeting_title').val(meeting_time + ' ' + meeting_type);
@@ -33,7 +33,7 @@
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_CATE_SN}>
             </label>
             <div class="col-sm-4">
-                <select name="tad_meeting_cate_sn" id="tad_meeting_cate" class="form-select validate[required]" size=1>
+                <select name="tad_meeting_cate_sn" id="tad_meeting_cate" class="form-control form-select validate[required]" size=1>
                     <option value=""></option>
                     <{foreach from=$tad_meeting_cate_sn_options item=opt}>
                         <option value="<{$opt.tad_meeting_cate_sn}>" <{if $tad_meeting_cate_sn==$opt.tad_meeting_cate_sn}>selected<{/if}>><{$opt.tad_meeting_cate_title}></option>
@@ -58,7 +58,7 @@
                 <{$smarty.const._MD_TADMEETIN_TAD_MEETING_PLACE}>
             </label>
             <div class="col-sm-4">
-                <select name="tad_meeting_place" class="form-select validate[required]" size=1>
+                <select name="tad_meeting_place" class="form-control form-select validate[required]" size=1>
                 <{foreach from=$meeting_place item=place}>
                     <option value="<{$place|default:''}>" <{if $tad_meeting_place == $place}>selected="selected"<{/if}>><{$place|default:''}></option>
                 <{/foreach}>
@@ -88,7 +88,7 @@
             <input type='hidden' name="tad_meeting_sn" value="<{$tad_meeting_sn|default:''}>">
             <{$token_form|default:''}>
             <input type="hidden" name="op" value="<{$next_op|default:''}>">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-disk" aria-hidden="true"></i> <{$smarty.const._TAD_SAVE}></button>
         </div>
     </form>
 <{/if}>
