@@ -343,11 +343,14 @@ function insert_tad_meeting_cate()
     //取得最後新增資料的流水編號
     $tad_meeting_cate_sn = $xoopsDB->getInsertId();
 
-    $view_meeting = Request::getArray('view_meeting');
-    $post_meeting = Request::getArray('post_meeting');
+    $view_meeting   = Request::getArray('view_meeting');
+    $post_meeting   = Request::getArray('post_meeting');
+    $create_meeting = Request::getArray('create_meeting');
+    $sort_meeting   = Request::getArray('sort_meeting');
     Utility::save_perm($view_meeting, $tad_meeting_cate_sn, 'view_meeting');
     Utility::save_perm($post_meeting, $tad_meeting_cate_sn, 'post_meeting');
-
+    Utility::save_perm($create_meeting, $tad_meeting_cate_sn, 'create_meeting');
+    Utility::save_perm($sort_meeting, $tad_meeting_cate_sn, 'sort_meeting');
     return $tad_meeting_cate_sn;
 }
 
@@ -381,10 +384,15 @@ function update_tad_meeting_cate($tad_meeting_cate_sn = '')
     WHERE `tad_meeting_cate_sn` = ?';
     Utility::query($sql, 'issisi', [$tad_meeting_cate_parent_sn, $tad_meeting_cate_title, $tad_meeting_cate_desc, $tad_meeting_cate_sort, $tad_meeting_cate_enable, $tad_meeting_cate_sn]) or Utility::web_error($sql, __FILE__, __LINE__);
 
-    $view_meeting = Request::getArray('view_meeting');
-    $post_meeting = Request::getArray('post_meeting');
+    $view_meeting   = Request::getArray('view_meeting');
+    $post_meeting   = Request::getArray('post_meeting');
+    $create_meeting = Request::getArray('create_meeting');
+    $sort_meeting   = Request::getArray('sort_meeting');
     Utility::save_perm($view_meeting, $tad_meeting_cate_sn, 'view_meeting');
     Utility::save_perm($post_meeting, $tad_meeting_cate_sn, 'post_meeting');
+    Utility::save_perm($create_meeting, $tad_meeting_cate_sn, 'create_meeting');
+    Utility::save_perm($sort_meeting, $tad_meeting_cate_sn, 'sort_meeting');
+
     return $tad_meeting_cate_sn;
 }
 
