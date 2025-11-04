@@ -4,7 +4,7 @@ global $xoopsConfig;
 
 //---模組基本資訊---//
 $modversion['name']        = _MI_TADMEETIN_NAME;
-$modversion['version']     = $_SESSION['xoops_version'] >= 20511 ? '3.1.0-Stable' : '3.1';
+$modversion['version']     = $_SESSION['xoops_version'] >= 20511 ? '3.2.0-Stable' : '3.2';
 $modversion['description'] = _MI_TADMEETIN_DESC;
 $modversion['author']      = _MI_TADMEETIN_AUTHOR;
 $modversion['credits']     = _MI_TADMEETIN_CREDITS;
@@ -14,13 +14,13 @@ $modversion['image']       = 'images/logo.png';
 $modversion['dirname']     = basename(__DIR__);
 
 //---模組狀態資訊---//
-$modversion['release_date']        = '2025-08-27';
+$modversion['release_date']        = '2025-11-04';
 $modversion['module_website_url']  = 'https://tad0616.net';
 $modversion['module_website_name'] = _MI_TADMEETIN_AUTHOR_WEB;
 $modversion['module_status']       = 'release';
 $modversion['author_website_url']  = 'https://tad0616.net';
 $modversion['author_website_name'] = _MI_TADMEETIN_AUTHOR_WEB;
-$modversion['min_php']             = '5.4';
+$modversion['min_php']             = '7.3';
 $modversion['min_xoops']           = '2.5.10';
 
 //---paypal資訊---//

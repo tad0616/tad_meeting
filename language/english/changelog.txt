@@ -1,3 +1,8 @@
+tad_meeting 3.2 (Released 2025-11-04)
+====================================
+1. Added tad_meeting_files_center index to improve read speed
+2. Fixed issue where attachments could not be downloaded
+
 tad_meeting 3.1 (released 2025-08-27)
 ====================================
 1. Fixed the problem that word cannot be downloaded.

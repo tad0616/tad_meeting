@@ -1,10 +1,13 @@
 <?php
 
 use XoopsModules\Tadtools\Utility;
+
 if (!class_exists('XoopsModules\Tadtools\Utility')) {
     require XOOPS_ROOT_PATH . '/modules/tadtools/preloads/autoloader.php';
 }
+
 use XoopsModules\Tad_meeting\Update;
+
 if (!class_exists('XoopsModules\Tad_meeting\Update')) {
     include dirname(__DIR__) . '/preloads/autoloader.php';
 }
@@ -24,6 +27,8 @@ function xoops_module_update_tad_meeting($module, $old_version)
     if (Update::chk_permission()) {
         Update::go_permission();
     }
+
+    Update::add_files_center_index();
 
     return true;
 }

@@ -68,13 +68,13 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
     $FormValidator->render();
 
     //會議類別
-    $sql = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY `tad_meeting_cate_sort`';
+    $sql    = 'SELECT `tad_meeting_cate_sn`, `tad_meeting_cate_title` FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` ORDER BY `tad_meeting_cate_sort`';
     $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
-    $i = 0;
+    $i                                 = 0;
     $tad_meeting_cate_sn_options_array = [];
     while (list($tad_meeting_cate_sn, $tad_meeting_cate_title) = $xoopsDB->fetchRow($result)) {
-        $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_sn'] = $tad_meeting_cate_sn;
+        $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_sn']    = $tad_meeting_cate_sn;
         $tad_meeting_cate_sn_options_array[$i]['tad_meeting_cate_title'] = $tad_meeting_cate_title;
         $i++;
     }
@@ -82,14 +82,14 @@ function tad_meeting_form($tad_meeting_sn = '', $tad_meeting_cate_sn = '')
 
     //加入Token安全機制
     require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-    $token = new \XoopsFormHiddenToken();
+    $token      = new \XoopsFormHiddenToken();
     $token_form = $token->render();
     $xoopsTpl->assign('token_form', $token_form);
     $xoopsTpl->assign('action', $_SERVER['PHP_SELF']);
     $xoopsTpl->assign('next_op', $op);
 
     $meeting_place_arr = [];
-    $meeting_place = explode(';', $xoopsModuleConfig['meeting_place']);
+    $meeting_place     = explode(';', $xoopsModuleConfig['meeting_place']);
     foreach ($meeting_place as $value) {
         $meeting_place_arr[] = trim($value);
     }
@@ -101,13 +101,13 @@ function insert_tad_meeting()
 {
     global $xoopsDB, $tad_meeting_adm;
 
-    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
-    $tad_meeting_title = Request::getString('tad_meeting_title');
-    $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
+    $tad_meeting_sn       = Request::getInt('tad_meeting_sn');
+    $tad_meeting_title    = Request::getString('tad_meeting_title');
+    $tad_meeting_cate_sn  = Request::getInt('tad_meeting_cate_sn');
     $tad_meeting_datetime = Request::getString('tad_meeting_datetime');
-    $tad_meeting_place = Request::getString('tad_meeting_place');
+    $tad_meeting_place    = Request::getString('tad_meeting_place');
     $tad_meeting_chairman = Request::getString('tad_meeting_chairman');
-    $tad_meeting_note = Request::getString('tad_meeting_note');
+    $tad_meeting_note     = Request::getString('tad_meeting_note');
 
     //判斷目前使用者是否有：建立會議
     $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
@@ -149,13 +149,13 @@ function update_tad_meeting($tad_meeting_sn = '')
 {
     global $xoopsDB, $tad_meeting_adm;
 
-    $tad_meeting_sn = Request::getInt('tad_meeting_sn');
-    $tad_meeting_title = Request::getString('tad_meeting_title');
-    $tad_meeting_cate_sn = Request::getInt('tad_meeting_cate_sn');
+    $tad_meeting_sn       = Request::getInt('tad_meeting_sn');
+    $tad_meeting_title    = Request::getString('tad_meeting_title');
+    $tad_meeting_cate_sn  = Request::getInt('tad_meeting_cate_sn');
     $tad_meeting_datetime = Request::getString('tad_meeting_datetime');
-    $tad_meeting_place = Request::getString('tad_meeting_place');
+    $tad_meeting_place    = Request::getString('tad_meeting_place');
     $tad_meeting_chairman = Request::getString('tad_meeting_chairman');
-    $tad_meeting_note = Request::getString('tad_meeting_note');
+    $tad_meeting_note     = Request::getString('tad_meeting_note');
 
     $create_meeting = Utility::power_chk('create_meeting', $tad_meeting_cate_sn);
     if (!$tad_meeting_adm and !$create_meeting) {
@@ -188,7 +188,7 @@ function delete_tad_meeting($tad_meeting_sn = '')
         redirect_header($_SERVER['PHP_SELF'], 3, _TAD_PERMISSION_DENIED);
     }
 
-    $sql = 'SELECT `tad_meeting_data_sn` FROM `' . $xoopsDB->prefix('tad_meeting_data') . '` WHERE `tad_meeting_sn` = ' . $tad_meeting_sn;
+    $sql    = 'SELECT `tad_meeting_data_sn` FROM `' . $xoopsDB->prefix('tad_meeting_data') . '` WHERE `tad_meeting_sn` = ' . $tad_meeting_sn;
     $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     while (list($tad_meeting_data_sn) = $xoopsDB->fetchRow($result)) {
@@ -209,7 +209,7 @@ function delete_tad_meeting_data($tad_meeting_data_sn = '')
         return;
     }
     $data = get_tad_meeting_data($tad_meeting_data_sn);
-    $DBV = get_tad_meeting($data['tad_meeting_sn']);
+    $DBV  = get_tad_meeting($data['tad_meeting_sn']);
 
     $post_meeting = Utility::power_chk('post_meeting', $DBV['tad_meeting_cate_sn']);
     if (!$tad_meeting_adm and !$post_meeting) {
@@ -233,9 +233,9 @@ function get_tad_meeting($tad_meeting_sn = '')
         return;
     }
 
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting') . '` WHERE `tad_meeting_sn` =' . $tad_meeting_sn;
+    $sql    = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting') . '` WHERE `tad_meeting_sn` =' . $tad_meeting_sn;
     $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
-    $data = $xoopsDB->fetchArray($result);
+    $data   = $xoopsDB->fetchArray($result);
 
     return $data;
 }
@@ -249,8 +249,8 @@ function get_tad_meeting_cate($tad_meeting_cate_sn = '')
         return;
     }
     $tad_meeting_cate_sn = (int) $tad_meeting_cate_sn;
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` WHERE `tad_meeting_cate_sn` = ' . $tad_meeting_cate_sn;
-    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $sql                 = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_cate') . '` WHERE `tad_meeting_cate_sn` = ' . $tad_meeting_cate_sn;
+    $result              = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $data = $xoopsDB->fetchArray($result);
 
@@ -267,19 +267,19 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
     $TadUpFiles = new TadUpFiles('tad_meeting');
 
     $meeting_unit_arr = [];
-    $meeting_unit = explode(';', $xoopsModuleConfig['meeting_unit']);
+    $meeting_unit     = explode(';', $xoopsModuleConfig['meeting_unit']);
     foreach ($meeting_unit as $value) {
         $meeting_unit_arr[] = "'" . trim($value) . "'";
     }
 
     $meeting_unit_str = implode(',', $meeting_unit_arr);
-    $tad_meeting_sn = (int) $tad_meeting_sn;
-    $orderby = ('tad_meeting_data_sort' === $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "FIELD(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
-    $sql = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_data') . "` WHERE tad_meeting_sn = '$tad_meeting_sn' ORDER BY $orderby";
-    $result = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
+    $tad_meeting_sn   = (int) $tad_meeting_sn;
+    $orderby          = ('tad_meeting_data_sort' === $xoopsModuleConfig['orderby']) ? '`tad_meeting_data_sort`' : "FIELD(`tad_meeting_data_unit`, {$meeting_unit_str}), `tad_meeting_data_sort`";
+    $sql              = 'SELECT * FROM `' . $xoopsDB->prefix('tad_meeting_data') . "` WHERE tad_meeting_sn = '$tad_meeting_sn' ORDER BY $orderby";
+    $result           = Utility::query($sql) or Utility::web_error($sql, __FILE__, __LINE__);
 
     $all_content = [];
-    $i = 1;
+    $i           = 1;
     while (false !== ($all = $xoopsDB->fetchArray($result))) {
         //以下會產生這些變數： $tad_meeting_data_sn, $tad_meeting_data_unit, $tad_meeting_data_job, $tad_meeting_data_title, $tad_meeting_data_content, $tad_meeting_data_uid, $tad_meeting_data_sort, $tad_meeting_data_date
         foreach ($all as $k => $v) {
@@ -293,23 +293,23 @@ function list_tad_meeting_data($tad_meeting_sn = '', $mode = '', $file_mode = ''
         }
 
         //過濾讀出的變數值
-        $tad_meeting_data_title = $myts->htmlSpecialChars($tad_meeting_data_title);
+        $tad_meeting_data_title        = $myts->htmlSpecialChars($tad_meeting_data_title);
         $tad_meeting_data_content_html = $myts->displayTarea($tad_meeting_data_content, 0, 1, 0, 1, 1);
 
-        $all_content[$i]['tad_meeting_data_sn'] = $tad_meeting_data_sn;
-        $all_content[$i]['tad_meeting_data_unit'] = $tad_meeting_data_unit;
-        $all_content[$i]['tad_meeting_data_job'] = $tad_meeting_data_job;
-        $all_content[$i]['tad_meeting_data_title'] = $tad_meeting_data_title;
-        $all_content[$i]['tad_meeting_data_content'] = $tad_meeting_data_content;
+        $all_content[$i]['tad_meeting_data_sn']           = $tad_meeting_data_sn;
+        $all_content[$i]['tad_meeting_data_unit']         = $tad_meeting_data_unit;
+        $all_content[$i]['tad_meeting_data_job']          = $tad_meeting_data_job;
+        $all_content[$i]['tad_meeting_data_title']        = $tad_meeting_data_title;
+        $all_content[$i]['tad_meeting_data_content']      = $tad_meeting_data_content;
         $all_content[$i]['tad_meeting_data_content_html'] = $tad_meeting_data_content_html;
-        $all_content[$i]['tad_meeting_data_uid'] = $tad_meeting_data_uid;
-        $all_content[$i]['tad_meeting_data_uid_name'] = $uid_name;
-        $all_content[$i]['tad_meeting_data_sort'] = $tad_meeting_data_sort;
-        $all_content[$i]['tad_meeting_data_date'] = $tad_meeting_data_date;
-        $all_content[$i]['number2chinese'] = number2chinese($i);
+        $all_content[$i]['tad_meeting_data_uid']          = $tad_meeting_data_uid;
+        $all_content[$i]['tad_meeting_data_uid_name']     = $uid_name;
+        $all_content[$i]['tad_meeting_data_sort']         = $tad_meeting_data_sort;
+        $all_content[$i]['tad_meeting_data_date']         = $tad_meeting_data_date;
+        $all_content[$i]['number2chinese']                = number2chinese($i);
 
         $TadUpFiles->set_col('tad_meeting_data_sn', $tad_meeting_data_sn);
-        $TadUpFiles->download_url = XOOPS_URL . '/modules/tad_meeting/index.php?op=tufdl';
+        // $TadUpFiles->download_url = XOOPS_URL . '/modules/tad_meeting/index.php?op=tufdl';
         if ('return' === $mode) {
             $all_content[$i]['list_file'] = $TadUpFiles->show_files('up_tad_meeting_data_sn', true, $file_mode, true, false, null, null, false);
         } else {
@@ -343,10 +343,10 @@ function number2chinese($num, $type = '')
 
     if ('simple' === $type) {
         $mode = false;
-        $sim = true;
+        $sim  = true;
     } else {
         $mode = true;
-        $sim = false;
+        $sim  = false;
     }
 
     $char = $sim ? ['０', '一', '二', '三', '四', '五', '六', '七', '八', '九']
@@ -358,7 +358,7 @@ function number2chinese($num, $type = '')
     //小數部分
     if (mb_strpos($num, '.')) {
         list($num, $dec) = explode('.', $num);
-        $dec = (string) round($dec, 2);
+        $dec             = (string) round($dec, 2);
         if ($mode) {
             $retval .= "{$char[$dec['0']]}角{$char[$dec['1']]}分";
         } else {

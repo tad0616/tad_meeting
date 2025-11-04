@@ -49,5 +49,6 @@ CREATE TABLE `tad_meeting_files_center` (
   `upload_date` datetime NOT NULL COMMENT '上傳時間',
   `uid` mediumint(8) unsigned NOT NULL default 0 COMMENT '上傳者',
   `tag` varchar(255) NOT NULL default '' COMMENT '註記',
-  PRIMARY KEY (`files_sn`)
+  PRIMARY KEY (`files_sn`),
+  KEY `col_name_col_sn` (`col_name`,`col_sn`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
